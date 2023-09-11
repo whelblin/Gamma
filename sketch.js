@@ -1,8 +1,9 @@
 let timer;
+let player;
 function setup() {
     new Canvas();
     // test circle
-    let test = new Sprite(width/2, height/2, 50);
+    player= new Player();
     timer = new Timer();
   }
   

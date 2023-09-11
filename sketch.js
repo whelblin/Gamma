@@ -8,6 +8,5 @@ function setup() {
   
   function draw() {
     background(220);
-    console.log(timer.getCurrentTime());
-    text("Time: " + timer.getCurrentTime(), 10,20);
+    timer.printTimer(width/2, 20);
   }

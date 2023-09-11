@@ -9,7 +9,7 @@ class Player{
     }
 
 
-    movement(){ //Not working
+    movement(){
         this.player.speed = 3;
 
         if (kb.pressing('up')) {

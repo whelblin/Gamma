@@ -2,7 +2,6 @@ let timer;
 let player;
 function setup() {
     new Canvas();
-    // test circle
     player= new Player();
     timer = new Timer();
   }

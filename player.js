@@ -4,6 +4,7 @@
 class Player{
     constructor(){
         this.player = new Sprite();
+        this.player.diameter = 50;
         
     }
 

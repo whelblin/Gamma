@@ -10,4 +10,5 @@ function setup() {
   function draw() {
     background(220);
     timer.printTimer(width/2, 20);
+    player.movement();
   }

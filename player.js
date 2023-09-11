@@ -13,15 +13,15 @@ class Player{
         this.player.speed = 3;
 
         if (kb.pressing('up')) {
-            player.direction = -90;
+            this.player.direction = -90;
         } else if (kb.pressing('down')) {
-            player.direction = 90;
+            this.player.direction = 90;
         } else if (kb.pressing('left')) {
-            player.direction = 180;
+            this.player.direction = 180;
         } else if (kb.pressing('right')) {
-            player.direction = 0;
+            this.player.direction = 0;
         } else {
-          player.speed = 0;
+            this.player.speed = 0;
         }
     }
 };

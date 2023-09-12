@@ -25,4 +25,7 @@ class Player{
     aiming(){
         this.player.rotateTowards(mouse,1,0);
     }
+    shoot(){
+        //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
+    }
 };

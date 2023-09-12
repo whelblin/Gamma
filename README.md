@@ -9,8 +9,10 @@ you can not push to main. you can only push to the branch and pull request for i
 This allows you to have the most recent version of the code
 ### When you are done coding, Commit your code
 Commit your code with good comments
-### Push the code to origin
-After you commit, you have to push for it to update the repo
+### Submit a pull request
+After you commit, you have to do a pull request for it to be able to merge with the main branch
+### Go to pull request tab on github and open yours. then merge it
+This is how it can be added the main without causing issues
 ## The p5play library
 https://p5play.org/learn/
 ### Sprites

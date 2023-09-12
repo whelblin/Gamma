@@ -4,9 +4,11 @@
 
 class Player{
     constructor(){
-        this.player = new Sprite();
+        console.log(colliding);
+        this.player = new colliding.Sprite();
         this.player.diameter = 50;
         //this.shot = new Sprite();
+
     }
     movement(){
         this.player.speed = 3;

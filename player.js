@@ -28,7 +28,8 @@ class Player{
         if( kb.presses(' ')){
             let bullet = new Bullet(this.player.x, this.player.y);
             this.player.overlaps(bullet.getObject());
-            bullet.getObject().moveTowards(mouseX,mouseY);
+            bullet.movement();
+            
         }
     }
     

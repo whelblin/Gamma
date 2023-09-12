@@ -4,7 +4,13 @@
 class Asteroid{
     constructor(){
         console.log(colliding);
-        this.Asteroid = new colliding.Sprite([20,30],[45,11],[80,20],[94,40],[80,93],[32,76],[20,80],[5,42],[24,34],[20,30]);
-
+        this.asteroid = new colliding.Sprite();
+        this.asteroid.diameter = 50;
+        this.asteroid.color = 'red';
+        this.asteroid.stroke = 'black';
+    }
+    movement(){
+        this.asteroid.speed = 3;
+        this.asteroid.attractTo(player,3);
     }
 };

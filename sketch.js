@@ -1,4 +1,5 @@
 let timer;
+let asteroid;
 let player;
 let exp;
 var non_colliding;
@@ -8,7 +9,6 @@ function setup() {
     new Canvas();
     non_colliding = new Group();
     colliding = new Group();
-
     player= new Player();
     timer = new Timer();
     exp = new Experience();
@@ -21,6 +21,7 @@ function setup() {
     player.movement();
     player.aiming();
     player.shoot();
+    timer.asteroidSpawn();
     tests();
   }
 

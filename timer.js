@@ -34,4 +34,10 @@ class Timer{
         textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
+    asteroidSpawn(){
+        if(timer.getCurrentSec() == "0"){
+            let rock = new Asteroid();
+            rock.movement();
+        }
+    }
 }

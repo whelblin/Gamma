@@ -1,11 +1,11 @@
 // file for the player class object
 // constructor should create the sprite and store it in a private attribute
 // methods will act on the sprite, such as movement
-
+let bullet;
 class Player{
     constructor(){
         this.player = new Sprite();
-        //this.player.diameter = 50;
+        this.player.diameter = 50;
         //this.shot = new Sprite();
     }
     movement(){
@@ -27,6 +27,7 @@ class Player{
         if(kb.pressing('down') && kb.pressing('left')){
             this.player.direction = 135
         }
+        
     }
     aiming(){
         this.player.rotateTowards(mouse,1,0);
@@ -34,7 +35,7 @@ class Player{
     shoot(){
         //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
         if( kb.presses('x')){
-            var bullet = createSprite(player.position.x, player.position.y);
+            let bullet = new Sprite();
             bullet.setSpeed(10 + player.getSpeed(), player.rotation);
         }
     }

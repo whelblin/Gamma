@@ -1,11 +1,7 @@
 // file for the player class object
 // constructor should create the sprite and store it in a private attribute
 // methods will act on the sprite, such as movement
-class Shot{
-    constructor(){
-        
-    }
-}
+
 class Player{
     constructor(){
         this.player = new Sprite();
@@ -38,3 +34,8 @@ class Player{
         }
     }
 };
+class Shot{
+    constructor(){
+        shot = new Sprite();
+    }
+}

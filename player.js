@@ -24,7 +24,6 @@ class Player{
         this.player.rotateTowards(mouse,1,0);
     }
     shoot(){
-        //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
         if( kb.presses(' ')){
             let bullet = new Bullet(this.player.x, this.player.y);
             this.player.overlaps(bullet.getObject());
@@ -32,6 +31,5 @@ class Player{
             
         }
     }
-    
 };
 

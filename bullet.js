@@ -1,8 +1,9 @@
 class Bullet{
     constructor(x,y){
         this.bullet = new Sprite(x, y);
-        this.bullet.diameter = 30;
-        this.bullet.height = 30;
+        this.bullet.diameter = 35;
+        this.bullet.height = 50;
+        this.bullet.width = 10;
         this.bullet.life = 200;
     }
 

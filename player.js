@@ -15,19 +15,10 @@ class Player{
         else if (kb.pressing('left')) { this.player.direction = 180; } 
         else if (kb.pressing('right')) { this.player.direction = 0; } 
         else { this.player.speed = 0; }
-        if(kb.pressing('up') && kb.pressing('right')){
-            this.player.direction = -45
-        }
-        if(kb.pressing('up') && kb.pressing('left')){
-            this.player.direction = -135
-        }
-        if(kb.pressing('down') && kb.pressing('right')){
-            this.player.direction = 45
-        }
-        if(kb.pressing('down') && kb.pressing('left')){
-            this.player.direction = 135
-        }
-        
+        if(kb.pressing('up') && kb.pressing('right')){ this.player.direction = -45 }
+        if(kb.pressing('up') && kb.pressing('left')){ this.player.direction = -135 }
+        if(kb.pressing('down') && kb.pressing('right')){ this.player.direction = 45 }
+        if(kb.pressing('down') && kb.pressing('left')){ this.player.direction = 135 }
     }
     aiming(){
         this.player.rotateTowards(mouse,1,0);

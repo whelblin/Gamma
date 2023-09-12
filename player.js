@@ -27,7 +27,7 @@ class Player{
         //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
         if( kb.presses(' ')){
             let bullet = new Bullet();
-            bullet.setSpeed(10 + player.getSpeed(), player.rotation);
+            bullet.moveTowards(mouseX,mouseY);
         }
     }
     

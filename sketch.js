@@ -13,9 +13,11 @@ function setup() {
     timer.printTimer(width/2, 30);
     player.movement();
     player.aiming();
+    player.shoot();
     //tests();
   }
 
 function tests(){
   exp.test_increase();
 }
+

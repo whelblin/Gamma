@@ -11,5 +11,6 @@ function setup() {
     timer.printTimer(width/2, 20);
     player.movement();
     player.aiming();
-    player.shoot();
+    //player.shoot();
+    
   }

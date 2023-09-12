@@ -6,7 +6,7 @@ class Player{
     constructor(){
         this.player = new Sprite();
         //this.player.diameter = 50;
-        this.shot = new Sprite();
+        //this.shot = new Sprite();
     }
     movement(){
         this.player.speed = 3;
@@ -22,20 +22,29 @@ class Player{
         } else {
             this.player.speed = 0;
         }
+        if(kb.pressing('up') && kb.pressing('right')){
+            this.player.direction = -45
+        }
+        if(kb.pressing('up') && kb.pressing('left')){
+            this.player.direction = -135
+        }
+        if(kb.pressing('down') && kb.pressing('right')){
+            this.player.direction = 45
+        }
+        if(kb.pressing('down') && kb.pressing('left')){
+            this.player.direction = 135
+        }
+        
     }
     aiming(){
         this.player.rotateTowards(mouse,1,0);
     }
     shoot(){
         //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
-        if( kb.pressing('space')){
-            bullet = new Shot();
-            bullet.moveTo(mouse,8);
+        if( kb.presses('x')){
+            var bullet = createSprite(player.position.x, player.position.y);
+            bullet.setSpeed(10 + player.getSpeed(), player.rotation);
         }
     }
 };
-class Shot{
-    constructor(){
-        shot = new Sprite();
-    }
-}
+

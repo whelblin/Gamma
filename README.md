@@ -3,6 +3,8 @@
 ### Clone the code
 if you have github desktop, you should use that.
 if not, vscode has the ability to link to your github account
+### Create a branch for your issue
+you can not push to main. you can only push to the branch and pull request for it to affect the main branch
 ### Pull origin before you start coding
 This allows you to have the most recent version of the code
 ### When you are done coding, Commit your code

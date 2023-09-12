@@ -4,11 +4,9 @@
 class Player{
     constructor(){
         this.player = new Sprite();
-        this.player.diameter = 50;
+        //this.player.diameter = 50;
         
     }
-
-
     movement(){
         this.player.speed = 3;
 
@@ -23,5 +21,8 @@ class Player{
         } else {
             this.player.speed = 0;
         }
+    }
+    aiming(){
+        this.player.rotateTowards(mouse,1,0);
     }
 };

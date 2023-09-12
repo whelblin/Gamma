@@ -26,8 +26,9 @@ class Player{
     shoot(){
         //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
         if( kb.presses(' ')){
-            let bullet = new Bullet();
-            bullet.moveTowards(mouseX,mouseY);
+            let bullet = new Bullet(this.player.x, this.player.y);
+            this.player.overlaps(bullet.getObject());
+            bullet.getObject().moveTowards(mouseX,mouseY);
         }
     }
     

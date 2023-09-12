@@ -24,12 +24,12 @@ class Player{
         this.player.rotateTowards(mouse,1,0);
     }
     shoot(){
-        let bullet;
         //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
-        if( kb.presses('x')){
-            bullet = new Bullet();
+        if( kb.presses(' ')){
+            let bullet = new Bullet();
             bullet.setSpeed(10 + player.getSpeed(), player.rotation);
         }
     }
+    
 };
 

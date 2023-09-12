@@ -5,4 +5,6 @@ class Bullet{
         this.bullet.height = 30;
         this.bullet.life = 200;
     }
+
+    
 }

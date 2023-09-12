@@ -35,9 +35,9 @@ class Timer{
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
     asteroidSpawn(){
-        if(timer.getCurrentSec() == "0"){
+        if(parseInt(timer.getCurrentSec())%5 == 0){
             let rock = new Asteroid();
             rock.movement();
-        }
+          }
     }
 }

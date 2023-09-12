@@ -9,6 +9,8 @@ class Experience{
         this.innerBar.overlaps(this.outerBar)
         this.innerBar.color = 'lightgreen'
         this.pickUpAmount = 100;
+        non_colliding.push(this.outerBar);
+        non_colliding.push(this.innerBar)
     }
 
     increase(){

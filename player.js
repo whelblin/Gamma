@@ -27,5 +27,14 @@ class Player{
     }
     shoot(){
         //https://p5play.org/learn/sprite.html?page=2 moveTo:impulse
+        if(kb.pressing('space')){
+            bullet = new Shot();
+            bullet.moveTo(mouse, 5);
+        }
+    }
+};
+class Shot{
+    constructor(){
+        this.shot = new Sprite();
     }
 };

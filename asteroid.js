@@ -2,7 +2,6 @@
 // constructor should create the sprite and store it in a private attribute
 // methods will act on the sprite, such as spawning
 class Asteroid{
-    static listOfAsteroids = [];
     constructor(){
         console.log(colliding);
         this.asteroid = new colliding.Sprite(0,0,10,'dodecagon');
@@ -12,7 +11,7 @@ class Asteroid{
         //this.asteroid.life = 10;
         this.asteroidSpeed = 7;
         
-        //listOfAsteroids.push(this.asteroid);
+        asteroids.push(this.asteroid);
     }
 
 

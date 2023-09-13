@@ -33,6 +33,15 @@ class Player{
             
         }
     }
+    checkCollision(asteroids){
+        asteroids.forEach(asteroid => {
+            if(this.player.collides(asteroid)){ // hit
+                console.log("hit");
+                asteroid.remove();// removes the asteroid
+            }
+        });
+        
+    }
 
 };
 

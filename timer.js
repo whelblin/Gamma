@@ -35,11 +35,11 @@ class Timer{
         textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
-    asteroidSpawn(){
+    asteroidSpawn(asteroids){
         this.now = parseInt(timer.getCurrentSec());
         if(this.now %1 == 0 && this.now != this.prev){
             console.log("test1")
-            let rock = new Asteroid();
+            let rock = new Asteroid(asteroids);
             rock.movement();
             this.prev = this.now;
           }

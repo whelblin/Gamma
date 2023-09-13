@@ -9,7 +9,7 @@ class Asteroid{
         //this.asteroid.diameter = 50;
         this.asteroid.color = 'darkgray';
         this.asteroid.stroke = 'black';
-        this.asteroid.life = 10;
+        //this.asteroid.life = 10;
         this.asteroidSpeed = 7;
         
         //listOfAsteroids.push(this.asteroid);

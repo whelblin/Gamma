@@ -3,14 +3,12 @@ class Experience{
         this.level = 1;
         this.maxLevel = 20;
         this.amount = 0;
-        this.outerBar = new Sprite(0,7,width*2,10)
+        this.outerBar = new non_colliding.Sprite(0,7,width*2,10)
         this.outerBar.color = "lightblue";
-        this.innerBar = new Sprite(0,7,1,10)
+        this.innerBar = new non_colliding.Sprite(0,7,1,10)
         this.innerBar.overlaps(this.outerBar)
         this.innerBar.color = 'lightgreen'
         this.pickUpAmount = 100;
-        non_colliding.push(this.outerBar);
-        non_colliding.push(this.innerBar)
     }
 
     increase(){

@@ -7,6 +7,7 @@ class Timer{
         this.timer = new Date();
         // get the initial time when the program is started
         this.initSec =this.timer.getTime()/1000;
+        this.prev = -1;
     }
     // gets the amount of seconds
     getCurrentSec(){
@@ -35,9 +36,12 @@ class Timer{
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
     asteroidSpawn(){
-        if(parseInt(timer.getCurrentSec())%5 == 0){
+        this.now = parseInt(timer.getCurrentSec());
+        if(this.now %1 == 0 && this.now != this.prev){
+            console.log("test1")
             let rock = new Asteroid();
             rock.movement();
+            this.prev = this.now;
           }
     }
 }

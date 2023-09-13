@@ -29,7 +29,7 @@ function setup() {
       player.movement();
       player.aiming();
       player.shoot();
-      tests();
+      //tests();
     }
     else
     {

@@ -6,12 +6,13 @@ class Player{
     constructor(){
         console.log(colliding);
         this.player = new colliding.Sprite();
-        this.player.diameter = 50;
+        this.player.diameter = 50; 
+        this.player.img = 'assets/playerSprite.png';
         //this.shot = new Sprite();
 
     }
     movement(){
-        this.player.speed = 3;
+        this.player.speed = 5;
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 
@@ -27,11 +28,25 @@ class Player{
     }
     shoot(){
         if( kb.presses(' ')){
-            let bullet = new Bullet(this.player.x, this.player.y);
+            let bullet = new Bullet(this.player.x, this.player.y,bullets);
             this.player.overlaps(bullet.getObject());
             bullet.movement();
+
             
         }
     }
+    checkBulletHit(asteroids, bullets, exp){
+        asteroids.forEach(asteroid => {
+            bullets.forEach(bullet => {
+                if(bullet.collides(asteroid)){ // hit
+                    console.log("hit");
+                    asteroid.remove();// removes the asteroid
+                    bullet.remove();
+                    exp.xpGain();
+                }
+            });
+        });
+    }
+
 };
 

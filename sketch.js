@@ -1,8 +1,11 @@
 let timer;
+let asteroid;
 let player;
 let exp;
 var non_colliding;
 var colliding;
+var asteroids;
+var bullets;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
@@ -22,7 +25,6 @@ function setup() {
   
   function draw() {
     background(220);
-
     if(!inMenu)
     {
       colliding.overlaps(non_colliding);
@@ -30,6 +32,9 @@ function setup() {
       player.movement();
       player.aiming();
       player.shoot();
+      timer.asteroidSpawn(asteroids);
+      // checks if a bullet hits an asteroid
+      player.checkBulletHit(asteroids, bullets, exp);
       //tests();
     }
     else
@@ -42,12 +47,13 @@ function setup() {
         inMenu = false;
         non_colliding = new Group();
         colliding = new Group();
+        asteroids = [];
+        bullets = [];
         player= new Player();
         timer = new Timer();
         exp = new Experience();
       }
     }
-
   }
 
 function drawTitle()

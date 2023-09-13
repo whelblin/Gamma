@@ -26,7 +26,7 @@ function setup() {
     player.aiming();
     player.shoot();
     timer.asteroidSpawn(asteroids);
-    // checks if an asteroid hits the player
+    // checks if a bullet hits an asteroid
     player.checkBulletHit(asteroids, bullets);
     
       

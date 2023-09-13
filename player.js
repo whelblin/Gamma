@@ -27,20 +27,23 @@ class Player{
     }
     shoot(){
         if( kb.presses(' ')){
-            let bullet = new Bullet(this.player.x, this.player.y);
+            let bullet = new Bullet(this.player.x, this.player.y,bullets);
             this.player.overlaps(bullet.getObject());
             bullet.movement();
+
             
         }
     }
-    checkCollision(asteroids){
+    checkBulletHit(asteroids, bullets){
         asteroids.forEach(asteroid => {
-            if(this.player.collides(asteroid)){ // hit
-                console.log("hit");
-                asteroid.remove();// removes the asteroid
-            }
+            bullets.forEach(bullet => {
+                if(bullet.collides(asteroid)){ // hit
+                    console.log("hit");
+                    asteroid.remove();// removes the asteroid
+                    bullet.remove();
+                }
+            });
         });
-        
     }
 
 };

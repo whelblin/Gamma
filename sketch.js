@@ -5,12 +5,14 @@ let exp;
 var non_colliding;
 var colliding;
 var asteroids;
+var bullets;
 function setup() {
   //these three must be first
     new Canvas();
     non_colliding = new Group();
     colliding = new Group();
     asteroids = [];
+    bullets = [];
     player= new Player();
     timer = new Timer();
     exp = new Experience();
@@ -25,7 +27,8 @@ function setup() {
     player.shoot();
     timer.asteroidSpawn(asteroids);
     // checks if an asteroid hits the player
-    player.checkCollision(asteroids);
+    player.checkBulletHit(asteroids, bullets);
+    
       
     tests();
   }

@@ -5,6 +5,8 @@ class Bullet{
         this.bullet.height = 50;
         this.bullet.width = 10;
         this.bullet.life = 200;
+
+        bullets.push(this.bullet);
     }
 
     getObject(){return this.bullet;}
@@ -12,6 +14,6 @@ class Bullet{
         this.bullet.speed  = 10;
         this.bullet.direction = this.bullet.angleTo(mouse);
     }
-
+    
     
 }

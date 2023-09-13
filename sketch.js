@@ -27,10 +27,10 @@ function setup() {
     player.shoot();
     timer.asteroidSpawn(asteroids);
     // checks if a bullet hits an asteroid
-    player.checkBulletHit(asteroids, bullets);
+    player.checkBulletHit(asteroids, bullets, exp);
     
       
-    tests();
+    //tests();
   }
 
 function tests(){

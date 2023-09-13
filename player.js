@@ -34,13 +34,14 @@ class Player{
             
         }
     }
-    checkBulletHit(asteroids, bullets){
+    checkBulletHit(asteroids, bullets, exp){
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
                     console.log("hit");
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
+                    exp.xpGain();
                 }
             });
         });

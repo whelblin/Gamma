@@ -28,4 +28,7 @@ class Experience{
             this.increase()
         }
     }
+    xpGain(){
+        this.increase()
+    }
 };

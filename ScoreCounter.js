@@ -10,4 +10,10 @@ class ScoreCounter {
     increaseScore(points) {
         this.score += points;
     }
+
+    draw(context) {
+        context.font = `${this.fontSize}px Arial`;
+        context.fillStyle = this.textColor;
+        context.fillText(`Score: ${this.score}`, this.x, this.y);
+    }
 }

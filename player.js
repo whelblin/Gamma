@@ -7,7 +7,7 @@ class Player{
         console.log(colliding);
         this.player = new colliding.Sprite();
         this.player.diameter = 50; 
-        this.player.img = 'assets/DurrrSpaceShip.png';
+        this.player.img = 'assets/playerSprite.png';
         //this.shot = new Sprite();
 
     }

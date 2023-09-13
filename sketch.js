@@ -22,6 +22,7 @@ function setup() {
   
   function draw() {
     background(220);
+
     if(!inMenu)
     {
       colliding.overlaps(non_colliding);
@@ -46,6 +47,7 @@ function setup() {
         exp = new Experience();
       }
     }
+
   }
 
 function drawTitle()

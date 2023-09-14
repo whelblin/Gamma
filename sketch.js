@@ -2,6 +2,7 @@ let timer;
 let asteroid;
 let player;
 let exp;
+let Health;
 var non_colliding;
 var colliding;
 var asteroids;
@@ -35,6 +36,7 @@ function setup() {
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp);
+      player.checkAstroidHit(asteroid, player, Health);
       //tests();
     }
     else
@@ -102,5 +104,6 @@ function drawScore()
 
 function tests(){
   exp.test_increase();
+  Health.healthDecrease();
 }
 

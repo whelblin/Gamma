@@ -10,7 +10,9 @@ class PlayerHealth {
 
     healthDecrease(){
         this.health -= 20;
-        this.innerBar.width -= width/10;
+        if(this.health >= 0){
+            this.innerBar.width -= width/10;
+        }
     }
 
 

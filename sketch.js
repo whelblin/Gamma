@@ -52,6 +52,7 @@ function setup() {
         player= new Player();
         timer = new Timer();
         exp = new Experience();
+        Health = new PlayerHealth();
       }
     }
   }

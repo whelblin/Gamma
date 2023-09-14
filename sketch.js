@@ -35,7 +35,7 @@ function setup() {
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp);
-      //tests();
+      tests();
     }
     else
     {
@@ -101,6 +101,8 @@ function drawScore()
 
 function tests(){
   exp.test_increase();
+  exp.test_pause();
+  exp.test_unpause();
 }
 
 

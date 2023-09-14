@@ -48,5 +48,15 @@ class Player{
         });
     }
 
+    checkAstroidHit(asteroid, player, Health) {
+        asteroids.forEach(asteroid => {
+                if(this.player.collides(asteroid)){ // hit
+                    console.log("hit");
+                    asteroid.remove();// removes the asteroid
+                    Health.healthDecrease();
+                }
+        });
+    }
+
 };
 

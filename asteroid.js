@@ -4,14 +4,21 @@
 class Asteroid{
     constructor(){
         //console.log(colliding);
-        this.asteroid = new colliding.Sprite(0,0,10,'dodecagon');
+    /*    this.asteroid = new colliding.Sprite(0,0,10,'dodecagon');
         //this.asteroid.diameter = 50;
         this.asteroid.color = 'darkgray';
         this.asteroid.stroke = 'black';
         //this.asteroid.life = 10;
         this.asteroidSpeed = 7;
         
-        asteroids.push(this.asteroid);
+        asteroids.push(this.asteroid); */
+       
+       // this.asteroid.spriteSheet = loadImage('assets/asteroid.png');
+       this.asteroid = new colliding.Sprite(width/2,height/2, 50);
+       this.asteroid.addAnimation('normal', 'assets/asteroid.png');
+       this.asteroidSpeed = 7;
+       asteroids.push(this.asteroid);
+
     }
 
 

@@ -30,9 +30,9 @@ class Timer{
     }
     // prints the timer to the screen
     printTimer(x,y){
-        textSize(20);
+        textSize(60);
         textAlign(CENTER);
-        textFont("comic sans");
+      //  textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
     asteroidSpawn(asteroids){

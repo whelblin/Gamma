@@ -1,6 +1,7 @@
 let timer;
 let asteroid;
 let player;
+let playerObject;
 let exp;
 let Health;
 var non_colliding;
@@ -14,6 +15,8 @@ let mainFont = "comic sans";
 
   function preload() {
     //mainFont = loadFont('assets/comici.tff');
+    non_colliding = new Group();
+    colliding = new Group();
   }
 
 function setup() {
@@ -36,7 +39,7 @@ function setup() {
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp);
-      player.checkAstroidHit(asteroid, player, Health);
+      player.checkAstroidHit(asteroids, player, Health);
       //tests();
     }
     else
@@ -47,14 +50,13 @@ function setup() {
       if (kb.presses(' '))
       {
         inMenu = false;
-        non_colliding = new Group();
-        colliding = new Group();
         asteroids = [];
         bullets = [];
         player= new Player();
         timer = new Timer();
         exp = new Experience();
         Health = new PlayerHealth();
+
       }
     }
   }

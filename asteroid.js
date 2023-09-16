@@ -3,7 +3,7 @@
 // methods will act on the sprite, such as spawning
 class Asteroid{
     constructor(){
-        console.log(colliding);
+        //console.log(colliding);
         this.asteroid = new colliding.Sprite(0,0,10,'dodecagon');
         //this.asteroid.diameter = 50;
         this.asteroid.color = 'darkgray';
@@ -46,5 +46,6 @@ class Asteroid{
             this.asteroid.vel.y = random(-this.asteroidSpeed,2);
         }
     }
+    
     
 };

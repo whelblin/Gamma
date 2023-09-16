@@ -11,9 +11,12 @@ var bullets;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
-let mainFont = "comic sans";
+let mainFont = 'Chakra Petch';
+let bgimage1;
+let bgimage2;
 
-  function preload() {
+
+function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
@@ -25,14 +28,19 @@ function setup() {
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
+    bgimage1 = loadImage('assets/bgimage2.png');
+    bgimage2 = loadImage('assets/bgimage3.gif');
+
   }
   
   function draw() {
-    background(220);
+    image(bgimage1, 0, 0, width, height);
+    //background(255);
     if(!inMenu)
     {
+      image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
-      timer.printTimer(width/2, 30);
+      timer.printTimer(width/2, 80);
       player.movement();
       player.aiming();
       player.shoot();
@@ -44,7 +52,7 @@ function setup() {
     }
     else
     {
-      drawTitle();
+   //   drawTitle();
       drawStart();
       drawScore();
       if (kb.presses(' '))
@@ -60,47 +68,56 @@ function setup() {
       }
     }
   }
-
+/*
 function drawTitle()
 {
     textSize(150);
     textAlign(CENTER);
     textFont(mainFont);
     fill(0,0,0);
-    text("SPACE SURVIVORS",width/2, height/2);
-}
+//    text("SPACE SURVIVORS",width/2, 300);
+} */
 
 function drawStart()
 {
-    textSize(30);
-    textAlign(CENTER);
-    textFont(mainFont);
-    fill(0,0,0,opacity);
-    text("Press space to start",width/2, height/2+150);
+    
+    fill(215,175, 55, opacity);
+    stroke(0);
+    strokeWeight(5);
+    rectMode(CENTER);
+    rect(width/2, height/2+200, 400, 150, 30);
 
-    if(opacity < 255 && opacShouldIncrease)
+    textSize(120);
+    textFont(mainFont);
+    fill(0,0,0);
+    text("Play",width/2, height/2+230);
+
+
+    if(opacity < 212 && opacShouldIncrease)
     {
-      opacity+=5;
+      opacity+=10;
     }
     else
     {
       opacShouldIncrease = false;
-      opacity-=5;
+      opacity-= 10;
       if(opacity < 0)
       {
         opacShouldIncrease = true;
       }
-    }
+    }   
+
+
 }
 
 function drawScore()
 {
     var score = 0; // temp
-    textSize(82);
+    textSize(80);
     textAlign(CENTER);
     textFont(mainFont);
-    fill(0,0,0);
-    text("Best Score: "+ score,width/2, height/2+95);
+    fill(255);
+    text("Best Score: "+ score,width/2, 860);
 }
 
 

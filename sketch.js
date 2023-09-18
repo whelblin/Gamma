@@ -9,6 +9,7 @@ var bullets;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
+var paused;
 let mainFont = "comic sans";
 
   function preload() {
@@ -18,6 +19,7 @@ let mainFont = "comic sans";
 function setup() {
     new Canvas();
     inMenu = true;
+    paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
@@ -25,7 +27,7 @@ function setup() {
   
   function draw() {
     background(220);
-    if(!inMenu)
+    if(!inMenu && paused == false)
     {
       colliding.overlaps(non_colliding);
       timer.printTimer(width/2, 30);
@@ -36,6 +38,15 @@ function setup() {
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp);
       tests();
+      if(kb.pressed('escape')){
+        paused = true;
+      }
+    }
+    else if(!inMenu && paused == true){
+      world.step(0.001/240);
+      if(kb.pressed('escape')){
+        paused = false;
+      }
     }
     else
     {
@@ -101,8 +112,6 @@ function drawScore()
 
 function tests(){
   exp.test_increase();
-  exp.test_pause();
-  exp.test_unpause();
 }
 
 

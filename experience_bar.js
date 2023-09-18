@@ -26,23 +26,9 @@ class Experience{
             this.increase()
         }
     }
-    test_pause(){
-        if(kb.presses('p')){
-            this.pause()
-        }
-    }
-    test_unpause(){
-        if(kb.presses('u')){
-            this.unpause()
-        }
-    }
+
     xpGain(){
         this.increase()
     }
-    pause(){
-        allSprites.autoUpdate = false;
-    }
-    unpause(){
-        allSprites.autoUpdate = true;
-    }
+
 };

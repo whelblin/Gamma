@@ -15,7 +15,6 @@ let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 
-//testing git push
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();

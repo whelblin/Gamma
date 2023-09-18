@@ -3,7 +3,7 @@ let asteroid;
 let player;
 let exp;
 let lvlBox;
-var step;
+var nextLevel;
 var non_colliding;
 var colliding;
 var asteroids;
@@ -40,13 +40,16 @@ function setup() {
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp);
       tests();
+      if(exp.level == nextLevel){
+        lvlBox.boxVis();
+        nextLevel += 1;
+        paused = true;
+      }
       if(kb.pressed('escape')){
         paused = true;
-        step = 0;
       }
     }
     else if(!inMenu && paused == true){
-      lvlBox.boxVis();
       world.step(0.001/240);
       if(kb.pressed('escape')){
         lvlBox.boxInvis();
@@ -69,6 +72,7 @@ function setup() {
         timer = new Timer();
         exp = new Experience();
         lvlBox = new LevelBox();
+        nextLevel = 2;
       }
     }
   }

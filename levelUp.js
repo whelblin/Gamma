@@ -23,9 +23,13 @@
    */
 class LevelBox{
     constructor(){
-        this.lvlBox = new non_colliding.Sprite(x/2,y/2,width,height)
+        this.lvlBox = new non_colliding.Sprite()
+        this.lvlBox.visible = false;
     }
-};
-class ItemBox{ // For now just needs to hold dummy values for testing purposes 
-
+    boxVis(){
+        this.lvlBox.visible = true;
+    }
+    boxInvis(){
+        this.lvlBox.visible = false;
+    }
 };

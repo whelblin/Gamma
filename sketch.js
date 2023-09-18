@@ -2,6 +2,8 @@ let timer;
 let asteroid;
 let player;
 let exp;
+let lvlBox;
+var step;
 var non_colliding;
 var colliding;
 var asteroids;
@@ -40,11 +42,14 @@ function setup() {
       tests();
       if(kb.pressed('escape')){
         paused = true;
+        step = 0;
       }
     }
     else if(!inMenu && paused == true){
+      lvlBox.boxVis();
       world.step(0.001/240);
       if(kb.pressed('escape')){
+        lvlBox.boxInvis();
         paused = false;
       }
     }
@@ -63,6 +68,7 @@ function setup() {
         player= new Player();
         timer = new Timer();
         exp = new Experience();
+        lvlBox = new LevelBox();
       }
     }
   }
@@ -108,7 +114,6 @@ function drawScore()
     fill(0,0,0);
     text("Best Score: "+ score,width/2, height/2+95);
 }
-
 
 function tests(){
   exp.test_increase();

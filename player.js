@@ -45,7 +45,7 @@ class Player{
             
         }
     }
-    checkBulletHit(asteroids, bullets, exp){
+    checkBulletHit(asteroids, bullets, exp, score){
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
@@ -53,6 +53,7 @@ class Player{
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
                     exp.xpGain();
+                    score.increaseScore(100);
                 }
             });
         });

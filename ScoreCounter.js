@@ -16,4 +16,10 @@ class ScoreCounter {
         context.fillStyle = this.textColor;
         context.fillText(`Score: ${this.score}`, this.x, this.y);
     }
+    printScore(x,y){
+        textSize(60);
+        textAlign(RIGHT);
+      //  textFont("comic sans");
+        text("SCORE: " + this.score , x,y);
+    }
 }

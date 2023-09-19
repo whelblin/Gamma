@@ -51,6 +51,9 @@ function setup() {
       player.checkBulletHit(asteroids, bullets, exp, score);
       player.checkAstroidHit(asteroids, player, Health);
       //tests();
+      if(Health.isDead()){
+        resetGame();
+      }
     }
     else
     {
@@ -129,4 +132,18 @@ function tests(){
 }
 
 
+
+
+
+function resetGame() {
+  inMenu = true;
+  exp.outerBar.remove();
+  exp.innerBar.remove();
+  Health.outerBar.remove();
+  Health.innerBar.remove();
+  player.player.remove();
+  for(let i = 0; i < asteroids.length; i++){
+    asteroids[i].remove();
+  }
+}
 

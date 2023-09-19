@@ -38,6 +38,9 @@ function setup() {
       player.checkBulletHit(asteroids, bullets, exp);
       player.checkAstroidHit(asteroid, player, Health);
       //tests();
+      if(Health.isDead()){
+        resetGame();
+      }
     }
     else
     {
@@ -105,5 +108,18 @@ function drawScore()
 function tests(){
   exp.test_increase();
   Health.healthDecrease();
+}
+
+
+
+
+function resetGame() {
+  inMenu = true;
+  exp.outerBar.remove();
+  exp.innerBar.remove();
+  Health.outerBar.remove();
+  Health.innerBar.remove();
+  player.player.remove();
+
 }
 

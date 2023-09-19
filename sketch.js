@@ -120,6 +120,8 @@ function resetGame() {
   Health.outerBar.remove();
   Health.innerBar.remove();
   player.player.remove();
-
+  for(let i = 0; i < asteroids.length; i++){
+    asteroids[i].remove();
+  }
 }
 

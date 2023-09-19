@@ -22,4 +22,7 @@ class ScoreCounter {
       //  textFont("comic sans");
         text("SCORE: " + this.score , x,y);
     }
+    finalScore(timer){
+        this.score = this.score * timer;
+    }
 }

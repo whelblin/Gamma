@@ -4,6 +4,7 @@ let player;
 let playerObject;
 let exp;
 let Health;
+let score;
 var non_colliding;
 var colliding;
 var asteroids;
@@ -41,12 +42,13 @@ function setup() {
       image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
       timer.printTimer(width/2, 80);
+      score.printScore(width, 80)
       player.movement();
       player.aiming();
       player.shoot();
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
-      player.checkBulletHit(asteroids, bullets, exp);
+      player.checkBulletHit(asteroids, bullets, exp, score);
       player.checkAstroidHit(asteroids, player, Health);
       //tests();
     }
@@ -64,7 +66,7 @@ function setup() {
         timer = new Timer();
         exp = new Experience();
         Health = new PlayerHealth();
-
+        score = new ScoreCounter();
       }
     }
   }

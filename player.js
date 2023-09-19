@@ -4,10 +4,20 @@
 
 class Player{
     constructor(){
-        console.log(colliding);
-        this.player = new colliding.Sprite();
-        this.player.diameter = 50; 
-        this.player.img = 'assets/playerSprite.png';
+        //console.log(colliding);
+        this.player = new colliding.Sprite(width/2,height/2,80)
+        this.player.spriteSheet = 'assets/sheet.png';
+        this.player.anis.frameDelay = 4;
+        this.player.addAnis({
+            idle: {row:0, frames: 1},
+            hit: {row:0, frames: 4}
+        })
+        this.player.changeAni('idle');
+        //this.player.diameter = 50; 
+        //this.player.img = 'assets/playerSprite.png';
+        this.immune = false;
+       
+        
         //this.shot = new Sprite();
 
     }
@@ -35,7 +45,7 @@ class Player{
             
         }
     }
-    checkBulletHit(asteroids, bullets, exp){
+    checkBulletHit(asteroids, bullets, exp, score){
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
@@ -43,6 +53,7 @@ class Player{
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
                     exp.xpGain();
+                    score.increaseScore(100);
                 }
             });
         });
@@ -51,12 +62,23 @@ class Player{
     checkAstroidHit(asteroid, player, Health) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
-                    console.log("hit");
-                    asteroid.remove();// removes the asteroid
+                    if(this.player.ani.name == 'idle'){ // if not immune
+                    this.collision(asteroid);// removes the asteroid
                     Health.healthDecrease();
+                    }
                 }
         });
     }
+    collision(asteroid){
+        // changes the direction of the asteroid
+        asteroid.vel.x = -asteroid.vel.x * 1.2;
+        asteroid.vel.y = -asteroid.vel.y * 1.2;
+        // plays animation
+        this.player.changeAni(['hit','hit','hit','idle'])
+       
 
+
+
+    }
 };
 

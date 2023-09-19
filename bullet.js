@@ -1,10 +1,12 @@
 class Bullet{
     constructor(x,y){
         this.bullet = new colliding.Sprite(x, y);
-        this.bullet.diameter = 35;
-        this.bullet.height = 50;
-        this.bullet.width = 10;
-        this.bullet.life = 200;
+        this.bullet.diameter = 45;
+        this.bullet.color = 'white';
+        this.bullet.stroke = 15;
+        this.bullet.height = 60;
+        this.bullet.width = 13;
+        this.bullet.life = 100;
 
         bullets.push(this.bullet);
     }

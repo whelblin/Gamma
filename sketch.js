@@ -15,12 +15,13 @@ var opacShouldIncrease;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
-
+var playerAni;
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
+    Player.preload()
   }
 
 function setup() {
@@ -66,6 +67,7 @@ function setup() {
         asteroids = [];
         bullets = [];
         player= new Player();
+        console.log(player.player.ani);
         timer = new Timer();
         exp = new Experience();
         Health = new PlayerHealth();

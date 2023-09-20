@@ -15,7 +15,6 @@ var inMenu;
 var opacity;
 var opacShouldIncrease;
 var paused;
-let mainFont = "comic sans";
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
@@ -66,16 +65,18 @@ function setup() {
       if(kb.pressed('escape')){
         paused = true;
       }
-    }
-    else if(!inMenu && paused == true){
-      world.step(0.001/240);
-      if(kb.pressed('escape')){
-        lvlBox.boxInvis();
-        paused = false;
       if(Health.isDead()){
         resetGame();
       }
     }
+    else if(!inMenu && paused == true){
+      image(bgimage2, 0, 0, width, height);
+      world.step(0.001/240);
+      if(kb.pressed('escape')){
+        lvlBox.boxInvis();
+        paused = false;
+    }
+  }
     else
     {
    //   drawTitle();
@@ -97,6 +98,7 @@ function setup() {
       }
     }
   }
+
 /*
 function drawTitle()
 {

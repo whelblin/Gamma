@@ -8,7 +8,7 @@ class Experience{
         this.innerBar = new non_colliding.Sprite(0,7,1,10)
         this.innerBar.overlaps(this.outerBar)
         this.innerBar.color = 'lightgreen'
-        this.pickUpAmount = 100;
+        this.pickUpAmount = 500;
     }
 
     increase(){

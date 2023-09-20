@@ -30,15 +30,14 @@ class Timer{
     }
     // prints the timer to the screen
     printTimer(x,y){
-        textSize(20);
+        textSize(60);
         textAlign(CENTER);
-        textFont("comic sans");
+      //  textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
     asteroidSpawn(asteroids){
         this.now = parseInt(timer.getCurrentSec());
         if(this.now %1 == 0 && this.now != this.prev){
-            console.log("test1")
             let rock = new Asteroid(asteroids);
             rock.movement();
             this.prev = this.now;

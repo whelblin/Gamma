@@ -3,7 +3,7 @@ let y = 100;
 
 function setup() {
   createCanvas(512, 512);
-  fill(255, 0, 0);
+  fill(255 , 0, 0);
 }
 
 function draw() {

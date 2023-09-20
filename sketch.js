@@ -39,7 +39,7 @@ function setup() {
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp);
-      tests();
+      //tests();
       if(exp.level == nextLevel){
         lvlBox.boxVis();
         nextLevel += 1;

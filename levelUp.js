@@ -23,7 +23,9 @@
    */
 class LevelBox{
     constructor(){
-        this.lvlBox = new non_colliding.Sprite()
+        this.lvlBox = new non_colliding.Sprite(width/2, height/2, 100,100);
+        this.lvlBox.textSize = 18;
+        this.lvlBox.text = "escape to exit";
         this.lvlBox.visible = false;
     }
     boxVis(){

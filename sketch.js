@@ -145,10 +145,11 @@ function drawScore()
 {
     var score = 0; // temp
     textSize(80);
-    textAlign(CENTER);
+    textAlign(RIGHT);
     textFont(mainFont);
     fill(255);
-    text("Best Score: "+ score,width/2, 860);
+    text("Best Score: "+ score,width - 10, 70)
+    textAlign(CENTER)
 }
 
 function tests(){

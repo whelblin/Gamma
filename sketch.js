@@ -3,6 +3,8 @@ let asteroid;
 let player;
 let playerObject;
 let exp;
+let lvlBox;
+var nextLevel;
 let Health;
 let score;
 var non_colliding;
@@ -12,10 +14,13 @@ var bullets;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
+var paused;
+let mainFont = "comic sans";
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 var playerAni;
+
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
@@ -27,6 +32,7 @@ function preload() {
 function setup() {
     new Canvas();
     inMenu = true;
+    paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
@@ -36,9 +42,9 @@ function setup() {
   }
   
   function draw() {
+
     image(bgimage1, 0, 0, width, height);
-    //background(255);
-    if(!inMenu)
+    if(!inMenu && paused == false)
     {
       image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
@@ -52,6 +58,20 @@ function setup() {
       player.checkBulletHit(asteroids, bullets, exp, score);
       player.checkAstroidHit(asteroids, player, Health);
       //tests();
+      if(exp.level == nextLevel){
+        lvlBox.boxVis();
+        nextLevel += 1;
+        paused = true;
+      }
+      if(kb.pressed('escape')){
+        paused = true;
+      }
+    }
+    else if(!inMenu && paused == true){
+      world.step(0.001/240);
+      if(kb.pressed('escape')){
+        lvlBox.boxInvis();
+        paused = false;
       if(Health.isDead()){
         resetGame();
       }
@@ -70,6 +90,8 @@ function setup() {
         console.log(player.player.ani);
         timer = new Timer();
         exp = new Experience();
+        lvlBox = new LevelBox();
+        nextLevel = 2;
         Health = new PlayerHealth();
         score = new ScoreCounter();
       }
@@ -126,7 +148,6 @@ function drawScore()
     fill(255);
     text("Best Score: "+ score,width/2, 860);
 }
-
 
 function tests(){
   exp.test_increase();

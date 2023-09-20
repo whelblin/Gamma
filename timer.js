@@ -38,7 +38,6 @@ class Timer{
     asteroidSpawn(asteroids){
         this.now = parseInt(timer.getCurrentSec());
         if(this.now %1 == 0 && this.now != this.prev){
-            console.log("test1")
             let rock = new Asteroid(asteroids);
             rock.movement();
             this.prev = this.now;

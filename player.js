@@ -37,12 +37,13 @@ class Player{
         this.player.rotateTowards(mouse,1,0);
     }
     shoot(){
-        if( kb.presses(' ')){
-            let bullet = new Bullet(this.player.x, this.player.y,bullets);
-            this.player.overlaps(bullet.getObject());
-            bullet.movement();
-
-            
+        if(kb.pressing(' ')){
+        var delay = timer.getMillis();
+            if(delay % 5 == 0){
+                let bullet = new Bullet(this.player.x, this.player.y,bullets);
+                this.player.overlaps(bullet.getObject());
+                bullet.movement();
+            }
         }
     }
     checkBulletHit(asteroids, bullets, exp){

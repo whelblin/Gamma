@@ -4,10 +4,13 @@ html, body {
     font-family: 'Chakra Petch', sans-serif;
  /*   font-size: 2px; */
     font-weight: bold;
+    
+
 
   }
   
 canvas {
     display: block;
+
   }
   

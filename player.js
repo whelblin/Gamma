@@ -56,7 +56,7 @@ class Player{
             
         }
     }
-    checkBulletHit(asteroids, bullets, exp, score){
+    checkBulletHit(asteroids, bullets, exp, score, bestScore){
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
@@ -64,6 +64,7 @@ class Player{
                     bullet.remove();
                     exp.xpGain();
                     score.increaseScore(100);
+                    bestScore.increaseScore(100);
                 }
             });
         });

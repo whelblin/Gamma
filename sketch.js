@@ -4,6 +4,11 @@ let player;
 let playerObject;
 let exp;
 let lvlBox;
+let itmBox1;
+let itmBox2;
+let itmBox3;
+let itmBox4;
+let itmNumChance;
 var nextLevel;
 let Health;
 let score;
@@ -25,6 +30,7 @@ function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
+    itmBoxes = new Group();
     Player.preload()
   }
 
@@ -47,6 +53,7 @@ function setup() {
     {
       image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
+      itmBoxes.overlaps(non_colliding);
       timer.printTimer(width/2, 80);
       score.printScore(width, 80)
       player.movement();
@@ -58,7 +65,11 @@ function setup() {
       player.checkAstroidHit(asteroids, player, Health);
       //tests();
       if(exp.level == nextLevel){
+        itmNumChance = floor(random(1,4));
+        if(x == 1){ itmBox1 = new ItemBox(); }
+        if(x == 2){ itmBox1 = new ItemBox(); itmBox2 = new ItemBox();}
         lvlBox.boxVis();
+        itmBox.boxVis();
         nextLevel += 1;
         paused = true;
       }

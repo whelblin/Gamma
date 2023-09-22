@@ -23,7 +23,8 @@
    */
 class LevelBox{
     constructor(){
-        this.lvlBox = new non_colliding.Sprite(width/2, height/2, 100,100);
+        this.lvlBox = new non_colliding.Sprite(width/2, height/2, 500, 500);
+        this.lvlBox.layer = 2;
         this.lvlBox.textSize = 15;
         this.lvlBox.textColor = "white";
         this.lvlBox.text = "escape to exit";
@@ -36,3 +37,24 @@ class LevelBox{
         this.lvlBox.visible = false;
     }
 };
+
+class ItemBox{
+    constructor(){
+        this.itmBox = new itmBoxes.Sprite(width/2, height/2, 400, 100);
+        this.itmBox.layer = 3;
+        this.itmBox.visible = false;
+    }
+    boxVis(){
+        this.itmBox.visible = true;
+    }
+    boxInvis(){
+        this.itmBox.visible = false;
+    }
+    /*
+    itmSelection(){
+        if (this.itmBox.mouse.pressing()){
+            
+        }
+    }
+    */
+}

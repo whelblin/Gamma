@@ -63,7 +63,7 @@ class Player{
                     console.log(new ExpOrb(asteroid.x, asteroid.y))
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
-                    exp.xpGain();
+                    //exp.xpGain();
                     score.increaseScore(100);
                 }
             });

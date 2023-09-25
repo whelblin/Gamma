@@ -23,6 +23,11 @@ class Timer{
         }
         return (num);
     }
+    getMillis(){
+        var temp = new Date();
+        var num = temp.getTime();
+        return (num);
+    }
     // gets the amount of seconds
     getCurrentMin(){
         let temp = new Date();

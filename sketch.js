@@ -34,6 +34,7 @@ function preload() {
 function setup() {
     new Canvas();
     inMenu = true;
+    frameRate(60); //set framerate to be system independent 
     paused = false;
     // Press to start opacity control
     opacity = 0;

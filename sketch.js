@@ -1,6 +1,6 @@
 let timer;
 let asteroid;
-let player;
+var player;
 let playerObject;
 let exp;
 let lvlBox;
@@ -13,6 +13,7 @@ var non_colliding;
 var colliding;
 var asteroids;
 var bullets;
+var orbs;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
@@ -29,12 +30,14 @@ function preload() {
     non_colliding = new Group();
     colliding = new Group();
     itmBoxes = new Group();
+    colliding.overlaps(non_colliding);
     Player.preload()
   }
 
 function setup() {
     new Canvas();
     inMenu = true;
+    frameRate(60); //set framerate to be system independent 
     paused = false;
     // Press to start opacity control
     opacity = 0;
@@ -61,7 +64,8 @@ function setup() {
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp, score);
-      player.checkAstroidHit(asteroids, player, Health);
+      player.checkAstroidHit(asteroids, player, orbs, Health);
+      player.checkExpHit()
       //tests();
       if(exp.level == nextLevel){
         for(i=0; i < 3; i++){
@@ -100,6 +104,7 @@ function setup() {
         inMenu = false;
         asteroids = [];
         bullets = [];
+        orbs = [];
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();

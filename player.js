@@ -16,6 +16,7 @@ class Player{
         //this.player.diameter = 50; 
         //this.player.img = 'assets/playerSprite.png';
         this.immune = false;
+        this.fireRate = 10;
        
         
         //this.shot = new Sprite();
@@ -38,8 +39,8 @@ class Player{
     }
     shoot(){
         if(kb.pressing(' ')){
-        var delay = timer.getMillis();
-            if(delay % 5 == 0){
+            // uses framecount because it is constant on system
+            if(frameCount % this.fireRate == 0){
                 let bullet = new Bullet(this.player.x, this.player.y,bullets);
                 this.player.overlaps(bullet.getObject());
                 bullet.movement();

@@ -8,10 +8,8 @@ class Player{
         this.player = new colliding.Sprite(width/2,height/2,80)
         this.player.spriteSheet = 'assets/sheet.png';
         this.player.anis.frameDelay = 4;
-        this.player.addAnis({
-            idle: {row:0, frames: 1},
-            hit: {row:0, frames: 4}
-        })
+        this.player.addAnis(this.idleAni);
+        this.player.addAnis(this.hitAni);
         this.player.changeAni('idle');
         //this.player.diameter = 50; 
         //this.player.img = 'assets/playerSprite.png';
@@ -20,6 +18,19 @@ class Player{
        
         
         //this.shot = new Sprite();
+
+    }
+    static preload(){
+        this.spriteSheet = 'assets/sheet.png';
+        this.frameDelay = 4;
+        this.idleAni = loadAni("idle",this.spriteSheet,{
+            frameSize: [80,80], frames: 1
+        })
+        this.hitAni = loadAni("hit",this.spriteSheet,{
+            frameSize: [80,80], frames: 4
+        })
+        console.log(this.idleAni);
+        console.log(this.hitAni)
 
     }
     movement(){
@@ -47,20 +58,21 @@ class Player{
             }
         }
     }
-    checkBulletHit(asteroids, bullets, exp){
+    checkBulletHit(asteroids, bullets, exp, score){
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
-                    console.log("hit");
+                    console.log(new ExpOrb(asteroid.x, asteroid.y))
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
-                    exp.xpGain();
+                    //exp.xpGain();
+                    score.increaseScore(100);
                 }
             });
         });
     }
 
-    checkAstroidHit(asteroid, player, Health) {
+    checkAstroidHit(asteroid, player, orbs, Health) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
@@ -80,6 +92,21 @@ class Player{
 
 
 
+    }
+    checkExpHit(){
+        orbs.forEach(orb => {
+            if(orb.overlaps(this.player)){
+                console.log("hit")
+                orb.remove();
+                exp.xpGain();
+            }
+        });
+    }
+    removePlayer(){
+        this.player.remove();
+    }
+    returnPlayerObject(){
+        return this.player
     }
 };
 

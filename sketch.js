@@ -1,31 +1,41 @@
 let timer;
 let asteroid;
-let player;
+var player;
 let playerObject;
 let exp;
+let lvlBox;
+var nextLevel;
 let Health;
+let score;
 var non_colliding;
 var colliding;
 var asteroids;
 var bullets;
+var orbs;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
+var paused;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
+var playerAni;
 
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
+    colliding.overlaps(non_colliding);
+
+    Player.preload()
   }
 
 function setup() {
     new Canvas();
     inMenu = true;
     frameRate(60); //set framerate to be system independent 
+    paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
@@ -35,22 +45,42 @@ function setup() {
   }
   
   function draw() {
+
     image(bgimage1, 0, 0, width, height);
-    //background(255);
-    if(!inMenu)
+    if(!inMenu && paused == false)
     {
       image(bgimage2, 0, 0, width, height);
-      colliding.overlaps(non_colliding);
       timer.printTimer(width/2, 80);
+      score.printScore(width, 80)
       player.movement();
       player.aiming();
       player.shoot();
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
-      player.checkBulletHit(asteroids, bullets, exp);
-      player.checkAstroidHit(asteroids, player, Health);
+      player.checkBulletHit(asteroids, bullets, exp, score);
+      player.checkAstroidHit(asteroids, player, orbs, Health);
+      player.checkExpHit()
       //tests();
+      if(exp.level == nextLevel){
+        lvlBox.boxVis();
+        nextLevel += 1;
+        paused = true;
+      }
+      if(kb.pressed('escape')){
+        paused = true;
+      }
+      if(Health.isDead()){
+        resetGame();
+      }
     }
+    else if(!inMenu && paused == true){
+      image(bgimage2, 0, 0, width, height);
+      world.step(0.001/240);
+      if(kb.pressed('escape')){
+        lvlBox.boxInvis();
+        paused = false;
+    }
+  }
     else
     {
    //   drawTitle();
@@ -61,14 +91,19 @@ function setup() {
         inMenu = false;
         asteroids = [];
         bullets = [];
+        orbs = [];
         player= new Player();
+        console.log(player.player.ani);
         timer = new Timer();
         exp = new Experience();
+        lvlBox = new LevelBox();
+        nextLevel = 2;
         Health = new PlayerHealth();
-
+        score = new ScoreCounter();
       }
     }
   }
+
 /*
 function drawTitle()
 {
@@ -115,12 +150,12 @@ function drawScore()
 {
     var score = 0; // temp
     textSize(80);
-    textAlign(CENTER);
+    textAlign(RIGHT);
     textFont(mainFont);
     fill(255);
-    text("Best Score: "+ score,width/2, 860);
+    text("Best Score: "+ score,width - 10, 70)
+    textAlign(CENTER)
 }
-
 
 function tests(){
   exp.test_increase();
@@ -128,4 +163,18 @@ function tests(){
 }
 
 
+
+
+
+function resetGame() {
+  inMenu = true;
+  exp.outerBar.remove();
+  exp.innerBar.remove();
+  Health.outerBar.remove();
+  Health.innerBar.remove();
+  player.player.remove();
+  for(let i = 0; i < asteroids.length; i++){
+    asteroids[i].remove();
+  }
+}
 

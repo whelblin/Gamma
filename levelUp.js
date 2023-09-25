@@ -42,13 +42,25 @@ class ItemBox{
     constructor(){
         this.itmBox = new itmBoxes.Sprite(width/2, height/2, 400, 100);
         this.itmBox.layer = 3;
-        this.itmBox.visible = false;
+        //this.itmBox.visible = false;
+        this.itmBox.text = "Filler Item";
+        this.itmBox.textColor = "white";
+        this.itmBox.textSize = 15;
+        items.push(this.itmBox);
+
     }
     boxVis(){
         this.itmBox.visible = true;
     }
     boxInvis(){
         this.itmBox.visible = false;
+    }
+    //ItemName(x) ItemDescription(x)
+    itmReload(itemName, itemDescription){
+        this.itmBox.text = itemName + itemDescription;
+    }
+    removeBoxes(){
+        items.remove();
     }
     /*
     itmSelection(){

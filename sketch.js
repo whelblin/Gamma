@@ -1,6 +1,6 @@
 let timer;
 let asteroid;
-let player;
+var player;
 let playerObject;
 let exp;
 let lvlBox;
@@ -11,6 +11,7 @@ var non_colliding;
 var colliding;
 var asteroids;
 var bullets;
+var orbs;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
@@ -25,6 +26,8 @@ function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
+    colliding.overlaps(non_colliding);
+
     Player.preload()
   }
 
@@ -46,7 +49,6 @@ function setup() {
     if(!inMenu && paused == false)
     {
       image(bgimage2, 0, 0, width, height);
-      colliding.overlaps(non_colliding);
       timer.printTimer(width/2, 80);
       score.printScore(width, 80)
       player.movement();
@@ -55,7 +57,8 @@ function setup() {
       timer.asteroidSpawn(asteroids);
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp, score);
-      player.checkAstroidHit(asteroids, player, Health);
+      player.checkAstroidHit(asteroids, player, orbs, Health);
+      player.checkExpHit()
       //tests();
       if(exp.level == nextLevel){
         lvlBox.boxVis();
@@ -87,6 +90,7 @@ function setup() {
         inMenu = false;
         asteroids = [];
         bullets = [];
+        orbs = [];
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();

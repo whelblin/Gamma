@@ -4,6 +4,8 @@ var player;
 let playerObject;
 let exp;
 let lvlBox;
+let items;
+let itmNumChance;
 var nextLevel;
 let Health;
 let score;
@@ -20,14 +22,15 @@ let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 var playerAni;
-
+let itemName = ["TestName"];
+let itemDescription = ["TestDescription"];
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
+    itmBoxes = new Group();
     colliding.overlaps(non_colliding);
-
     Player.preload()
   }
 
@@ -50,6 +53,9 @@ function setup() {
     if(!inMenu && paused == false)
     {
       image(bgimage2, 0, 0, width, height);
+      colliding.overlaps(non_colliding);
+      itmBoxes.overlaps(non_colliding);
+      itmBoxes.overlaps(colliding);
       timer.printTimer(width/2, 80);
       score.printScore(width, 80)
       player.movement();
@@ -62,6 +68,10 @@ function setup() {
       player.checkExpHit()
       //tests();
       if(exp.level == nextLevel){
+        for(i=0; i < 3; i++){
+          items == new ItemBox();
+          //itemBoxes[i].boxVis();
+        }
         lvlBox.boxVis();
         nextLevel += 1;
         paused = true;
@@ -77,6 +87,9 @@ function setup() {
       image(bgimage2, 0, 0, width, height);
       world.step(0.001/240);
       if(kb.pressed('escape')){
+        for(let y = 0; y < items.length; y++){
+          items[y].remove();
+        }
         lvlBox.boxInvis();
         paused = false;
     }
@@ -97,6 +110,7 @@ function setup() {
         timer = new Timer();
         exp = new Experience();
         lvlBox = new LevelBox();
+        items = [];
         nextLevel = 2;
         Health = new PlayerHealth();
         score = new ScoreCounter();

@@ -60,16 +60,17 @@ class Player{
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
+                    console.log(new ExpOrb(asteroid.x, asteroid.y))
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
-                    exp.xpGain();
+                    //exp.xpGain();
                     score.increaseScore(100);
                 }
             });
         });
     }
 
-    checkAstroidHit(asteroid, player, Health) {
+    checkAstroidHit(asteroid, player, orbs, Health) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
@@ -90,8 +91,20 @@ class Player{
 
 
     }
+    checkExpHit(){
+        orbs.forEach(orb => {
+            if(orb.overlaps(this.player)){
+                console.log("hit")
+                orb.remove();
+                exp.xpGain();
+            }
+        });
+    }
     removePlayer(){
         this.player.remove();
+    }
+    returnPlayerObject(){
+        return this.player
     }
 };
 

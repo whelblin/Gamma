@@ -85,7 +85,7 @@ class Player{
         });
     }
 
-    checkAstroidHit(asteroid, player, orbs, Health) {
+    checkShipHit(asteroid, Health, tracker) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
@@ -94,7 +94,16 @@ class Player{
                     }
                 }
         });
+        trackers.forEach(tracker => {
+            if(this.player.collides(tracker)){ // hit
+                if(this.player.ani.name == 'idle'){ // if not immune
+                this.collision(tracker);// removes the tracker
+                Health.healthDecrease();
+                }
+            }
+        });
     }
+
     collision(asteroid){
         // changes the direction of the asteroid
         asteroid.vel.x = -asteroid.vel.x * 1.2;
@@ -102,8 +111,15 @@ class Player{
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
     }
+    collision(tracker){
+        // changes the direction of the tracker
+        tracker.vel.x = -tracker.vel.x * 1.2;
+        tracker.vel.y = -tracker.vel.y * 1.2;
+        // plays animation
+        this.player.changeAni(['hit','hit','hit','idle'])
+    }
     trackerAttract(tracker){
-        tracker.attractTo(this.player, 50);
+        tracker.attractTo(this.player, 100);
     }
     checkExpHit(){
         orbs.forEach(orb => {

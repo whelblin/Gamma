@@ -63,15 +63,14 @@ function setup() {
       player.movement();
       player.aiming();
       player.shoot();
-      timer.asteroidSpawn(asteroids);
-      timer.trackerSpawn(trackers);
+      timer.enemySpawn(asteroids,trackers);
       for(let t = 0; t < trackers.length; t++){
         player.trackerAttract(trackers[t]);
       }
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp, score);
       player.trackerBulletHit(trackers, bullets, exp, score);
-      player.checkAstroidHit(asteroids, player, orbs, Health);
+      player.checkShipHit(asteroids, player, orbs, Health);
       player.checkExpHit()
       //tests();
       if(exp.level == nextLevel){

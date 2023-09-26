@@ -6,7 +6,7 @@ class Tracker{
 
        this.tracker = new colliding.Sprite(width/2,height/2, 50);
        //this.tracker.addAnimation('normal', 'assets/asteroid.png');
-       this.trackerSpeed = 5;
+       this.trackerSpeed = 1;
        //this.tracker.attractTo(player,25);
        trackers.push(this.tracker);
 

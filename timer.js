@@ -40,20 +40,15 @@ class Timer{
       //  textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
-    asteroidSpawn(asteroids){
+    enemySpawn(asteroids,trackers){
         this.now = parseInt(timer.getCurrentSec());
         if(this.now %1 == 0 && this.now != this.prev){
             let rock = new Asteroid(asteroids);
             rock.movement();
-            this.prev = this.now;
-          }
-    }
-    trackerSpawn(trackers){
-        this.now = parseInt(timer.getCurrentSec());
-        if(this.now %1 == 0 && this.now != this.prev){
             let track = new Tracker(trackers);
             track.movement();
             this.prev = this.now;
           }
     }
+
 }

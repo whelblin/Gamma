@@ -48,4 +48,12 @@ class Timer{
             this.prev = this.now;
           }
     }
+    trackerSpawn(trackers){
+        this.now = parseInt(timer.getCurrentSec());
+        if(this.now %1 == 0 && this.now != this.prev){
+            let track = new Tracker(trackers);
+            track.movement();
+            this.prev = this.now;
+          }
+    }
 }

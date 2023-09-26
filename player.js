@@ -71,6 +71,19 @@ class Player{
             });
         });
     }
+    trackerBulletHit(trackers, bullets, exp, score){
+        trackers.forEach(tracker => {
+            bullets.forEach(bullet => {
+                if(bullet.collides(tracker)){ // hit
+                    console.log(new ExpOrb(tracker.x, tracker.y))
+                    tracker.remove();// removes the tracker
+                    bullet.remove();
+                    //exp.xpGain();
+                    score.increaseScore(200);
+                }
+            });
+        });
+    }
 
     checkAstroidHit(asteroid, player, orbs, Health) {
         asteroids.forEach(asteroid => {
@@ -88,10 +101,9 @@ class Player{
         asteroid.vel.y = -asteroid.vel.y * 1.2;
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
-       
-
-
-
+    }
+    trackerAttract(tracker){
+        tracker.attractTo(this.player, 50);
     }
     checkExpHit(){
         orbs.forEach(orb => {

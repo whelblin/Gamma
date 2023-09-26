@@ -20,8 +20,6 @@ class Asteroid{
        asteroids.push(this.asteroid);
 
     }
-
-
     movement(){
         let x = floor(random(4));
         // left side

@@ -94,6 +94,7 @@ class Player{
                     }
                 }
         });
+        /*
         trackers.forEach(tracker => {
             if(this.player.collides(tracker)){ // hit
                 if(this.player.ani.name == 'idle'){ // if not immune
@@ -102,6 +103,7 @@ class Player{
                 }
             }
         });
+        */
     }
 
     collision(asteroid){

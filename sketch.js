@@ -70,7 +70,7 @@ function setup() {
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp, score);
       player.trackerBulletHit(trackers, bullets, exp, score);
-      player.checkShipHit(asteroids, player, orbs, Health);
+      player.checkShipHit(asteroids, Health, trackers);
       player.checkExpHit()
       //tests();
       if(exp.level == nextLevel){
@@ -196,6 +196,12 @@ function resetGame() {
   player.player.remove();
   for(let i = 0; i < asteroids.length; i++){
     asteroids[i].remove();
+  }
+  for(let q = 0; q < trackers.length; q++){
+    trackers[q].remove();
+  }
+  for(let e = 0; e < orbs.length; e++){
+    orbs[e].remove();
   }
 }
 

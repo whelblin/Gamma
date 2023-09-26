@@ -34,7 +34,7 @@ class Player{
 
     }
     movement(){
-        this.player.speed = 5;
+        this.player.speed = 8;
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 
@@ -85,7 +85,7 @@ class Player{
         });
     }
 
-    checkShipHit(asteroid, Health, tracker) {
+    checkShipHit(asteroids, Health, trackers) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
@@ -94,7 +94,6 @@ class Player{
                     }
                 }
         });
-        /*
         trackers.forEach(tracker => {
             if(this.player.collides(tracker)){ // hit
                 if(this.player.ani.name == 'idle'){ // if not immune
@@ -103,7 +102,6 @@ class Player{
                 }
             }
         });
-        */
     }
 
     collision(asteroid){

@@ -24,7 +24,7 @@ let bgimage2;
 var playerAni;
 let itemName = ["TestName"];
 let itemDescription = ["TestDescription"];
-
+let backgroundMusic;
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
@@ -32,6 +32,7 @@ function preload() {
     itmBoxes = new Group();
     colliding.overlaps(non_colliding);
     Player.preload()
+    backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
   }
 
 function setup() {
@@ -44,7 +45,7 @@ function setup() {
     opacShouldIncrease = false;
     bgimage1 = loadImage('assets/bgimage2.png');
     bgimage2 = loadImage('assets/bgimage3.gif');
-
+    backgroundSong();
   }
   
   function draw() {
@@ -190,5 +191,12 @@ function resetGame() {
   for(let i = 0; i < asteroids.length; i++){
     asteroids[i].remove();
   }
+}
+
+function backgroundSong(){
+  backgroundMusic.play();
+  backgroundMusic.loop();
+  backgroundMusic.setVolume(.05);
+  userStartAudio();
 }
 

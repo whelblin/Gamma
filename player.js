@@ -34,7 +34,7 @@ class Player{
 
     }
     movement(){
-        this.player.speed = 5;
+        this.player.speed = 8;
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 
@@ -71,8 +71,21 @@ class Player{
             });
         });
     }
+    trackerBulletHit(trackers, bullets, exp, score){
+        trackers.forEach(tracker => {
+            bullets.forEach(bullet => {
+                if(bullet.collides(tracker)){ // hit
+                    console.log(new ExpOrb(tracker.x, tracker.y))
+                    tracker.remove();// removes the tracker
+                    bullet.remove();
+                    //exp.xpGain();
+                    score.increaseScore(200);
+                }
+            });
+        });
+    }
 
-    checkAstroidHit(asteroid, player, orbs, Health) {
+    checkShipHit(asteroids, Health, trackers) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
@@ -81,17 +94,32 @@ class Player{
                     }
                 }
         });
+        trackers.forEach(tracker => {
+            if(this.player.collides(tracker)){ // hit
+                if(this.player.ani.name == 'idle'){ // if not immune
+                this.collision(tracker);// removes the tracker
+                Health.healthDecrease();
+                }
+            }
+        });
     }
+
     collision(asteroid){
         // changes the direction of the asteroid
         asteroid.vel.x = -asteroid.vel.x * 1.2;
         asteroid.vel.y = -asteroid.vel.y * 1.2;
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
-       
-
-
-
+    }
+    collision(tracker){
+        // changes the direction of the tracker
+        tracker.vel.x = -tracker.vel.x * 1.2;
+        tracker.vel.y = -tracker.vel.y * 1.2;
+        // plays animation
+        this.player.changeAni(['hit','hit','hit','idle'])
+    }
+    trackerAttract(tracker){
+        tracker.moveTo(this.player, tracker.trackerSpeed);
     }
     checkExpHit(){
         orbs.forEach(orb => {

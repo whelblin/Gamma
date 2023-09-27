@@ -35,15 +35,7 @@ class Player{
 
     }
     movement(){
-<<<<<<< HEAD
-        this.player.speed = 5;
-       
-<<<<<<< Updated upstream
-=======
-=======
         this.player.speed = 8;
->>>>>>> 6f0b32766208be096979fb1a8514a947ffa8de53
->>>>>>> Stashed changes
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 
@@ -77,8 +69,7 @@ class Player{
                     //exp.xpGain();
                     score.increaseScore(100);
                     asteroidHitSound.play();
-<<<<<<< Updated upstream
-=======
+
                 }
             });
         });
@@ -92,7 +83,20 @@ class Player{
                     bullet.remove();
                     //exp.xpGain();
                     score.increaseScore(200);
->>>>>>> Stashed changes
+
+                }
+            });
+        });
+    }
+    trackerBulletHit(trackers, bullets, exp, score){
+        trackers.forEach(tracker => {
+            bullets.forEach(bullet => {
+                if(bullet.collides(tracker)){ // hit
+                    console.log(new ExpOrb(tracker.x, tracker.y))
+                    tracker.remove();// removes the tracker
+                    bullet.remove();
+                    //exp.xpGain();
+                    score.increaseScore(200);
                 }
             });
         });

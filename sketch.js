@@ -24,9 +24,12 @@ let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 var playerAni;
+let bulletSound;
+let asteroidHitSound;
 let itemName = ["TestName"];
 let itemDescription = ["TestDescription"];
 let backgroundMusic;
+
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
@@ -34,7 +37,10 @@ function preload() {
     itmBoxes = new Group();
     colliding.overlaps(non_colliding);
     Player.preload()
+    bulletSound = loadSound('assets/shoot02wav-14562.mp3');
+    asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
+
   }
 
 function setup() {

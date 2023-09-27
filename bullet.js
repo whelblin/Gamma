@@ -8,7 +8,9 @@ class Bullet{
         this.bullet.width = 13;
         this.bullet.life = 100;
 
+        bulletSound.play();
         bullets.push(this.bullet);
+        
     }
 
     getObject(){return this.bullet;}

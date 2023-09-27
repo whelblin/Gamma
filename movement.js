@@ -7,6 +7,8 @@ function setup() {
 }
 
 function draw() {
+  
+if(y>0||y<height||x>0||x<width){
   if (keyIsDown(65)) {
     x -= 5;
   }
@@ -22,6 +24,7 @@ function draw() {
   if (keyIsDown(83)) {
     y += 5;
   }
+}
 
   clear();
   ellipse(x, y, 50, 50);

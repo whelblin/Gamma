@@ -19,13 +19,17 @@ let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 var playerAni;
-
+let bulletSound;
+let asteroidHitSound;
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
     Player.preload()
+    bulletSound = loadSound('assets/shoot02wav-14562.mp3');
+    asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
+
   }
 
 function setup() {

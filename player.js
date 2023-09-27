@@ -19,6 +19,7 @@ class Player{
         //this.shot = new Sprite();
 
     }
+     
     static preload(){
         this.spriteSheet = 'assets/sheet.png';
         this.frameDelay = 4;
@@ -34,11 +35,12 @@ class Player{
     }
     movement(){
         this.player.speed = 5;
+       
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 
         else if (kb.pressing('right')) { this.player.direction = 0; } 
-        else { this.player.speed = 0; }
+        else { this.player.speed = 0.5; }
         if(kb.pressing('up') && kb.pressing('right')){ this.player.direction = -45 }
         if(kb.pressing('up') && kb.pressing('left')){ this.player.direction = -135 }
         if(kb.pressing('down') && kb.pressing('right')){ this.player.direction = 45 }
@@ -64,6 +66,7 @@ class Player{
                     bullet.remove();
                     exp.xpGain();
                     score.increaseScore(100);
+                    asteroidHitSound.play();
                 }
             });
         });

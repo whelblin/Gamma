@@ -28,7 +28,7 @@ class ScoreCounter {
     }
 
     printBestScore(x,y){
-        textSize(90);
+        textSize(80);
         textStyle(BOLD);
         textAlign(CENTER);
       //  textFont("comic sans");

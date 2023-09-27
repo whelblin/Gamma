@@ -28,7 +28,7 @@ function preload() {
     non_colliding = new Group();
     colliding = new Group();
     Player.preload()
-    bgimage1 = loadImage('assets/bgimage1.gif');
+    bgimage1 = loadImage('assets/bgimage2.png');
     bgimage2 = loadImage('assets/bgimage3.gif');
     bgimage3 = loadImage('assets/bgimage4.png');
 
@@ -74,6 +74,21 @@ function setup() {
       }
       if(Health.isDead()){
         resetGame();
+        drawScore();
+        if (kb.presses(' ')){
+          inMenu = false;
+          asteroids = [];
+          bullets = [];
+          player= new Player();
+          console.log(player.player.ani);
+          timer = new Timer();
+          exp = new Experience();
+          lvlBox = new LevelBox();
+          nextLevel = 2;
+          Health = new PlayerHealth();
+          score = new ScoreCounter();
+          bestScore = new ScoreCounter();
+        }
       }
     }
     else if(!inMenu && paused == true){
@@ -108,16 +123,6 @@ function setup() {
     }
   }
 
-/*
-function drawTitle()
-{
-    textSize(150);
-    textAlign(CENTER);
-    textFont(mainFont);
-    fill(0,0,0);
-//    text("SPACE SURVIVORS",width/2, 300);
-} */
-
 function drawStart()
 {
     
@@ -125,13 +130,13 @@ function drawStart()
     stroke(0);
     strokeWeight(5);
     rectMode(CENTER);
-    rect(width/2, height/2+180, 400, 150, 30);
+    rect(width/2, height/2+170, 400, 150, 30);
 
     textSize(120);
     textFont(mainFont);
     fill(0,0,0);
     textAlign(CENTER);
-    text("Play",width/2, height/2+210);
+    text("Play",width/2, height/2+200);
 
 
     if(opacity < 212 && opacShouldIncrease)
@@ -149,56 +154,63 @@ function drawStart()
     }   
 }
 
-
-function drawScore()
-{
+function drawScore(){
   fill(255);
-  //textSize(100);
-  //  var score = 0; // temp
-  //  textAlign(RIGHT);
-  //  textFont(mainFont);
-  //  text("Best Score: "+ score,width - 10, 70)
-  //  textAlign(CENTER)
 }
 
 /*
-function tests(){
-  exp.test_increase();
-  Health.healthDecrease();
-}*/
-
-/*
-function drawGameOver(){
-  textAlign(CENTER);
-  textFont = mainFont;
-  textSize(40);
-  text("GAME OVER", width/2,height/2+110);
+function drawLevelUp(){
+    textSize(120);
+    textFont(mainFont);
+    fill(111,168,220,opacity);
+    textAlign(CENTER);
+    text("Level Up!",width/2, height/2);
+    if(opacity < 212 && opacShouldIncrease){
+      opacity+=8;
+    }else{
+      opacShouldIncrease = false;
+      opacity-=8;
+      if(opacity < 0){
+        opacShouldIncrease = true;
+      }
+    } 
 } */
 
 function resetGame() {
  // inMenu = true;
   image(bgimage3, 0, 0, width, height);
-  bestScore.printBestScore(width/2,height/2+220);
-  fill(111,168,220, opacity);
-  if(opacity < 212 && opacShouldIncrease)
-    {
-      opacity+=7;
-    }
-    else
-    {
+  fill(111,168,220);
+  bestScore.printBestScore(width/2,height/2+70);
+
+    fill(215,175, 55, opacity);
+    stroke(0);
+    strokeWeight(5);
+    rectMode(CENTER);
+    rect(width/2, height/2+192, 300, 100, 20);
+
+    textSize(55);
+    textFont(mainFont);
+    fill(0,0,0);
+    textAlign(CENTER);
+    text("Play Again",width/2, height/2+208);
+    if(opacity < 212 && opacShouldIncrease){
+      opacity+=8;
+    }else{
       opacShouldIncrease = false;
-      opacity-= 7;
-      if(opacity < 0)
-      {
+      opacity-=8;
+      if(opacity < 0){
         opacShouldIncrease = true;
       }
-    }  
-
+    }   
+  
   exp.outerBar.remove();
   exp.innerBar.remove();
   Health.outerBar.remove();
   Health.innerBar.remove();
   player.player.remove();
+  for(let i = 0; i < bullets.length; i++){
+    bullets[i].remove();
+  }
   for(let i = 0; i < asteroids.length; i++){
     asteroids[i].remove();
   }

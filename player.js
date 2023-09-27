@@ -14,7 +14,7 @@ class Player{
         //this.player.diameter = 50; 
         //this.player.img = 'assets/playerSprite.png';
         this.immune = false;
-        this.fireRate = 10;
+        this.fireRate = 15;
        
         
         //this.shot = new Sprite();

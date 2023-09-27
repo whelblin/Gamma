@@ -119,7 +119,7 @@ class Player{
         this.player.changeAni(['hit','hit','hit','idle'])
     }
     trackerAttract(tracker){
-        tracker.attractTo(this.player, 100);
+        tracker.moveTo(this.player, tracker.trackerSpeed);
     }
     checkExpHit(){
         orbs.forEach(orb => {

@@ -10,6 +10,7 @@ class Bullet{
 
         bulletSound.play();
         bullets.push(this.bullet);
+        
     }
 
     getObject(){return this.bullet;}

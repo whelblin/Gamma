@@ -14,6 +14,7 @@ class Player{
         //this.player.diameter = 50; 
         //this.player.img = 'assets/playerSprite.png';
         this.immune = false;
+        this.fireRate = 15;
        
         
         //this.shot = new Sprite();
@@ -34,8 +35,15 @@ class Player{
 
     }
     movement(){
+<<<<<<< HEAD
         this.player.speed = 5;
        
+<<<<<<< Updated upstream
+=======
+=======
+        this.player.speed = 8;
+>>>>>>> 6f0b32766208be096979fb1a8514a947ffa8de53
+>>>>>>> Stashed changes
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 
@@ -50,29 +58,47 @@ class Player{
         this.player.rotateTowards(mouse,1,0);
     }
     shoot(){
-        if( kb.presses(' ')){
-            let bullet = new Bullet(this.player.x, this.player.y,bullets);
-            this.player.overlaps(bullet.getObject());
-            bullet.movement();
-
-            
+        if(kb.pressing(' ')){
+            // uses framecount because it is constant on system
+            if(frameCount % this.fireRate == 0){
+                let bullet = new Bullet(this.player.x, this.player.y,bullets);
+                this.player.overlaps(bullet.getObject());
+                bullet.movement();
+            }
         }
     }
     checkBulletHit(asteroids, bullets, exp, score){
         asteroids.forEach(asteroid => {
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
+                    console.log(new ExpOrb(asteroid.x, asteroid.y))
                     asteroid.remove();// removes the asteroid
                     bullet.remove();
-                    exp.xpGain();
+                    //exp.xpGain();
                     score.increaseScore(100);
                     asteroidHitSound.play();
+<<<<<<< Updated upstream
+=======
+                }
+            });
+        });
+    }
+    trackerBulletHit(trackers, bullets, exp, score){
+        trackers.forEach(tracker => {
+            bullets.forEach(bullet => {
+                if(bullet.collides(tracker)){ // hit
+                    console.log(new ExpOrb(tracker.x, tracker.y))
+                    tracker.remove();// removes the tracker
+                    bullet.remove();
+                    //exp.xpGain();
+                    score.increaseScore(200);
+>>>>>>> Stashed changes
                 }
             });
         });
     }
 
-    checkAstroidHit(asteroid, player, Health) {
+    checkShipHit(asteroids, Health, trackers) {
         asteroids.forEach(asteroid => {
                 if(this.player.collides(asteroid)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
@@ -81,20 +107,47 @@ class Player{
                     }
                 }
         });
+        trackers.forEach(tracker => {
+            if(this.player.collides(tracker)){ // hit
+                if(this.player.ani.name == 'idle'){ // if not immune
+                this.collision(tracker);// removes the tracker
+                Health.healthDecrease();
+                }
+            }
+        });
     }
+
     collision(asteroid){
         // changes the direction of the asteroid
         asteroid.vel.x = -asteroid.vel.x * 1.2;
         asteroid.vel.y = -asteroid.vel.y * 1.2;
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
-       
-
-
-
+    }
+    collision(tracker){
+        // changes the direction of the tracker
+        tracker.vel.x = -tracker.vel.x * 1.2;
+        tracker.vel.y = -tracker.vel.y * 1.2;
+        // plays animation
+        this.player.changeAni(['hit','hit','hit','idle'])
+    }
+    trackerAttract(tracker){
+        tracker.moveTo(this.player, tracker.trackerSpeed);
+    }
+    checkExpHit(){
+        orbs.forEach(orb => {
+            if(orb.overlaps(this.player)){
+                console.log("hit")
+                orb.remove();
+                exp.xpGain();
+            }
+        });
     }
     removePlayer(){
         this.player.remove();
+    }
+    returnPlayerObject(){
+        return this.player
     }
 };
 

@@ -1,16 +1,21 @@
 let timer;
 let asteroid;
-let player;
+let tracker;
+var player;
 let playerObject;
 let exp;
 let lvlBox;
+let items;
+let itmNumChance;
 var nextLevel;
 let Health;
 let score;
 var non_colliding;
 var colliding;
 var asteroids;
+var trackers;
 var bullets;
+var orbs;
 var inMenu;
 var opacity;
 var opacShouldIncrease;
@@ -19,29 +24,54 @@ let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 var playerAni;
+<<<<<<< Updated upstream
 let bulletSound;
 let asteroidHitSound;
 
+=======
+<<<<<<< HEAD
+let bulletSound;
+let asteroidHitSound;
+
+=======
+let itemName = ["TestName"];
+let itemDescription = ["TestDescription"];
+let backgroundMusic;
+>>>>>>> 6f0b32766208be096979fb1a8514a947ffa8de53
+>>>>>>> Stashed changes
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
     colliding = new Group();
+    itmBoxes = new Group();
+    colliding.overlaps(non_colliding);
     Player.preload()
+<<<<<<< Updated upstream
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
 
+=======
+<<<<<<< HEAD
+    bulletSound = loadSound('assets/shoot02wav-14562.mp3');
+    asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
+
+=======
+    backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
+>>>>>>> 6f0b32766208be096979fb1a8514a947ffa8de53
+>>>>>>> Stashed changes
   }
 
 function setup() {
     new Canvas();
     inMenu = true;
+    frameRate(60); //set framerate to be system independent 
     paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
     bgimage1 = loadImage('assets/bgimage2.png');
     bgimage2 = loadImage('assets/bgimage3.gif');
-
+    backgroundSong();
   }
   
   function draw() {
@@ -51,17 +81,28 @@ function setup() {
     {
       image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
+      itmBoxes.overlaps(non_colliding);
+      itmBoxes.overlaps(colliding);
       timer.printTimer(width/2, 80);
       score.printScore(width, 80)
       player.movement();
       player.aiming();
       player.shoot();
-      timer.asteroidSpawn(asteroids);
+      timer.enemySpawn(asteroids,trackers);
+      for(let t = 0; t < trackers.length; t++){
+        player.trackerAttract(trackers[t]);
+      }
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp, score);
-      player.checkAstroidHit(asteroids, player, Health);
+      player.trackerBulletHit(trackers, bullets, exp, score);
+      player.checkShipHit(asteroids, Health, trackers);
+      player.checkExpHit()
       //tests();
       if(exp.level == nextLevel){
+        for(i=0; i < 3; i++){
+          items == new ItemBox();
+          //itemBoxes[i].boxVis();
+        }
         lvlBox.boxVis();
         nextLevel += 1;
         paused = true;
@@ -77,6 +118,9 @@ function setup() {
       image(bgimage2, 0, 0, width, height);
       world.step(0.001/240);
       if(kb.pressed('escape')){
+        for(let y = 0; y < items.length; y++){
+          items[y].remove();
+        }
         lvlBox.boxInvis();
         paused = false;
     }
@@ -90,12 +134,15 @@ function setup() {
       {
         inMenu = false;
         asteroids = [];
+        trackers = [];
         bullets = [];
+        orbs = [];
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();
         exp = new Experience();
         lvlBox = new LevelBox();
+        items = [];
         nextLevel = 2;
         Health = new PlayerHealth();
         score = new ScoreCounter();
@@ -149,10 +196,11 @@ function drawScore()
 {
     var score = 0; // temp
     textSize(80);
-    textAlign(CENTER);
+    textAlign(RIGHT);
     textFont(mainFont);
     fill(255);
-    text("Best Score: "+ score,width/2, 860);
+    text("Best Score: "+ score,width - 10, 70)
+    textAlign(CENTER)
 }
 
 function tests(){
@@ -174,5 +222,18 @@ function resetGame() {
   for(let i = 0; i < asteroids.length; i++){
     asteroids[i].remove();
   }
+  for(let q = 0; q < trackers.length; q++){
+    trackers[q].remove();
+  }
+  for(let e = 0; e < orbs.length; e++){
+    orbs[e].remove();
+  }
+}
+
+function backgroundSong(){
+  backgroundMusic.play();
+  backgroundMusic.loop();
+  backgroundMusic.setVolume(.05);
+  userStartAudio();
 }
 

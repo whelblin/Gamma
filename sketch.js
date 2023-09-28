@@ -30,7 +30,7 @@ let itemName = ["TestName"];
 let itemDescription = ["TestDescription"];
 let backgroundMusic;
 
-var chromedriver;
+var chromedriver = -1;
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
@@ -69,7 +69,7 @@ function setup() {
     image(bgimage1, 0, 0, width, height);
     if(!inMenu && paused == false)
     {
-      chromedriver.update()
+      if(chromedriver != -1) chromedriver.update()
       image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
       itmBoxes.overlaps(non_colliding);

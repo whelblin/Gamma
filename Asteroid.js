@@ -54,5 +54,17 @@ class Asteroid{
         }
     }
     
+    delete(bullet){
+        console.log(new ExpOrb(this.asteroid.x, this.asteroid.y))
+        let index = asteroids.indexOf(this.asteroid);
+        console.log("before: ",asteroids.length)
+        this.asteroid.remove();// removes the asteroid
+        asteroids.splice(index,1); // removes it from the array
+        console.log("after: ",asteroids.length)
+        bullet.remove();
+        //exp.xpGain();
+        score.increaseScore(100);
+        asteroidHitSound.play();
+    }
     
 };

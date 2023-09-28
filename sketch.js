@@ -30,6 +30,8 @@ let itemName = ["TestName"];
 let itemDescription = ["TestDescription"];
 let backgroundMusic;
 
+var chromedriver = -1;
+
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
     non_colliding = new Group();
@@ -40,6 +42,7 @@ function preload() {
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
+   
 
   }
 
@@ -54,6 +57,11 @@ function setup() {
     bgimage1 = loadImage('assets/bgimage2.png');
     bgimage2 = loadImage('assets/bgimage3.gif');
     backgroundSong();
+    asteroids = [];
+    trackers = [];
+    bullets = [];
+    orbs = [];
+    chromedriver = new Chromedriver
   }
   
   function draw() {
@@ -61,6 +69,7 @@ function setup() {
     image(bgimage1, 0, 0, width, height);
     if(!inMenu && paused == false)
     {
+      if(chromedriver != -1) chromedriver.update()
       image(bgimage2, 0, 0, width, height);
       colliding.overlaps(non_colliding);
       itmBoxes.overlaps(non_colliding);
@@ -79,6 +88,7 @@ function setup() {
       player.trackerBulletHit(trackers, bullets, exp, score);
       player.checkShipHit(asteroids, Health, trackers);
       player.checkExpHit()
+      
       //tests();
       if(exp.level == nextLevel){
         for(i=0; i < 3; i++){
@@ -115,10 +125,6 @@ function setup() {
       if (kb.presses(' '))
       {
         inMenu = false;
-        asteroids = [];
-        trackers = [];
-        bullets = [];
-        orbs = [];
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();
@@ -130,6 +136,7 @@ function setup() {
         score = new ScoreCounter();
       }
     }
+    
   }
 
 /*
@@ -204,12 +211,15 @@ function resetGame() {
   for(let i = 0; i < asteroids.length; i++){
     asteroids[i].remove();
   }
+  asteroids = []
   for(let q = 0; q < trackers.length; q++){
     trackers[q].remove();
   }
+  trackers = []
   for(let e = 0; e < orbs.length; e++){
     orbs[e].remove();
   }
+  orbs = []
 }
 
 function backgroundSong(){

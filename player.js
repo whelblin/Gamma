@@ -64,7 +64,11 @@ class Player{
             bullets.forEach(bullet => {
                 if(bullet.collides(asteroid)){ // hit
                     console.log(new ExpOrb(asteroid.x, asteroid.y))
+                    let index = asteroids.indexOf(asteroid);
+                    console.log("before: ",asteroids.length)
                     asteroid.remove();// removes the asteroid
+                    asteroids.splice(index,1); // removes it from the array
+                    console.log("after: ",asteroids.length)
                     bullet.remove();
                     //exp.xpGain();
                     score.increaseScore(100);

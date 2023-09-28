@@ -21,6 +21,7 @@ class PlayerHealth {
     isDead(){
         return this.dead;
     }
+    returnHealth(){return this.health;}
 
 
 };

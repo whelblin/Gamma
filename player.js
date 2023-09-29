@@ -4,23 +4,14 @@
 
 class Player{
     constructor(){
-        //console.log(colliding);
         this.player = new colliding.Sprite(width/2,height/2,80)
-        this.player.spriteSheet = 'assets/sheet.png';
-        this.player.anis.frameDelay = 4;
         this.player.addAnis(this.idleAni);
         this.player.addAnis(this.hitAni);
         this.player.changeAni('idle');
-        //this.player.diameter = 50; 
-        //this.player.img = 'assets/playerSprite.png';
         this.immune = false;
         this.fireRate = 15;
-       
-        
-        //this.shot = new Sprite();
-
     }
-     
+     // loads the aniamtion during the reload function
     static preload(){
         this.spriteSheet = 'assets/sheet.png';
         this.frameDelay = 4;
@@ -30,10 +21,8 @@ class Player{
         this.hitAni = loadAni("hit",this.spriteSheet,{
             frameSize: [80,80], frames: 4
         })
-        console.log(this.idleAni);
-        console.log(this.hitAni)
-
     }
+
     movement(){
         this.player.speed = 8;
         if (kb.pressing('up')) { this.player.direction = -90; }
@@ -46,9 +35,11 @@ class Player{
         if(kb.pressing('down') && kb.pressing('right')){ this.player.direction = 45 }
         if(kb.pressing('down') && kb.pressing('left')){ this.player.direction = 135 }
     }
+    // rotates the player towards the mouse
     aiming(){
         this.player.rotateTowards(mouse,1,0);
     }
+    // shoots bullets at the firerate 
     shoot(){
         if(kb.pressing(' ')){
             // uses framecount because it is constant on system
@@ -59,18 +50,18 @@ class Player{
             }
         }
     }
-    checkBulletHit(asteroids, bullets, exp, score){
-        asteroids.forEach(asteroid => {
+    // checks if the bullet hit an oject in the passed array
+    // you can pass any array whiich contains sprite objects
+    checkBulletHit(array, bullets, exp, score){
+        array.forEach(object => {
             bullets.forEach(bullet => {
-                if(bullet.collides(asteroid)){ // hit
-                    console.log(new ExpOrb(asteroid.x, asteroid.y))
-                    let index = asteroids.indexOf(asteroid);
-                    console.log("before: ",asteroids.length)
-                    asteroid.remove();// removes the asteroid
-                    asteroids.splice(index,1); // removes it from the array
-                    console.log("after: ",asteroids.length)
-                    bullet.remove();
-                    //exp.xpGain();
+                if(bullet.removed == true){
+                    removal(bullets, bullet)
+                }
+                if(bullet.collides(object)){ // hit
+                    new ExpOrb(object.x, object.y)
+                    removal(array,object)
+                    removal(bullets, bullet);
                     score.increaseScore(100);
                     asteroidHitSound.play();
 
@@ -78,82 +69,41 @@ class Player{
             });
         });
     }
-    trackerBulletHit(trackers, bullets, exp, score){
-        trackers.forEach(tracker => {
-            bullets.forEach(bullet => {
-                if(bullet.collides(tracker)){ // hit
-                    console.log(new ExpOrb(tracker.x, tracker.y))
-                    tracker.remove();// removes the tracker
-                    bullet.remove();
-                    //exp.xpGain();
-                    score.increaseScore(200);
-
-                }
-            });
-        });
-    }
-    trackerBulletHit(trackers, bullets, exp, score){
-        trackers.forEach(tracker => {
-            bullets.forEach(bullet => {
-                if(bullet.collides(tracker)){ // hit
-                    console.log(new ExpOrb(tracker.x, tracker.y))
-                    tracker.remove();// removes the tracker
-                    bullet.remove();
-                    //exp.xpGain();
-                    score.increaseScore(200);
-                }
-            });
-        });
-    }
-
-    checkShipHit(asteroids, Health, trackers) {
-        asteroids.forEach(asteroid => {
-                if(this.player.collides(asteroid)){ // hit
+    
+    
+    // checks if the ship has hit on object in the passed array
+    // if so, colide with it and take damage
+    checkShipHit(array, Health) {
+        array.forEach(object => {
+                if(this.player.collides(object)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
-                    this.collision(asteroid);// removes the asteroid
+                    this.collision(object);
                     Health.healthDecrease();
                     }
                 }
         });
-        trackers.forEach(tracker => {
-            if(this.player.collides(tracker)){ // hit
-                if(this.player.ani.name == 'idle'){ // if not immune
-                this.collision(tracker);// removes the tracker
-                Health.healthDecrease();
-                }
-            }
-        });
     }
 
-    collision(asteroid){
+    collision(object){
         // changes the direction of the asteroid
-        asteroid.vel.x = -asteroid.vel.x * 1.2;
-        asteroid.vel.y = -asteroid.vel.y * 1.2;
+        object.vel.x = -object.vel.x * 1.2;
+        object.vel.y = -object.vel.y * 1.2;
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
     }
-    collision(tracker){
-        // changes the direction of the tracker
-        tracker.vel.x = -tracker.vel.x * 1.2;
-        tracker.vel.y = -tracker.vel.y * 1.2;
-        // plays animation
-        this.player.changeAni(['hit','hit','hit','idle'])
-    }
+    
     trackerAttract(tracker){
         tracker.moveTo(this.player, tracker.trackerSpeed);
     }
     checkExpHit(){
         orbs.forEach(orb => {
             if(orb.overlaps(this.player)){
-                console.log("hit")
-                orb.remove();
+                removal(orbs,orb)
                 exp.xpGain();
             }
         });
     }
-    removePlayer(){
-        this.player.remove();
-    }
+
     returnPlayerObject(){
         return this.player
     }

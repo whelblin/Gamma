@@ -12,6 +12,8 @@ let Health;
 let score;
 var non_colliding;
 var colliding;
+var asteroidGroup;
+var trackerGroup;
 var asteroids;
 var trackers;
 var bullets;
@@ -38,6 +40,8 @@ function preload() {
     colliding = new Group();
     itmBoxes = new Group();
     colliding.overlaps(non_colliding);
+    asteroidGroup = new colliding.Group();
+    trackerGroup = new colliding.Group();
     Player.preload()
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
@@ -48,6 +52,8 @@ function preload() {
 
 function setup() {
     new Canvas();
+    allSprites.autoCull = false
+    
     inMenu = true;
     frameRate(60); //set framerate to be system independent 
     paused = false;
@@ -61,11 +67,11 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
-    //chromedriver = new Chromedriver
+    chromedriver = new Chromedriver(1)
   }
   
   function draw() {
-
+    
     image(bgimage1, 0, 0, width, height);
     if(!inMenu && paused == false)
     {
@@ -80,14 +86,18 @@ function setup() {
       player.aiming();
       player.shoot();
       timer.enemySpawn(asteroids,trackers);
+      cullObjects()
+
       for(let t = 0; t < trackers.length; t++){
         player.trackerAttract(trackers[t]);
       }
       // checks if a bullet hits an asteroid
       player.checkBulletHit(asteroids, bullets, exp, score);
-      player.trackerBulletHit(trackers, bullets, exp, score);
-      player.checkShipHit(asteroids, Health, trackers);
+      player.checkBulletHit(trackers, bullets, exp, score);
+      player.checkShipHit(asteroids, Health);
+      player.checkShipHit(trackers, Health);
       player.checkExpHit()
+      exp.draw()
       
       //tests();
       if(exp.level == nextLevel){
@@ -203,8 +213,7 @@ function tests(){
 
 function resetGame() {
   inMenu = true;
-  exp.outerBar.remove();
-  exp.innerBar.remove();
+  exp.reset()
   Health.outerBar.remove();
   Health.innerBar.remove();
   player.player.remove();

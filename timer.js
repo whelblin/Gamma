@@ -45,7 +45,7 @@ class Timer{
         let rockNow = parseInt(timer.getCurrentSec());
         let trackerNow = parseInt(timer.getCurrentSec());
         if(rockNow %2 == 0 &&  rockNow != this.rockPrev){
-            let rock = new Asteroid(asteroids);
+            let rock = new Asteroid();
             rock.movement();
             this.rockPrev = rockNow;
           }

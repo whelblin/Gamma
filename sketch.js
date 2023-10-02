@@ -28,10 +28,10 @@ let bgimage2;
 var playerAni;
 let bulletSound;
 let asteroidHitSound;
-let itemName = ["TestName"];
-let itemDescription = ["TestDescription"];
 let backgroundMusic;
-
+let itemName = ['test1','test2','test3'];
+let itemDesc = ['desc1','desc2','desc3'];
+let newItem;
 var chromedriver = -1;
 
 function preload() {
@@ -69,7 +69,7 @@ function setup() {
     orbs = [];
     chromedriver = new Chromedriver()
   }
-  
+
   function draw() {
     
     image(bgimage1, 0, 0, width, height);
@@ -102,7 +102,9 @@ function setup() {
       //tests();
       if(exp.level == nextLevel){
         for(i=0; i < 3; i++){
-          items == new ItemBox();
+          itemReload();
+          items[i] = new ItemBox();
+          items[i].setItem(newItem);
           //itemBoxes[i].boxVis();
         }
         lvlBox.boxVis();
@@ -120,9 +122,11 @@ function setup() {
       image(bgimage2, 0, 0, width, height);
       world.step(0.001/240);
       if(kb.pressed('escape')){
-        for(let y = 0; y < items.length; y++){
-          items[y].remove();
+        
+        for(let y = 0; y < 3; y++){
+          items[y].removeBoxes();
         }
+        
         lvlBox.boxInvis();
         paused = false;
     }
@@ -205,11 +209,12 @@ function drawScore()
 function tests(){
   exp.test_increase();
   Health.healthDecrease();
+};
+
+function itemReload(){
+  x = floor(random(3));
+  newItem = itemName[x] + itemDesc[x];
 }
-
-
-
-
 
 function resetGame() {
   inMenu = true;

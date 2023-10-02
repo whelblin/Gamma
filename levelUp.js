@@ -43,11 +43,11 @@ class ItemBox{
         this.itmBox = new itmBoxes.Sprite(width/2, height/2, 400, 100);
         this.itmBox.layer = 3;
         //this.itmBox.visible = false;
-        this.itmBox.text = "Filler Item";
-        this.itmBox.textColor = "white";
+        
+        this.itmBox.textColor = "black";
         this.itmBox.textSize = 15;
+        this.itmBox.text = "please work";
         items.push(this.itmBox);
-
     }
     boxVis(){
         this.itmBox.visible = true;
@@ -56,11 +56,12 @@ class ItemBox{
         this.itmBox.visible = false;
     }
     //ItemName(x) ItemDescription(x)
-    itmReload(itemName, itemDescription){
-        this.itmBox.text = itemName + itemDescription;
+    setItem(newItem){
+        this.itmBox.text = newItem;
+        console.log(newItem);
     }
     removeBoxes(){
-        items.remove();
+        this.itmBox.remove();
     }
     /*
     itmSelection(){

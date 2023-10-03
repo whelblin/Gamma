@@ -29,8 +29,8 @@ var playerAni;
 let bulletSound;
 let asteroidHitSound;
 let backgroundMusic;
-let itemName = ['Sentry Cannon','test2','test3'];
-let itemDesc = ['A sentry mounted on your ship that will attack the closest enemy','desc2','desc3'];
+let itemName = ['Sentry Cannon','Big Beam','Shields'];
+let itemDesc = ['A sentry mounted on your ship that will attack the closest enemy','A large beam fires from your ship in the direction you are facing','A series of shields that rotate around your ship blocking incoming enemies and projectiles.'];
 let newItem;
 var chromedriver = -1;
 
@@ -103,9 +103,8 @@ function setup() {
       if(exp.level == nextLevel){
         for(i=0; i < 3; i++){
           itemReload();
-          items[i] = new ItemBox();
           items[i].setItem(newItem);
-          //itemBoxes[i].boxVis();
+          items[i].boxVis();
         }
         lvlBox.boxVis();
         nextLevel += 1;
@@ -120,11 +119,11 @@ function setup() {
     }
     else if(!inMenu && paused == true){
       image(bgimage2, 0, 0, width, height);
-      world.step(0.001/240);
+      world.step(0.0000001/240);
       if(kb.pressed('escape')){
         
-        for(let y = 0; y < 3; y++){
-          items[y].removeBoxes();
+        for(let y = 0; y < 1; y++){
+          items[y].boxInvis();
         }
         
         lvlBox.boxInvis();
@@ -145,6 +144,9 @@ function setup() {
         exp = new Experience();
         lvlBox = new LevelBox();
         items = [];
+        for(x=0; x<3; x++){
+          items[i] = new ItemBox();
+        }
         nextLevel = 2;
         Health = new PlayerHealth();
         score = new ScoreCounter();

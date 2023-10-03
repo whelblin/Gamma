@@ -44,8 +44,10 @@ class ItemBox{
         this.itmBox.layer = 3;
         //this.itmBox.visible = false;
         this.itmBox.textColor = "white";
-        this.itmBox.text = "please work";
+        this.itmBox.textSize = 15;
+        this.itmBox.visible = false;
         items.push(this.itmBox);
+        
     }
     boxVis(){
         this.itmBox.visible = true;

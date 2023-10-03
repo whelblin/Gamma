@@ -18,6 +18,15 @@ class PlayerHealth {
         }
     }
 
+    healthIncrease(){
+        if(this.health == 100 ) return; 
+
+        if(this.health  < 100){
+            this.health += 20;
+            this.innerBar.width += width/10;
+        }
+    }
+
     isDead(){
         return this.dead;
     }

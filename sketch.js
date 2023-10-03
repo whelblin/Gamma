@@ -1,6 +1,7 @@
 let timer;
 let asteroid;
 let tracker;
+let food;
 var player;
 let playerObject;
 let exp;
@@ -15,6 +16,7 @@ var colliding;
 var asteroidGroup;
 var trackerGroup;
 var asteroids;
+var foods;
 var trackers;
 var bullets;
 var orbs;
@@ -67,6 +69,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
+    foods = [];
     chromedriver = new Chromedriver()
   }
   
@@ -97,6 +100,7 @@ function setup() {
       player.checkShipHit(asteroids, Health);
       player.checkShipHit(trackers, Health);
       player.checkExpHit()
+      // add player.checkfoodhit(foods,Health)
       exp.draw()
       
       //tests();

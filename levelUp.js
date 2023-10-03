@@ -43,9 +43,7 @@ class ItemBox{
         this.itmBox = new itmBoxes.Sprite(width/2, height/2, 400, 100);
         this.itmBox.layer = 3;
         //this.itmBox.visible = false;
-        
-        this.itmBox.textColor = "black";
-        this.itmBox.textSize = 15;
+        this.itmBox.textColor = "white";
         this.itmBox.text = "please work";
         items.push(this.itmBox);
     }

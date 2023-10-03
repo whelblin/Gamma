@@ -29,8 +29,8 @@ var playerAni;
 let bulletSound;
 let asteroidHitSound;
 let backgroundMusic;
-let itemName = ['test1','test2','test3'];
-let itemDesc = ['desc1','desc2','desc3'];
+let itemName = ['Sentry Cannon','test2','test3'];
+let itemDesc = ['A sentry mounted on your ship that will attack the closest enemy','desc2','desc3'];
 let newItem;
 var chromedriver = -1;
 
@@ -67,7 +67,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
-    chromedriver = new Chromedriver()
+    chromedriver = new Chromedriver(1)
   }
 
   function draw() {

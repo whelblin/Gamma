@@ -24,7 +24,7 @@ class Player{
     }
 
     movement(){
-        this.player.speed = 12;
+        this.player.speed = 8;
         if (kb.pressing('up')) { this.player.direction = -90; }
         else if (kb.pressing('down')) { this.player.direction = 90; }
         else if (kb.pressing('left')) { this.player.direction = 180; } 

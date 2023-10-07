@@ -21,53 +21,80 @@
         Level Up Box
         Item options maybe?
    */
+
+        class ItemBox{
+            constructor(){
+                this.itmBox = new itmBoxes.Sprite(width/2, height/2, 400, 100);
+                this.itmBox.layer = 2;
+                this.itmBox.visible = false;
+                this.itmBox.textColor = "white";
+                this.itmBox.textSize = 40;
+                this.itmBox.visible = false;
+                this.itmBox.text = "starting"
+                
+            }
+            boxVis(){
+                this.setItem()
+                this.itmBox.visible = true;
+            }
+            boxInvis(){
+                this.itmBox.visible = false;
+            }
+            //ItemName(x) ItemDescription(x)
+            setItem(){
+               this.itmBox.text = itemReload()
+            }
+            removeBoxes(){
+                this.itmBox.remove();
+            }
+            /*
+            itmSelection(){
+                if (this.itmBox.mouse.pressing()){
+                    
+                }
+            }
+            */
+        }
+
 class LevelBox{
     constructor(){
         this.lvlBox = new non_colliding.Sprite(width/2, height/2, 500, 500);
-        this.lvlBox.layer = 2;
+        this.lvlBox.layer = 1;
         this.lvlBox.textSize = 15;
         this.lvlBox.textColor = "white";
         this.lvlBox.text = "escape to exit";
         this.lvlBox.visible = false;
+        this.itemBoxes = [];
+        for(var i = 0; i < 3; ++i){
+            this.itemBoxes.push(new ItemBox())
+        }
     }
     boxVis(){
         this.lvlBox.visible = true;
+        for(var i = 0; i < 3; ++i){
+            this.itemBoxes[i].boxVis();
+        }
     }
     boxInvis(){
         this.lvlBox.visible = false;
+        for(var i = 0; i < 3; ++i){
+            this.itemBoxes[i].boxInvis();
+        }
     }
 };
 
-class ItemBox{
-    constructor(){
-        this.itmBox = new itmBoxes.Sprite(width/2, height/2, 400, 100);
-        this.itmBox.layer = 3;
-        //this.itmBox.visible = false;
-        this.itmBox.textColor = "white";
-        this.itmBox.textSize = 15;
-        this.itmBox.visible = false;
-        items.push(this.itmBox);
-        
-    }
-    boxVis(){
-        this.itmBox.visible = true;
-    }
-    boxInvis(){
-        this.itmBox.visible = false;
-    }
-    //ItemName(x) ItemDescription(x)
-    setItem(newItem){
-        this.itmBox.text = newItem;
-        console.log(newItem);
-    }
-    removeBoxes(){
-        this.itmBox.remove();
-    }
-    /*
-    itmSelection(){
-        if (this.itmBox.mouse.pressing()){
-            
-        }
-    }
-    */
-}
+// testing the power ups
+
+let itemName = ['Sentry Cannon',
+                'Big Beam',
+                'Shields'];
+
+let itemDesc = ['A sentry mounted on your ship that will attack the closest enemy',
+                'A large beam fires from your ship in the direction you are facing',
+                'A series of shields that rotate around your ship blocking incoming enemies and projectiles.'];
+
+function itemReload(){
+    x = floor(random(3));
+    let newItem = itemName[x];
+    return String(newItem)
+  }

@@ -41,7 +41,7 @@ class Player{
     }
     // shoots bullets at the firerate 
     shoot(){
-        if(kb.pressing(' ')){
+        if((kb.pressing(' ')) ||(mouseIsPressed === true)){
             // uses framecount because it is constant on system
             if(frameCount % this.fireRate == 0){
                 let bullet = new Bullet(this.player.x, this.player.y,bullets);

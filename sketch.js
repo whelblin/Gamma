@@ -132,7 +132,7 @@ function setup() {
    //   drawTitle();
       drawStart();
       drawScore();
-      if (kb.presses(' '))
+      if ((kb.presses(' '))||(mouseIsPressed === true))
       {
         inMenu = false;
         player= new Player();

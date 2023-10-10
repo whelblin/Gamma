@@ -10,6 +10,7 @@ class Player{
         this.player.changeAni('idle');
         this.immune = false;
         this.fireRate = 15;
+        this.speed = 8;
     }
      // loads the aniamtion during the reload function
     static preload(){
@@ -22,18 +23,39 @@ class Player{
             frameSize: [80,80], frames: 4
         })
     }
-
+    /*
     movement(){
         this.player.speed = 8;
-        if (kb.pressing('up')) { this.player.direction = -90; }
-        else if (kb.pressing('down')) { this.player.direction = 90; }
-        else if (kb.pressing('left')) { this.player.direction = 180; } 
-        else if (kb.pressing('right')) { this.player.direction = 0; } 
-        else { this.player.speed = 0.5; }
+        if (kb.pressing('up') && this.player.y - this.player.speed >= 0) { this.player.direction = -90; }
+        if (kb.pressing('down')  && this.player.y + this.player.speed <= height) { this.player.direction = 90; }
+        if (kb.pressing('left')  && this.player.x - this.player.speed >= 0) { this.player.direction = 180; } 
+        if (kb.pressing('right')&& this.player.x + this.player.speed <= width) { this.player.direction = 0; } 
+        if(this.player.y > 0 && this.player.y < height && this.player.x > 0 && this.player.x < width) { this.player.speed = 0; }
         if(kb.pressing('up') && kb.pressing('right')){ this.player.direction = -45 }
         if(kb.pressing('up') && kb.pressing('left')){ this.player.direction = -135 }
         if(kb.pressing('down') && kb.pressing('right')){ this.player.direction = 45 }
         if(kb.pressing('down') && kb.pressing('left')){ this.player.direction = 135 }
+    }
+    */
+
+    // new movement system that use vel instead of speed and direction
+    // this.speed determines the speed of the player
+    // 0.8 is the slow down factor used when no key is pressed
+    movement(){
+        // drift / braking system to slow down
+        if(this.player.y > 0 && this.player.y < height && this.player.x > 0 && this.player.x < width){
+            this.player.vel.x *= 0.8;
+            this.player.vel.y *= 0.8;
+        }
+        else{
+            this.player.vel.x *= 0;
+            this.player.vel.y *= 0;
+        }
+        if (kb.pressing('up') && this.player.y - this.speed >= 0) { this.player.vel.y = -this.speed; }
+        if (kb.pressing('down')  && this.player.y + this.speed <= height) { this.player.vel.y = this.speed; }
+        if (kb.pressing('left')  && this.player.x - this.speed >= 0) { this.player.vel.x = -this.speed; } 
+        if (kb.pressing('right')&& this.player.x + this.speed <= width) { this.player.vel.x = this.speed; } 
+        
     }
     // rotates the player towards the mouse
     aiming(){

@@ -67,7 +67,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
-    chromedriver = new Chromedriver()
+    chromedriver = new Chromedriver(1)
   }
   
   function draw() {

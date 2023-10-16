@@ -22,7 +22,7 @@ class Player{
             frameSize: [80,80], frames: 4
         })
     }
-
+    setFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
     movement(){
         this.player.speed = 12;
         if (kb.pressing('up')) { this.player.direction = -90; }

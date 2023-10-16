@@ -12,7 +12,6 @@ function removal(array,object){
 
 function cullObjects(){
     asteroidGroup.cull(50, (object) => {
-        console.log(object)
         let index = asteroids.indexOf(object);
         object.remove();
         asteroids.splice(index,1);

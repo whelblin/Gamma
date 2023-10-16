@@ -1,3 +1,14 @@
+function drawScore()
+{
+    var score = 0; // temp
+    textSize(80);
+    textAlign(RIGHT);
+    textFont(mainFont);
+    fill(255);
+    text("Best Score: "+ score,width - 10, 70)
+    textAlign(CENTER)
+}
+
 class ScoreCounter {
     constructor(x, y) {
         this.score = 0;

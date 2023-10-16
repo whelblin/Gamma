@@ -22,17 +22,25 @@ var inMenu;
 var opacity;
 var opacShouldIncrease;
 var paused;
+var levelingup;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
 var playerAni;
 let bulletSound;
 let asteroidHitSound;
-let itemName = ["TestName"];
-let itemDescription = ["TestDescription"];
 let backgroundMusic;
 
+let newItem;
 var chromedriver = -1;
+// list of power ups that are allowed
+var powerups = [
+  ["Fire Rate", new FireRate()],
+  ['Sentry Cannon', null],
+  ['Big Beam', null],
+  ['Shields', null]
+]
+
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
@@ -68,12 +76,14 @@ function setup() {
     bullets = [];
     orbs = [];
     chromedriver = new Chromedriver()
+    lvlBox = new LevelBox();
   }
-  
+
   function draw() {
     
     image(bgimage1, 0, 0, width, height);
-    if(!inMenu && paused == false)
+    // in game
+    if(!inMenu && paused == false && levelingup == false)
     {
       if(chromedriver != -1) chromedriver.update()
       image(bgimage2, 0, 0, width, height);
@@ -100,30 +110,27 @@ function setup() {
       exp.draw()
       
       //tests();
+      // level up screens
       if(exp.level == nextLevel){
-        for(i=0; i < 3; i++){
-          items == new ItemBox();
-          //itemBoxes[i].boxVis();
-        }
         lvlBox.boxVis();
         nextLevel += 1;
-        paused = true;
+        levelingup = true;
       }
       if(kb.pressed('escape')){
-        paused = true;
+        pause()
       }
       if(Health.isDead()){
         resetGame();
       }
+      print("visible",colliding.visible)
+    }
+    // level up screen
+    else if(!inMenu && levelingup == true){
+      enterLevelUpScreen()
     }
     else if(!inMenu && paused == true){
-      image(bgimage2, 0, 0, width, height);
-      world.step(0.001/240);
+      pause()
       if(kb.pressed('escape')){
-        for(let y = 0; y < items.length; y++){
-          items[y].remove();
-        }
-        lvlBox.boxInvis();
         paused = false;
     }
   }
@@ -135,12 +142,13 @@ function setup() {
       if ((kb.presses(' '))||(mouseIsPressed === true))
       {
         inMenu = false;
+        levelingup = false;
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();
         exp = new Experience();
-        lvlBox = new LevelBox();
-        items = [];
+        
+        
         nextLevel = 2;
         Health = new PlayerHealth();
         score = new ScoreCounter();
@@ -205,9 +213,7 @@ function drawScore()
 function tests(){
   exp.test_increase();
   Health.healthDecrease();
-}
-
-
+};
 
 
 
@@ -236,5 +242,11 @@ function backgroundSong(){
   backgroundMusic.loop();
   backgroundMusic.setVolume(.05);
   userStartAudio();
+}
+
+function pause(){
+  paused = true;
+  image(bgimage2, 0, 0, width, height);
+  world.step(0.0000001/240);
 }
 

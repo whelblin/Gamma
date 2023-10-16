@@ -23,6 +23,7 @@ class Player{
             frameSize: [80,80], frames: 4
         })
     }
+    setFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
     /*
     movement(){
         this.player.speed = 8;

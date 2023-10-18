@@ -24,21 +24,10 @@
 
 function exitLevelUpScreen(){
     print("exiting")
-            lvlBox.boxInvis();
-            paused = false;
-            colliding.visible = true;
-            levelingup = false;
+           
 }
 function enterLevelUpScreen(){
-    print("starting")
-    image(bgimage2, 0, 0, width, height);
-    world.step(0.0000001/240);
-    colliding.visible = false;
-    lvlBox.checkClick();
-
-    if(kb.pressed('escape')){
-        exitLevelUpScreen()
-    }
+    
 }
 
 
@@ -72,12 +61,12 @@ function enterLevelUpScreen(){
                     powerups.every((value, index, array)=> {
                         if(this.itmBox.text == value[0]){
                             if(value[1] == null) {
-                                exitLevelUpScreen();
+                                state.leveledUp()
                                 return false;
                             }
                             value[1].activate(player, index)
                             
-                            exitLevelUpScreen();
+                            state.leveledUp()
                             print("return")
                             return false
                         }

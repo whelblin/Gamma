@@ -19,6 +19,10 @@ class Chromedriver{
         this.gainExpButton = createButton("Give experience")
         this.gainExpButton.position(475, windowHeight-30)
         this.gainExpButton.mousePressed(Chromedriver.GiveExp)
+
+        this.gainExpButton = createButton("Kill player")
+        this.gainExpButton.position(675, windowHeight-30)
+        this.gainExpButton.mousePressed(Chromedriver.KillPlayer)
         }
 
         // divs that can be displayed
@@ -92,5 +96,8 @@ class Chromedriver{
     static GiveExp(){
         new ExpOrb(player.returnPlayerObject().x,player.returnPlayerObject().y);
         player.checkExpHit()
+    }
+    static KillPlayer(){
+        Health.health = 0;
     }
 };

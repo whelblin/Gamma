@@ -34,6 +34,7 @@ class ScoreCounter {
     printScore(x,y){
         textSize(60);
         textAlign(RIGHT);
+        fill(255);
         text("SCORE: " + this.score , x,y);
     }
 /*

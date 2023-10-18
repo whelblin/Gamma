@@ -10,6 +10,7 @@ let itmNumChance;
 var nextLevel;
 let Health;
 let score;
+//let bestScore;
 var non_colliding;
 var colliding;
 var asteroidGroup;
@@ -26,6 +27,7 @@ var levelingup;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
+let bgimage3;
 var playerAni;
 let bulletSound;
 let asteroidHitSound;
@@ -53,6 +55,7 @@ function preload() {
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
     Player.preload()
+    bgimage1 = loadImage('assets/bgimage2.gif');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
@@ -71,8 +74,8 @@ function setup() {
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
-    bgimage1 = loadImage('assets/bgimage2.png');
     bgimage2 = loadImage('assets/bgimage3.gif');
+    bgimage3 = loadImage('assets/gameover.png');
     backgroundSong();
     asteroids = [];
     trackers = [];

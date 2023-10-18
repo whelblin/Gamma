@@ -27,6 +27,7 @@ class gameState{
         nextLevel = 2;
         Health = new PlayerHealth();
         score = new ScoreCounter();
+     //   bestScore = new ScoreCounter();
 
         this.changeState(GameScreen.instance())
     }
@@ -60,7 +61,7 @@ class gameState{
     // restarts the game data (same as restart function)
     // changes the state to startScreen
     restart(){
-        exp.reset()
+        exp.reset();
         Health.outerBar.remove();
         Health.innerBar.remove();
         player.player.remove();
@@ -68,6 +69,10 @@ class gameState{
             asteroids[i].remove();
         }
         asteroids = []
+        for(let i = 0; i < bullets.length; i++){
+            bullets[i].remove();
+        }
+        bullets = [];
         for(let q = 0; q < trackers.length; q++){
             trackers[q].remove();
         }
@@ -77,7 +82,7 @@ class gameState{
         }
         orbs = []
 
-        this.changeState(StartScreen.instance())
+        this.changeState(DeadScreen.instance())
     }
 
     // transition from GameScreen to PauseScreen
@@ -134,6 +139,7 @@ class StartScreen extends Screen {
 
         textSize(120);
         textFont(mainFont);
+        textAlign(CENTER);
         fill(0,0,0);
         text("Play",width/2, height/2+230);
 
@@ -151,13 +157,13 @@ class StartScreen extends Screen {
             opacShouldIncrease = true;
         }
         }   
-
+        
         drawScore();
         // switches the state to gameScreen when the mouseIsPressed or space is pressed
         if ((kb.presses(' '))||(mouseIsPressed === true))
         {
             state.startGame()
-        }
+        } 
 
     }
 }
@@ -179,7 +185,7 @@ class GameScreen extends Screen {
         itmBoxes.overlaps(non_colliding);
         itmBoxes.overlaps(colliding);
         timer.printTimer(width/2, 80);
-        score.printScore(width, 80)
+        score.printScore(width, 80);
         player.movement();
         player.aiming();
         player.shoot();
@@ -246,9 +252,38 @@ class DeadScreen extends Screen {
 
     active(){
         // needs to be implimented
+        image(bgimage3, 0, 0, width, height);
+        fill(111,168,220);
+        score.printScore(width/2+150,height/2);
+
+        fill(215,175, 55, opacity);
+        stroke(0);
+        strokeWeight(5);
+        rectMode(CENTER);
+        rect(width/2, height/2+192, 300, 100, 20);
+
+        textSize(55);
+        textFont(mainFont);
+        fill(0,0,0);
+        textAlign(CENTER);
+        text("Play Again",width/2, height/2+208);
+        if(opacity < 212 && opacShouldIncrease){
+            opacity+=10;
+        }else{
+        opacShouldIncrease = false;
+        opacity-=10;
+        if(opacity < 0){
+            opacShouldIncrease = true;
+      }
+    }   
 
 
         state.restart() // goes to the restart state
+        drawScore()
+        if ((kb.presses(' '))||(mouseIsPressed === true))
+        {
+            state.startGame()
+        } 
     }
 }
 

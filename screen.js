@@ -206,7 +206,7 @@ class GameScreen extends Screen {
         player.checkShipHit(trackers, Health);
         player.checkExpHit()
         exp.draw()
-        
+        drawScore()
         //tests();
         // level up screens
         if(exp.level == nextLevel){

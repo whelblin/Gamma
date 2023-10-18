@@ -24,7 +24,7 @@ class gameState{
         console.log(player.player.ani);
         timer = new Timer();
         exp = new Experience();
-        
+        lvlBox = new LevelBox();
         
         nextLevel = 2;
         Health = new PlayerHealth();

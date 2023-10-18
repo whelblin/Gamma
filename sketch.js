@@ -55,7 +55,7 @@ function preload() {
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
     Player.preload()
-    bgimage1 = loadImage('assets/bgimage1.png');
+    bgimage1 = loadImage('assets/bgimage2.png');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
@@ -81,9 +81,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
-    chromedriver = new Chromedriver(1 )
-    lvlBox = new LevelBox();
-
+    chromedriver = new Chromedriver()
     state.init()
   }
 

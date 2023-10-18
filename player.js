@@ -9,7 +9,7 @@ class Player{
         this.player.addAnis(this.hitAni);
         this.player.changeAni('idle');
         this.immune = false;
-        this.fireRate = 15;
+        this.fireRate = 25;
         this.speed = 8;
     }
      // loads the aniamtion during the reload function

@@ -259,7 +259,7 @@ class DeadScreen extends Screen {
         player.player.visible = false;
         image(bgimage3, 0, 0, width, height);
         fill(111,168,220);
-        score.printScore(width/2+150,height/2);
+        score.printBestScore(width/2,height/2);
 
         fill(215,175, 55, opacity);
         stroke(0);

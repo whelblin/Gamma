@@ -12,7 +12,7 @@ function drawScore()
 class ScoreCounter {
     constructor(x, y) {
         this.score = 0;
-   //     this.bestSore = 0;
+        this.bestScore = 0;
         this.x = x;
         this.y = y;
         this.textColor = "white";
@@ -21,7 +21,7 @@ class ScoreCounter {
 
     increaseScore(points) {
         this.score += points;
-   //     this.bestScore += points;
+        this.bestScore += points;
     }
 
     /*
@@ -36,6 +36,16 @@ class ScoreCounter {
         textAlign(RIGHT);
         fill(255);
         text("SCORE: " + this.score , x,y);
+    }
+
+    printBestScore(x,y){
+        push()
+        textSize(80);
+        textStyle(BOLD);
+        textAlign(CENTER);
+      //  textFont("comic sans");
+        text("BEST SCORE: " + this.bestScore , x,y);
+        pop()
     }
 /*
     printBestScore(x,y){

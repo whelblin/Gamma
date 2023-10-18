@@ -8,7 +8,7 @@ let lvlBox;
 let items;
 let itmNumChance;
 var nextLevel;
-let Health;
+var Health;
 let score;
 //let bestScore;
 var non_colliding;
@@ -55,7 +55,7 @@ function preload() {
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
     Player.preload()
-    bgimage1 = loadImage('assets/bgimage2.gif');
+    bgimage1 = loadImage('assets/bgimage1.png');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
@@ -84,7 +84,7 @@ function setup() {
     chromedriver = new Chromedriver(1 )
     lvlBox = new LevelBox();
 
-    state.changeState(StartScreen.instance())
+    state.init()
   }
 
   function draw() {

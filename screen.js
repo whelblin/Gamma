@@ -11,10 +11,12 @@ class gameState{
 
     // sets the stat of the game
     // should be startscreen to start the game
-    constructor(state){
-        this.#state_ = state;
+    constructor(){
+        
     }
-
+    init(){
+        this.changeState(StartScreen.instance())
+    }
     // transition from startScreen to GameScreen
     // create the objects and switch states
     startGame(){
@@ -66,23 +68,24 @@ class gameState{
         Health.innerBar.remove();
         player.player.remove();
         for(let i = 0; i < asteroids.length; i++){
-            asteroids[i].remove();
+            removal(asteroids, asteroids[i])
         }
         asteroids = []
         for(let i = 0; i < bullets.length; i++){
-            bullets[i].remove();
+            removal(bullets, bullets[i])
         }
         bullets = [];
-        for(let q = 0; q < trackers.length; q++){
-            trackers[q].remove();
+        for(let i = 0; i < trackers.length; i++){
+            removal(trackers, trackers[i])
         }
         trackers = []
-        for(let e = 0; e < orbs.length; e++){
-            orbs[e].remove();
+        for(let i = 0; i < orbs.length; i++){
+            removal(orbs, orbs[i])
         }
         orbs = []
-
-        this.changeState(DeadScreen.instance())
+        allSprites.remove()
+        print(asteroids.length, trackers.legnth)
+        this.changeState(StartScreen.instance())
     }
 
     // transition from GameScreen to PauseScreen
@@ -130,6 +133,7 @@ class StartScreen extends Screen {
     // does the start screen stuff
     active(){
         print("active: StartScreen")
+        //if(chromedriver != -1) chromedriver.update()
         image(bgimage1, 0, 0, width, height);
         fill(215,175, 55, opacity);
         stroke(0);
@@ -252,6 +256,7 @@ class DeadScreen extends Screen {
 
     active(){
         // needs to be implimented
+        player.player.visible = false;
         image(bgimage3, 0, 0, width, height);
         fill(111,168,220);
         score.printScore(width/2+150,height/2);
@@ -278,11 +283,10 @@ class DeadScreen extends Screen {
     }   
 
 
-        state.restart() // goes to the restart state
-        drawScore()
+        
         if ((kb.presses(' '))||(mouseIsPressed === true))
         {
-            state.startGame()
+            state.restart()
         } 
     }
 }

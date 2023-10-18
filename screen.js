@@ -85,7 +85,7 @@ class gameState{
         orbs = []
         allSprites.remove()
         print(asteroids.length, trackers.legnth)
-        this.changeState(StartScreen.instance())
+        this.changeState(DeadScreen.instance())
     }
 
     // transition from GameScreen to PauseScreen
@@ -189,7 +189,7 @@ class GameScreen extends Screen {
         itmBoxes.overlaps(non_colliding);
         itmBoxes.overlaps(colliding);
         timer.printTimer(width/2, 80);
-        score.printScore(width, 80);
+        score.printScore(width - 100, 80);
         player.movement();
         player.aiming();
         player.shoot();
@@ -216,7 +216,7 @@ class GameScreen extends Screen {
           state.pause()
         }
         if(Health.isDead()){
-          state.died()
+          state.restart()
         }
 
     }
@@ -286,7 +286,7 @@ class DeadScreen extends Screen {
         
         if ((kb.presses(' '))||(mouseIsPressed === true))
         {
-            state.restart()
+            state.startGame()
         } 
     }
 }

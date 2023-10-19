@@ -1,9 +1,9 @@
 class PlayerHealth {
     constructor(){
         this.health = 100;
-        this.outerBar = new non_colliding.Sprite(0,20,width/2,10)
+        this.outerBar = new non_colliding.Sprite(width,20,width/2,10)
         this.outerBar.color = "lightblue";
-        this.innerBar = new non_colliding.Sprite(0,20,width/2,10)
+        this.innerBar = new non_colliding.Sprite(width,20,width/2,10)
         this.innerBar.overlaps(this.outerBar)
         this.innerBar.color = 'red'
         this.dead = false;

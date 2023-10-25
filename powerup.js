@@ -137,7 +137,6 @@ class turretPowerUp extends PowerUp {
             }
         });
         if(target != undefined){
-            target.debug = true
         let bullet = new Bullet(player.player.x,player.player.y);
         player.player.overlaps(bullet.getObject());
         bullet.movement(target);

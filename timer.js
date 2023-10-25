@@ -45,14 +45,18 @@ class Timer{
     enemySpawn(asteroids,trackers){
         let rockNow = parseInt(timer.getCurrentSec());
         let trackerNow = parseInt(timer.getCurrentSec());
-        if(rockNow %2 == 0 &&  rockNow != this.rockPrev){
+        if(rockNow %2  == 0 &&  rockNow != this.rockPrev){
+            for(let i = 0; i < Math.ceil(exp.getLevel()/2);++i){
             let rock = new Asteroid();
             rock.movement();
+            }
             this.rockPrev = rockNow;
           }
-          if(trackerNow %10 == 0 && trackerNow !=this.trackerPrev){
+          if(trackerNow %5 == 0 && trackerNow !=this.trackerPrev){
+            for(let i = 0; i < Math.ceil(exp.getLevel()/2);++i){
             let track = new Tracker(trackers);
             track.movement();
+            }
             this.trackerPrev = trackerNow;
           }
     }

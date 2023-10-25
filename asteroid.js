@@ -16,7 +16,15 @@ class Asteroid{
        // this.asteroid.spriteSheet = loadImage('assets/asteroid.png');
        this.asteroid = new asteroidGroup.Sprite(x,y, 50);
        this.asteroid.addAnimation('normal', 'assets/asteroid.png');
-       this.asteroidSpeed = 7;
+       this.asteroidSpeed = 10;
+       this.health = 10;
+       this.asteroid.damage = (num,x,y)=>{
+            this.health -=num;
+            if(this.health <= 0){
+                removal(asteroids,this.asteroid)
+                new ExpOrb(x, y)
+            }
+       }
        asteroids.push(this.asteroid);
 
     }
@@ -53,7 +61,6 @@ class Asteroid{
             this.asteroid.vel.y = random(-this.asteroidSpeed,2);
         }
     }
-    
     
 };
 

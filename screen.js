@@ -27,7 +27,6 @@ class gameState{
         lvlBox = new LevelBox();
         
         nextLevel = 2;
-        Health = new PlayerHealth();
         score = new ScoreCounter();
      //   bestScore = new ScoreCounter();
 
@@ -38,9 +37,14 @@ class gameState{
     // turns the box to visible and increasing the nextlevel required
     // changes the state to the levelScreen
     levelingup(){
+        if(powerups.length > 0){
         lvlBox.boxVis();
         nextLevel += 1;
         this.changeState(LevelScreen.instance())
+        }
+        else{
+            this.changeState(GameScreen.instance())
+        }
     }
 
     // transition from LevelScreen to GameScreen
@@ -64,12 +68,12 @@ class gameState{
     // changes the state to startScreen
     restart(){
         exp.reset();
-        Health.outerBar.remove();
-        Health.innerBar.remove();
         player.player.remove();
+       
         for(let i = 0; i < asteroids.length; i++){
             removal(asteroids, asteroids[i])
         }
+        activePowers = []
         asteroids = []
         for(let i = 0; i < bullets.length; i++){
             removal(bullets, bullets[i])
@@ -189,6 +193,7 @@ class GameScreen extends Screen {
         itmBoxes.overlaps(non_colliding);
         itmBoxes.overlaps(colliding);
         timer.printTimer(width/2, 80);
+        timer.activatePowers()
         score.printScore(width - 100, 80);
         player.movement();
         player.aiming();
@@ -202,10 +207,11 @@ class GameScreen extends Screen {
         // checks if a bullet hits an asteroid
         player.checkBulletHit(asteroids, bullets, exp, score);
         player.checkBulletHit(trackers, bullets, exp, score);
-        player.checkShipHit(asteroids, Health);
-        player.checkShipHit(trackers, Health);
+        player.checkShipHit(asteroids);
+        player.checkShipHit(trackers);
         player.checkExpHit()
         exp.draw()
+        player.drawHealth()
         drawScore()
         //tests();
         // level up screens
@@ -215,7 +221,7 @@ class GameScreen extends Screen {
         if(kb.pressed('escape')){
           state.pause()
         }
-        if(Health.isDead()){
+        if(player.isDead()){
           state.restart()
         }
 

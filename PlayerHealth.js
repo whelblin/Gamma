@@ -1,23 +1,42 @@
 class PlayerHealth {
     constructor(){
         this.health = 100;
-        this.outerBar = new non_colliding.Sprite(0,30,width/2,10, 's')
-        this.outerBar.color = "lightblue";
-        this.innerBar = new non_colliding.Sprite(0,30,width/2,10, 's')
-        this.innerBar.overlaps(this.outerBar)
-        this.innerBar.color = 'red'
+        this.maxHealth = this.health;
         this.dead = false;
+        this.width = 200;
+        this.maxWidth = this.width;
     }
+    draw(){
+       
+        push()
+        rectMode(CORNER)
+        fill('rgb(173, 216, 230)');
+        rect(0,25,this.maxWidth,10)
+        pop()
 
+        push()
+        rectMode(CORNER)
+        fill('rgb(255,0,0)');
+        rect(0,25,this.width,10)
+        pop()
+    }
+    #update(){
+        let percentneeded = this.health/this.maxHealth;
+        this.width = this.maxWidth * percentneeded;
+    }
     healthDecrease(){
         this.health -= 20;
-        if(this.health > 0){
-            this.innerBar.width -= width/10;
-        } else {
+        this.#update()
+        if(this.health <= 0){
             this.dead = true;
         }
     }
-
+    increaseHealth(num){
+        this.maxWidth +=num
+        this.maxHealth +=num
+        this.health +=num // keeps the same health
+        this.#update()
+    }
     isDead(){
         return this.dead;
     }

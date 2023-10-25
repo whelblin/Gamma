@@ -37,16 +37,16 @@ let newItem;
 var chromedriver = -1;
 // list of power ups that are allowed
 var powerups = [
-  //["Fire Rate", new FireRate()],
+  ["Fire Rate", new FireRate()],
   /*
   ['Sentry Cannon', null],
   ['Big Beam', null],
   ['Shields', null],
   */
-  //['Movement Speed', new MovementSpeed()],
-  //['Health', new HealthIncrease()],
-  //['Damage', new DamageIncrease()],
-  ['Turret', new turretPowerUp()]
+  ['Movement Speed', new MovementSpeed()],
+  ['Health', new HealthIncrease()],
+  ['Damage', new DamageIncrease()],
+  ['Sentry Cannon', new turretPowerUp()]
 ]
 var activePowers = []
 
@@ -88,7 +88,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
-    chromedriver = new Chromedriver(1)
+    chromedriver = new Chromedriver()
     state.init()
   }
 

@@ -31,7 +31,7 @@ class FireRate extends PowerUp{
 class MovementSpeed extends PowerUp{
     constructor(){
         super()
-        this.rate = 10;
+        this.rate = 3;
         this.limit = 5;
        
     }

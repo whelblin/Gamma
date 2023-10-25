@@ -24,6 +24,7 @@ class Experience{
             }
         }
     }
+    getLevel(){return this.level}
     draw(){
         push()
         rectMode(CORNER)

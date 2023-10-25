@@ -7,7 +7,9 @@ class Timer{
         this.timer = new Date();
         // get the initial time when the program is started
         this.initSec =this.timer.getTime()/1000;
-        this.prev = -1;
+        this.rockPrev = -1;
+        this.trackerPrev = -1;
+        this.prevTime = -1;
     }
     // gets the amount of seconds
     getCurrentSec(){
@@ -23,6 +25,11 @@ class Timer{
         }
         return (num);
     }
+    getMillis(){
+        var temp = new Date();
+        var num = temp.getTime();
+        return (num);
+    }
     // gets the amount of seconds
     getCurrentMin(){
         let temp = new Date();
@@ -35,12 +42,32 @@ class Timer{
       //  textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
     }
-    asteroidSpawn(asteroids){
-        this.now = parseInt(timer.getCurrentSec());
-        if(this.now %1 == 0 && this.now != this.prev){
-            let rock = new Asteroid(asteroids);
+    enemySpawn(asteroids,trackers){
+        let rockNow = parseInt(timer.getCurrentSec());
+        let trackerNow = parseInt(timer.getCurrentSec());
+        if(rockNow %2 == 0 &&  rockNow != this.rockPrev){
+            let rock = new Asteroid();
             rock.movement();
-            this.prev = this.now;
+            this.rockPrev = rockNow;
+          }
+          if(trackerNow %10 == 0 && trackerNow !=this.trackerPrev){
+            let track = new Tracker(trackers);
+            track.movement();
+            this.trackerPrev = trackerNow;
           }
     }
+
+    activatePowers(){
+        let time = frameCount;
+        activePowers.forEach(e => {
+            print(time % e.getRate())
+            if(time % e.getRate() == 0 && e.getTime() != time){
+                e.run()
+                e.setTime(time)
+            }
+        });
+       
+    
+    }
+
 }

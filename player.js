@@ -11,6 +11,8 @@ class Player{
         this.immune = false;
         this.fireRate = 25;
         this.speed = 8;
+        this.health = new PlayerHealth()
+        this.damage = 10;
     }
      // loads the aniamtion during the reload function
     static preload(){
@@ -23,7 +25,9 @@ class Player{
             frameSize: [80,80], frames: 4
         })
     }
-    setFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
+    increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
+    increaseMovementSpeed(num){this.speed += num;}
+    increaseDamage(num){this.damage +=num;}
     /*
     movement(){
         this.player.speed = 8;
@@ -62,6 +66,15 @@ class Player{
     aiming(){
         this.player.rotateTowards(mouse,1,0);
     }
+    isDead(){
+        return this.health.isDead()
+    }
+    drawHealth(){
+        this.health.draw()
+    }
+    increaseHealth(num){
+        this.health.increaseHealth(num)
+    }
     // shoots bullets at the firerate 
     shoot(){
         if((kb.pressing(' ')) ||(mouseIsPressed === true)){
@@ -69,7 +82,7 @@ class Player{
             if(frameCount % this.fireRate == 0){
                 let bullet = new Bullet(this.player.x, this.player.y,bullets);
                 this.player.overlaps(bullet.getObject());
-                bullet.movement();
+                bullet.movement(mouse);
             }
         }
     }
@@ -82,8 +95,7 @@ class Player{
                     removal(bullets, bullet)
                 }
                 if(bullet.collides(object)){ // hit
-                    new ExpOrb(object.x, object.y)
-                    removal(array,object)
+                    object.damage(this.damage,object.x, object.y)   
                     removal(bullets, bullet);
                     score.increaseScore(100);
                     asteroidHitSound.play();
@@ -96,12 +108,12 @@ class Player{
     
     // checks if the ship has hit on object in the passed array
     // if so, colide with it and take damage
-    checkShipHit(array, Health) {
+    checkShipHit(array) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
                     this.collision(object);
-                    Health.healthDecrease();
+                    this.health.healthDecrease();
                     }
                 }
         });

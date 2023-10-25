@@ -13,13 +13,13 @@ class Experience{
 
     increase(){
         if(this.level <this.maxLevel){
-            this.amount +=  this.pickUpAmount/this.level;
+            this.amount +=  this.pickUpAmount;
             let percentneeded = this.amount/this.needed; 
             this.width =  width * percentneeded;
              if(this.amount >= this.needed){
                 this.level++;
                 this.width = 0;
-                this.needed = this.level * 100;
+                this.needed *= 1.50;
                 this.amount = 0;
             }
         }

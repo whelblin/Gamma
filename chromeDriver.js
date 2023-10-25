@@ -58,10 +58,9 @@ class Chromedriver{
     }
 
     update(){
-        this.playerDiv.html("Player Health: "+ Health.returnHealth())
+        this.playerDiv.html("Player Health: "+ player.health.returnHealth())
         this.expAmountDiv.html("Player experience: "+ exp.amount)
         this.levelDiv.html("Player level: "+ exp.level)
-        this.playerDiv.html("Player Health: "+ Health.returnHealth())
         this.asteroidDiv.html("Number of Asteroids: "+ asteroids.length)
         this.bulletDiv.html("Number of bullets: "+ bullets.length)
         this.trackerDiv.html("Number of trackers: "+ trackers.length)

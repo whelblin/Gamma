@@ -14,9 +14,11 @@ class Bullet{
     }
 
     getObject(){return this.bullet;}
-    movement(){
-        this.bullet.speed  = 20;
-        this.bullet.direction = this.bullet.angleTo(mouse);
+    movement(target, speed = 20){
+        
+        this.bullet.speed  = speed;
+        this.bullet.direction = this.bullet.angleTo(target);
+    
     }
     
     

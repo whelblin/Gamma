@@ -9,6 +9,7 @@ class Timer{
         this.initSec =this.timer.getTime()/1000;
         this.rockPrev = -1;
         this.trackerPrev = -1;
+        this.prevTime = -1;
     }
     // gets the amount of seconds
     getCurrentSec(){
@@ -54,6 +55,19 @@ class Timer{
             track.movement();
             this.trackerPrev = trackerNow;
           }
+    }
+
+    activatePowers(){
+        let time = frameCount;
+        activePowers.forEach(e => {
+            print(time % e.getRate())
+            if(time % e.getRate() == 0 && e.getTime() != time){
+                e.run()
+                e.setTime(time)
+            }
+        });
+       
+    
     }
 
 }

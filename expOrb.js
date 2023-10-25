@@ -5,7 +5,6 @@ class ExpOrb {
         this.expOrb.overlaps(itmBoxes)
         orbs.push(this.expOrb);
         this.expOrb.color = 'lime';
-        console.log("created exp")
     }
 
     

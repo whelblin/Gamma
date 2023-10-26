@@ -28,6 +28,11 @@ class Player{
     increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
     increaseMovementSpeed(num){this.speed += num;}
     increaseDamage(num){this.damage +=num;}
+    activateShield(interval)
+    {
+        //todo
+        // loop for interval, togglging 'immune'
+    }
     /*
     movement(){
         this.player.speed = 8;
@@ -111,7 +116,7 @@ class Player{
     checkShipHit(array) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
-                    if(this.player.ani.name == 'idle'){ // if not immune
+                    if(this.player.ani.name == 'idle' && !immune){ // if not immune
                     this.collision(object);
                     this.health.healthDecrease();
                     }

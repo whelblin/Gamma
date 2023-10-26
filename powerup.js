@@ -86,6 +86,25 @@ class DamageIncrease extends PowerUp{
     }
 };
 
+class ShieldPowerup extends PowerUp{
+    constructor(){
+        super()
+        this.rate = 10;
+        this.limit = 1;
+        this.interval = 10;
+    }
+    activate(object, index){
+        object.activateShield(this.interval)
+        this.currentAmount +=1;
+        // removes the option once it reaches its limit
+        if(this.currentAmount >=this.limit){
+            powerups.splice(index,1)
+            print("removing the Shield upgrade")
+            print(powerups)
+        }
+    }
+};
+
 
 class turretPowerUp extends PowerUp {
     constructor(){

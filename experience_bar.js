@@ -6,9 +6,6 @@ class Experience{
         this.needed = 100;
         this.pickUpAmount = 25;
         this.width = 0;
-
-        
-       
     }
 
     increase(){

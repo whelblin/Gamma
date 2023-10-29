@@ -23,7 +23,6 @@ class gameState{
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();
-        exp = new Experience();
         lvlBox = new LevelBox();
         
         nextLevel = 2;
@@ -67,7 +66,6 @@ class gameState{
     // restarts the game data (same as restart function)
     // changes the state to startScreen
     restart(){
-        exp.reset();
         player.player.remove();
        
         for(let i = 0; i < asteroids.length; i++){
@@ -205,17 +203,17 @@ class GameScreen extends Screen {
           player.trackerAttract(trackers[t]);
         }
         // checks if a bullet hits an asteroid
-        player.checkBulletHit(asteroids, bullets, exp, score);
-        player.checkBulletHit(trackers, bullets, exp, score);
+        player.checkBulletHit(asteroids, bullets, score);
+        player.checkBulletHit(trackers, bullets, score);
         player.checkShipHit(asteroids);
         player.checkShipHit(trackers);
         player.checkExpHit()
-        exp.draw()
+        player.drawExp();
         player.drawHealth()
         drawScore()
         //tests();
         // level up screens
-        if(exp.level == nextLevel){
+        if(player.getLevel() == nextLevel){
           state.levelingup()
         }
         if(kb.pressed('escape')){
@@ -312,7 +310,7 @@ class PauseScreen extends Screen {
         image(bgimage2, 0, 0, width, height);
         timer.printTimer(width/2, 80);
         score.printScore(width - 100, 80);
-        exp.draw();
+        player.drawExp();
         world.step(0.0000001/240);
         if(kb.pressed('escape')){
             paused = false;

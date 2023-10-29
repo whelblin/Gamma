@@ -10,10 +10,18 @@ class Experience{
         
        
     }
+    /**
+     * @returns the current level
+     */
+    getLevel(){return this.level;}
 
-    increase(){
+    /**
+     * Increases the experience bar by the given amount
+     * @param {Int16Array} amount - the amount of experience gained  
+     */
+    increase(amount){
         if(this.level <this.maxLevel){
-            this.amount +=  this.pickUpAmount;
+            this.amount += amount;
             let percentneeded = this.amount/this.needed; 
             this.width =  width * percentneeded;
              if(this.amount >= this.needed){
@@ -24,7 +32,9 @@ class Experience{
             }
         }
     }
-    getLevel(){return this.level}
+    /**
+     * draws the experience bar to the screen
+     */
     draw(){
         push()
         rectMode(CORNER)
@@ -45,9 +55,6 @@ class Experience{
         }
     }
 
-    xpGain(){
-        this.increase()
-    }
 
     reset(){
         this.level = 1;

@@ -13,7 +13,7 @@ class Tracker{
         this.health -=num;
         if(this.health <= 0){
             removal(trackers,this.tracker)
-            new ExpOrb(x, y)
+            new ExpOrb(x, y, 50)
         }
    }
        trackers.push(this.tracker);

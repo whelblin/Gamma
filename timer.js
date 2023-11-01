@@ -46,14 +46,14 @@ class Timer{
         let rockNow = parseInt(timer.getCurrentSec());
         let trackerNow = parseInt(timer.getCurrentSec());
         if(rockNow %2  == 0 &&  rockNow != this.rockPrev){
-            for(let i = 0; i < Math.ceil(exp.getLevel()/2);++i){
+            for(let i = 0; i < Math.ceil(player.getLevel()/2);++i){
             let rock = new Asteroid();
             rock.movement();
             }
             this.rockPrev = rockNow;
           }
           if(trackerNow %5 == 0 && trackerNow !=this.trackerPrev){
-            for(let i = 0; i < Math.ceil(exp.getLevel()/2);++i){
+            for(let i = 0; i < Math.ceil(player.getLevel()/2);++i){
             let track = new Tracker(trackers);
             track.movement();
             }

@@ -6,26 +6,50 @@ class Experience{
         this.needed = 100;
         this.pickUpAmount = 25;
         this.width = 0;
+        this.levelUps = 0;
 
         
        
     }
-
-    increase(){
+    /**
+     * @returns the current level
+     */
+    getLevel(){return this.level;}
+    getLevelUps(){return this.levelUps}
+    setLevelUps(num){this.levelUps = num }
+    /**
+     * Increases the experience bar by the given amount
+     * @param {Int16Array} amount - the amount of experience gained  
+     */
+    updateExp(){
+       
+    }
+    increase(amount){ 
+        let toggle = false;
         if(this.level <this.maxLevel){
-            this.amount +=  this.pickUpAmount;
-            let percentneeded = this.amount/this.needed; 
-            this.width =  width * percentneeded;
-             if(this.amount >= this.needed){
+            this.amount += amount;
+             while(this.amount >= this.needed){
                 this.level++;
-                this.width = 0;
-                this.needed *= 1.50;
-                this.amount = 0;
+                this.levelUps++;
+                this.amount = this.amount -this.needed;
+                toggle = true
+                state.levelingup()
             }
+            if(toggle)
+                this.#resetLevel()
         }
     }
-    getLevel(){return this.level}
+    #resetLevel(){
+        this.width = 0;
+        this.needed *= 1.50; 
+    }
+    
+    /**
+     * draws the experience bar to the screen
+     */
     draw(){
+        let percentneeded = this.amount/this.needed; 
+        this.width =  width * percentneeded;
         push()
         rectMode(CORNER)
         fill('rgb(173, 216, 230)');
@@ -45,9 +69,6 @@ class Experience{
         }
     }
 
-    xpGain(){
-        this.increase()
-    }
 
     reset(){
         this.level = 1;

@@ -1,16 +1,11 @@
 let timer;
-let asteroid;
-let tracker;
 var player;
 let playerObject;
 let exp;
 let lvlBox;
 let items;
-let itmNumChance;
 var nextLevel;
-var Health;
 let score;
-//let bestScore;
 var non_colliding;
 var colliding;
 var asteroidGroup;
@@ -19,11 +14,8 @@ var asteroids;
 var trackers;
 var bullets;
 var orbs;
-var inMenu;
 var opacity;
 var opacShouldIncrease;
-var paused;
-var levelingup;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
@@ -75,9 +67,7 @@ function setup() {
     new Canvas();
     allSprites.autoCull = false
     
-    inMenu = true;
     frameRate(60); //set framerate to be system independent 
-    paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;

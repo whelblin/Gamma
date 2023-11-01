@@ -12,6 +12,7 @@ class Player{
         this.fireRate = 25;
         this.speed = 8;
         this.health = new PlayerHealth()
+        this.exp = new Experience()
         this.damage = 10;
     }
      // loads the aniamtion during the reload function
@@ -69,9 +70,18 @@ class Player{
     isDead(){
         return this.health.isDead()
     }
+    getLevel(){
+        return this.exp.getLevel()
+    }
+    getLevelUps(){return this.exp.getLevelUps()}
+    setLevelUps(num){this.exp.setLevelUps(num)}
     drawHealth(){
         this.health.draw()
     }
+    drawExp(){
+        this.exp.draw()
+    }
+
     increaseHealth(num){
         this.health.increaseHealth(num)
     }
@@ -88,7 +98,7 @@ class Player{
     }
     // checks if the bullet hit an oject in the passed array
     // you can pass any array whiich contains sprite objects
-    checkBulletHit(array, bullets, exp, score){
+    checkBulletHit(array, bullets, score){
         array.forEach(object => {
             bullets.forEach(bullet => {
                 if(bullet.removed == true){
@@ -134,7 +144,7 @@ class Player{
         orbs.forEach(orb => {
             if(orb.overlaps(this.player)){
                 removal(orbs,orb)
-                exp.xpGain();
+                this.exp.increase(orb.amount);
             }
         });
     }

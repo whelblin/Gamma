@@ -9,11 +9,12 @@ class Tracker{
        this.tracker.trackerSpeed = 2;
        //this.tracker.attractTo(player,25);
         this.health = 20
+        this.experericeAmount = 50
        this.tracker.damage = (num,x,y)=>{
         this.health -=num;
         if(this.health <= 0){
             removal(trackers,this.tracker)
-            new ExpOrb(x, y)
+            ExpOrb.createExp(x, y, this.experericeAmount)
         }
    }
        trackers.push(this.tracker);

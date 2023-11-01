@@ -18,11 +18,12 @@ class Asteroid{
        this.asteroid.addAnimation('normal', 'assets/asteroid.png');
        this.asteroidSpeed = 10;
        this.health = 10;
+       this.experericeAmount = 25
        this.asteroid.damage = (num,x,y)=>{
             this.health -=num;
             if(this.health <= 0){
                 removal(asteroids,this.asteroid)
-                new ExpOrb(x, y)
+                ExpOrb.createExp(x, y, this.experericeAmount)
             }
        }
        asteroids.push(this.asteroid);

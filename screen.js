@@ -36,7 +36,7 @@ class gameState{
     // turns the box to visible and increasing the nextlevel required
     // changes the state to the levelScreen
     levelingup(){
-        if(powerups.length > 0){
+         if(powerups.length > 0){
         lvlBox.boxVis();
         nextLevel += 1;
         this.changeState(LevelScreen.instance())
@@ -44,16 +44,22 @@ class gameState{
         else{
             this.changeState(GameScreen.instance())
         }
+
     }
 
     // transition from LevelScreen to GameScreen
     // turns off the box and make everything visible again
     // changes the state back to GameScreen
     leveledUp(){
+        print(player.getLevelUps())
         lvlBox.boxInvis();
         colliding.visible = true;
-       
-        this.changeState(GameScreen.instance())
+        player.setLevelUps(player.getLevelUps()- 1);
+        if(player.getLevelUps() == 0)
+            this.changeState(GameScreen.instance())
+        else{
+            this.levelingup();
+        }
     }
 
     // transition from GameScreen to DeadScreen
@@ -106,7 +112,7 @@ class gameState{
     changeState(state){
         this.#state_ = state;
     }
-    
+    getCurrentState(){return this.#state_;}
     #state_; // private varaibleto hold the state
 };
 
@@ -213,9 +219,11 @@ class GameScreen extends Screen {
         drawScore()
         //tests();
         // level up screens
+        /*
         if(player.getLevel() == nextLevel){
           state.levelingup()
         }
+        */
         if(kb.pressed('escape')){
           state.pause()
         }

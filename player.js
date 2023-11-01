@@ -73,12 +73,15 @@ class Player{
     getLevel(){
         return this.exp.getLevel()
     }
+    getLevelUps(){return this.exp.getLevelUps()}
+    setLevelUps(num){this.exp.setLevelUps(num)}
     drawHealth(){
         this.health.draw()
     }
     drawExp(){
         this.exp.draw()
     }
+
     increaseHealth(num){
         this.health.increaseHealth(num)
     }

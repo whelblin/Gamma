@@ -12,7 +12,7 @@ class PowerUp{
 class FireRate extends PowerUp{
     constructor(){
         super()
-        this.rate = 1;
+        this.rate = 3;
         this.limit = 5;
        
     }

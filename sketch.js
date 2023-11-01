@@ -7,6 +7,7 @@ let exp;
 let lvlBox;
 let items;
 let itmNumChance;
+let shield;
 var nextLevel;
 var Health;
 let score;
@@ -41,8 +42,8 @@ var powerups = [
   /*
   ['Sentry Cannon', null],
   ['Big Beam', null],
-  ['Shields', null],
   */
+  ['Shields', new ShieldPowerup()],
   ['Movement Speed', new MovementSpeed()],
   ['Health', new HealthIncrease()],
   ['Damage', new DamageIncrease()],
@@ -59,6 +60,7 @@ function preload() {
     colliding.overlaps(non_colliding);
     itmBoxes.overlaps(colliding)
     itmBoxes.overlaps(non_colliding)
+    shield = new shieldSprite(200, 200);
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
     Player.preload()

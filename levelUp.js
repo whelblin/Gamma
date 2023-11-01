@@ -121,7 +121,7 @@ let itemDesc = ['A sentry mounted on your ship that will attack the closest enem
 
 function itemReload(){
     x = floor(random((powerups.length)));
-    let item = powerups[x][0]
+    let item = powerups[1][0]
     return String(item)
   }
 

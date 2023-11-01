@@ -13,9 +13,11 @@ class Player{
         this.speed = 8;
         this.health = new PlayerHealth()
         this.damage = 10;
+        
     }
-     // loads the aniamtion during the reload function
+     // loads the animation during the reload function
     static preload(){
+        
         this.spriteSheet = 'assets/sheet.png';
         this.frameDelay = 4;
         this.idleAni = loadAni("idle",this.spriteSheet,{
@@ -28,10 +30,14 @@ class Player{
     increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
     increaseMovementSpeed(num){this.speed += num;}
     increaseDamage(num){this.damage +=num;}
-    activateShield(interval)
+    setImmune(val)
     {
-        //todo
-        // loop for interval, togglging 'immune'
+        print("immuned set to" +val);
+        this.immune = val;
+    }
+    getImmune()
+    {
+        return this.immune;
     }
     /*
     movement(){
@@ -65,6 +71,9 @@ class Player{
         if (kb.pressing('down')  && this.player.y + this.speed <= height) { this.player.vel.y = this.speed; }
         if (kb.pressing('left')  && this.player.x - this.speed >= 0) { this.player.vel.x = -this.speed; } 
         if (kb.pressing('right')&& this.player.x + this.speed <= width) { this.player.vel.x = this.speed; } 
+
+        shield.x = this.player.x;
+        shield.y = this.player.y;
         
     }
     // rotates the player towards the mouse
@@ -116,10 +125,12 @@ class Player{
     checkShipHit(array) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
-                    if(this.player.ani.name == 'idle' && !immune){ // if not immune
+                    if(this.player.ani.name == 'idle' && !this.immune){ // if not immune
                     this.collision(object);
                     this.health.healthDecrease();
                     }
+                    else if(this.immune)
+                        print("was immune")
                 }
         });
     }

@@ -9,8 +9,8 @@ class Player{
         this.player.addAnis(this.hitAni);
         this.player.changeAni('idle');
         this.immune = false;
-        this.fireRate = 25;
-        this.speed = 8;
+        this.fireRate = 30;
+        this.speed = 5;
         this.health = new PlayerHealth()
         this.exp = new Experience()
         this.damage = 10;

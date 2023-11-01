@@ -6,6 +6,7 @@ class PowerUp{
     }
     // pure virtual function
     activate(){ throw "Need to define concrete"}
+    type(){ throw "Need to define concrete"}
 };
 
 
@@ -14,6 +15,7 @@ class FireRate extends PowerUp{
         super()
         this.rate = 3;
         this.limit = 5;
+        this.type = "passive";
        
     }
     activate(object, index){
@@ -26,6 +28,7 @@ class FireRate extends PowerUp{
             print(powerups)
         }
     }
+    type(){return this.type;}
 };
 
 class MovementSpeed extends PowerUp{
@@ -33,7 +36,7 @@ class MovementSpeed extends PowerUp{
         super()
         this.rate = 3;
         this.limit = 5;
-       
+        this.type = "passive";
     }
     activate(object, index){
         object.increaseMovementSpeed(this.rate)
@@ -45,6 +48,7 @@ class MovementSpeed extends PowerUp{
             print(powerups)
         }
     }
+    type(){return this.type;}
 };
 
 class HealthIncrease extends PowerUp{
@@ -52,7 +56,7 @@ class HealthIncrease extends PowerUp{
         super()
         this.rate = 25;
         this.limit = 5;
-       
+        this.type = "passive";
     }
     activate(object, index){
         object.increaseHealth(this.rate)
@@ -64,6 +68,7 @@ class HealthIncrease extends PowerUp{
             print(powerups)
         }
     }
+    type(){return this.type;}
 };
 
 
@@ -72,7 +77,7 @@ class DamageIncrease extends PowerUp{
         super()
         this.rate = 10;
         this.limit = 5;
-       
+        this.type = "passive";
     }
     activate(object, index){
         object.increaseDamage(this.rate)
@@ -84,6 +89,7 @@ class DamageIncrease extends PowerUp{
             print(powerups)
         }
     }
+    type(){return this.type;}
 };
 
 
@@ -96,6 +102,7 @@ class turretPowerUp extends PowerUp {
         this.amount = 20;
         this.time = -1;
         this.currentAmount = 0;
+        this.type = "active";
     }
 
     activate(object, index){
@@ -118,6 +125,7 @@ class turretPowerUp extends PowerUp {
             }
         }
     }
+    type(){return this.type;}
     run(){
 
         let closest = 100000;

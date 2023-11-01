@@ -90,6 +90,10 @@ class gameState{
         for(let i = 0; i < orbs.length; i++){
             removal(orbs, orbs[i])
         }
+        for(let i = 0; i < shooters.length; i++){
+            removal(shooters, shooters[i])
+        }
+        shooters = []
         orbs = []
         allSprites.remove()
         print(asteroids.length, trackers.legnth)
@@ -206,13 +210,23 @@ class GameScreen extends Screen {
         cullObjects()
   
         for(let t = 0; t < trackers.length; t++){
-          player.trackerAttract(trackers[t]);
+          player.attract(trackers[t]);
         }
+        for(let t = 0; t < shooters.length; t++){
+            player.attract(shooters[t]);
+            shooters[t].shoot()
+            shooters[t].checkBulletHit(player)
+            shooters[t].checkBulletHit(asteroids)
+            shooters[t].checkBulletHit(trackers)
+            //shooters[t].checkBulletHit(shooters)
+          }
         // checks if a bullet hits an asteroid
         player.checkBulletHit(asteroids, bullets, score);
         player.checkBulletHit(trackers, bullets, score);
+        player.checkBulletHit(shooters, bullets, score);
         player.checkShipHit(asteroids);
         player.checkShipHit(trackers);
+        player.checkShipHit(shooters);
         player.checkExpHit()
         player.drawExp();
         player.drawHealth()

@@ -22,4 +22,10 @@ function cullObjects(){
         object.remove();
         trackers.splice(index,1);
       });
+      bulletGroup.cull(10, (object) => {
+        console.log(object)
+        let index = allBullets.indexOf(object);
+        object.remove();
+        allBullets.splice(index,1);
+      });
 }

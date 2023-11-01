@@ -144,8 +144,15 @@ class turretPowerUp extends PowerUp {
                 target = e
             }
         });
+        shooters.forEach(e => {
+            let temp = dist(e.x, e.y,player.player.x,player.player.y)
+            if(temp < closest){
+                closest = temp;
+                target = e
+            }
+        });
         if(target != undefined){
-        let bullet = new Bullet(player.player.x,player.player.y);
+        let bullet = new Bullet(player.player.x,player.player.y, bullets);
         player.player.overlaps(bullet.getObject());
         bullet.movement(target);
         }

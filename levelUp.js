@@ -50,7 +50,14 @@ function enterLevelUpScreen(){
             }
             //ItemName(x) ItemDescription(x)
             setItem(){
-               this.itmBox.text = itemReload()
+                let item = itemReload()
+               this.itmBox.text =String(item[0])
+               if(item[1].type =="passive"){
+                this.itmBox.color = "blue"
+            }
+            else if (item[1].type =="active"){
+                this.itmBox.color = "red"
+            }
             }
             removeBoxes(){
                 this.itmBox.remove();
@@ -121,7 +128,8 @@ let itemDesc = ['A sentry mounted on your ship that will attack the closest enem
 
 function itemReload(){
     x = floor(random((powerups.length)));
-    let item = powerups[x][0]
-    return String(item)
+    let text = powerups[x][0]
+    let obj = powerups[x][1]
+    return ([text, obj])
   }
 

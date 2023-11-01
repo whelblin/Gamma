@@ -63,6 +63,7 @@ class Player{
         if (kb.pressing('right')&& this.player.x + this.speed <= width) { this.player.vel.x = this.speed; } 
         
     }
+
     // rotates the player towards the mouse
     aiming(){
         this.player.rotateTowards(mouse,1,0);
@@ -103,10 +104,12 @@ class Player{
             bullets.forEach(bullet => {
                 if(bullet.removed == true){
                     removal(bullets, bullet)
+                    removal(allBullets, bullet)
                 }
                 if(bullet.collides(object)){ // hit
                     object.damage(this.damage,object.x, object.y)   
                     removal(bullets, bullet);
+                    removal(allBullets, bullet)
                     score.increaseScore(100);
                     asteroidHitSound.play();
 
@@ -118,11 +121,15 @@ class Player{
     
     // checks if the ship has hit on object in the passed array
     // if so, colide with it and take damage
-    checkShipHit(array) {
+    checkShipHit(array, bullet = false) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
                     if(this.player.ani.name == 'idle'){ // if not immune
                     this.collision(object);
+                    if(bullet){
+                        removal(array, object)
+                        removal(allBullets, object)
+                    }
                     this.health.healthDecrease();
                     }
                 }
@@ -137,8 +144,8 @@ class Player{
         this.player.changeAni(['hit','hit','hit','idle'])
     }
     
-    trackerAttract(tracker){
-        tracker.moveTo(this.player, tracker.trackerSpeed);
+    attract(enemy){
+        enemy .moveTo(this.player, enemy.Trackingspeed);
     }
     checkExpHit(){
         orbs.forEach(orb => {

@@ -62,7 +62,7 @@ class Chromedriver{
         this.expAmountDiv.html("Player experience: "+ player.exp.amount)
         this.levelDiv.html("Player level: "+ player.getLevel())
         this.asteroidDiv.html("Number of Asteroids: "+ asteroids.length)
-        this.bulletDiv.html("Number of bullets: "+ bullets.length)
+        this.bulletDiv.html("Number of bullets: "+ allBullets.length)
         this.trackerDiv.html("Number of trackers: "+ trackers.length)
         this.expDiv.html("Number of experience orbs: "+ orbs.length)
         

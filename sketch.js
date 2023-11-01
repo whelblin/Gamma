@@ -5,13 +5,16 @@ let exp;
 let lvlBox;
 let items;
 var nextLevel;
+var allBullets = [];
 let score;
 var non_colliding;
 var colliding;
 var asteroidGroup;
 var trackerGroup;
+var bulletGroup;
 var asteroids;
 var trackers;
+var shooters;
 var bullets;
 var orbs;
 var opacity;
@@ -53,6 +56,7 @@ function preload() {
     itmBoxes.overlaps(non_colliding)
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
+    bulletGroup = new colliding.Group()
     Player.preload()
     bgimage1 = loadImage('assets/bgimage2.png');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
@@ -78,6 +82,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
+    shooters = []
     chromedriver = new Chromedriver()
     state.init()
   }

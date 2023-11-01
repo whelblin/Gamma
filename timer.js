@@ -10,6 +10,7 @@ class Timer{
         this.rockPrev = -1;
         this.trackerPrev = -1;
         this.prevTime = -1;
+        this.shooterPrev = -1;
     }
     // gets the amount of seconds
     getCurrentSec(){
@@ -45,6 +46,7 @@ class Timer{
     enemySpawn(asteroids,trackers){
         let rockNow = parseInt(timer.getCurrentSec());
         let trackerNow = parseInt(timer.getCurrentSec());
+        let shooterNow = parseInt(timer.getCurrentSec());
         if(rockNow %2  == 0 &&  rockNow != this.rockPrev){
             for(let i = 0; i < Math.ceil(player.getLevel()/2);++i){
             let rock = new Asteroid();
@@ -54,10 +56,17 @@ class Timer{
           }
           if(trackerNow %5 == 0 && trackerNow !=this.trackerPrev){
             for(let i = 0; i < Math.ceil(player.getLevel()/2);++i){
-            let track = new Tracker(trackers);
+            let track = new Tracker();
             track.movement();
             }
             this.trackerPrev = trackerNow;
+          }
+          if(shooterNow %20 == 0 && shooterNow !=this.shooterPrev){
+            for(let i = 0; i < Math.ceil(player.getLevel()/2);++i){
+            let shoot = new Shooter();
+            shoot.movement();
+            }
+            this.shooterPrev = shooterNow;
           }
     }
 

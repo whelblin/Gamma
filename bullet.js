@@ -1,15 +1,16 @@
 class Bullet{
-    constructor(x,y){
-        this.bullet = new colliding.Sprite(x, y);
+    constructor(x,y, array){
+        this.bullet = new bulletGroup.Sprite(x, y);
         this.bullet.diameter = 45;
         this.bullet.color = 'white';
         this.bullet.stroke = 15;
         this.bullet.height = 60;
         this.bullet.width = 13;
-        this.bullet.life = 100;
+        //this.bullet.life = 100;
 
         bulletSound.play();
-        bullets.push(this.bullet);
+        array.push(this.bullet);
+        allBullets.push(this.bullet);
         
     }
 

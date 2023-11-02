@@ -7,6 +7,7 @@ class Player{
         this.player = new colliding.Sprite(width/2,height/2,80)
         this.player.addAnis(this.idleAni);
         this.player.addAnis(this.hitAni);
+        this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
         this.immune = false;
         this.fireRate = 25;
@@ -25,6 +26,10 @@ class Player{
         })
         this.hitAni = loadAni("hit",this.spriteSheet,{
             frameSize: [80,80], frames: 4
+        })
+        this.shieldSprite = 'assets/shieldSprite.png';
+        this.shieldedAnim = loadAni("shield",this.shieldSprite,{
+            frameSize: [100,100], frames: 1
         })
     }
     increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
@@ -71,9 +76,6 @@ class Player{
         if (kb.pressing('down')  && this.player.y + this.speed <= height) { this.player.vel.y = this.speed; }
         if (kb.pressing('left')  && this.player.x - this.speed >= 0) { this.player.vel.x = -this.speed; } 
         if (kb.pressing('right')&& this.player.x + this.speed <= width) { this.player.vel.x = this.speed; } 
-
-        shield.x = this.player.x;
-        shield.y = this.player.y;
         
     }
     // rotates the player towards the mouse
@@ -141,6 +143,15 @@ class Player{
         object.vel.y = -object.vel.y * 1.2;
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
+        this.handleAnimation()
+    }
+
+    handleAnimation()
+    {
+        if(!this.immune)
+            this.player.changeAni('idle')
+        else
+            this.player.changeAni('shield')
     }
     
     trackerAttract(tracker){

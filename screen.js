@@ -88,7 +88,7 @@ class gameState{
         }
         orbs = []
         allSprites.remove()
-        print(asteroids.length, trackers.legnth)
+      //  print(asteroids.length, trackers.legnth)
         this.changeState(DeadScreen.instance())
     }
 
@@ -200,16 +200,6 @@ class GameScreen extends Screen {
         player.shoot();
         timer.enemySpawn(asteroids,trackers);
         cullObjects()
-        print(shield.alpha)
-        if(player.immune)
-        {
-            shield.x = player.player.x;
-            shield.y = player.player.y;
-            shield.alpha = 128;
-        }
-        else
-            shield.alpha = 0;
-
         for(let t = 0; t < trackers.length; t++){
           player.trackerAttract(trackers[t]);
         }

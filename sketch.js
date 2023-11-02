@@ -60,7 +60,6 @@ function preload() {
     colliding.overlaps(non_colliding);
     itmBoxes.overlaps(colliding)
     itmBoxes.overlaps(non_colliding)
-    shield = new shieldSprite(200, 200);
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
     Player.preload()
@@ -69,8 +68,6 @@ function preload() {
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
     state = new gameState();
-   
-
   }
 
 function setup() {

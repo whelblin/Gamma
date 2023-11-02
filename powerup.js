@@ -105,13 +105,17 @@ class ShieldPowerup extends PowerUp{
         if(this.currentAmount >this.limit){
             powerups.splice(index,1)
             print("removing the Shield upgrade")
-            print(powerups)
+           // print(powerups)
         }
     }
     run()
     {
        // print("hi")
         player.setImmune(!player.getImmune());
+        if(player.player.ani.name != 'hit')
+        {
+            player.handleAnimation()
+        }
     }
     getRate(){
         return this.interval;

@@ -23,7 +23,6 @@ class gameState{
         player= new Player();
         console.log(player.player.ani);
         timer = new Timer();
-        exp = new Experience();
         lvlBox = new LevelBox();
         
         nextLevel = 2;
@@ -37,7 +36,7 @@ class gameState{
     // turns the box to visible and increasing the nextlevel required
     // changes the state to the levelScreen
     levelingup(){
-        if(powerups.length > 0){
+         if(powerups.length > 0){
         lvlBox.boxVis();
         nextLevel += 1;
         this.changeState(LevelScreen.instance())
@@ -45,16 +44,22 @@ class gameState{
         else{
             this.changeState(GameScreen.instance())
         }
+
     }
 
     // transition from LevelScreen to GameScreen
     // turns off the box and make everything visible again
     // changes the state back to GameScreen
     leveledUp(){
+        print(player.getLevelUps())
         lvlBox.boxInvis();
         colliding.visible = true;
-       
-        this.changeState(GameScreen.instance())
+        player.setLevelUps(player.getLevelUps()- 1);
+        if(player.getLevelUps() == 0)
+            this.changeState(GameScreen.instance())
+        else{
+            this.levelingup();
+        }
     }
 
     // transition from GameScreen to DeadScreen
@@ -67,7 +72,6 @@ class gameState{
     // restarts the game data (same as restart function)
     // changes the state to startScreen
     restart(){
-        exp.reset();
         player.player.remove();
        
         for(let i = 0; i < asteroids.length; i++){
@@ -86,6 +90,10 @@ class gameState{
         for(let i = 0; i < orbs.length; i++){
             removal(orbs, orbs[i])
         }
+        for(let i = 0; i < shooters.length; i++){
+            removal(shooters, shooters[i])
+        }
+        shooters = []
         orbs = []
         allSprites.remove()
       //  print(asteroids.length, trackers.legnth)
@@ -108,7 +116,7 @@ class gameState{
     changeState(state){
         this.#state_ = state;
     }
-    
+    getCurrentState(){return this.#state_;}
     #state_; // private varaibleto hold the state
 };
 
@@ -201,22 +209,34 @@ class GameScreen extends Screen {
         timer.enemySpawn(asteroids,trackers);
         cullObjects()
         for(let t = 0; t < trackers.length; t++){
-          player.trackerAttract(trackers[t]);
+          player.attract(trackers[t]);
         }
+        for(let t = 0; t < shooters.length; t++){
+            player.attract(shooters[t]);
+            shooters[t].shoot()
+            shooters[t].checkBulletHit(player)
+            shooters[t].checkBulletHit(asteroids)
+            shooters[t].checkBulletHit(trackers)
+            //shooters[t].checkBulletHit(shooters)
+          }
         // checks if a bullet hits an asteroid
-        player.checkBulletHit(asteroids, bullets, exp, score);
-        player.checkBulletHit(trackers, bullets, exp, score);
+        player.checkBulletHit(asteroids, bullets, score);
+        player.checkBulletHit(trackers, bullets, score);
+        player.checkBulletHit(shooters, bullets, score);
         player.checkShipHit(asteroids);
         player.checkShipHit(trackers);
+        player.checkShipHit(shooters);
         player.checkExpHit()
-        exp.draw()
+        player.drawExp();
         player.drawHealth()
         drawScore()
         //tests();
         // level up screens
-        if(exp.level == nextLevel){
+        /*
+        if(player.getLevel() == nextLevel){
           state.levelingup()
         }
+        */
         if(kb.pressed('escape')){
           state.pause()
         }
@@ -311,7 +331,7 @@ class PauseScreen extends Screen {
         image(bgimage2, 0, 0, width, height);
         timer.printTimer(width/2, 80);
         score.printScore(width - 100, 80);
-        exp.draw();
+        player.drawExp();
         world.step(0.0000001/240);
         if(kb.pressed('escape')){
             paused = false;

@@ -59,10 +59,10 @@ class Chromedriver{
 
     update(){
         this.playerDiv.html("Player Health: "+ player.health.returnHealth())
-        this.expAmountDiv.html("Player experience: "+ exp.amount)
-        this.levelDiv.html("Player level: "+ exp.level)
+        this.expAmountDiv.html("Player experience: "+ player.exp.amount)
+        this.levelDiv.html("Player level: "+ player.getLevel())
         this.asteroidDiv.html("Number of Asteroids: "+ asteroids.length)
-        this.bulletDiv.html("Number of bullets: "+ bullets.length)
+        this.bulletDiv.html("Number of bullets: "+ allBullets.length)
         this.trackerDiv.html("Number of trackers: "+ trackers.length)
         this.expDiv.html("Number of experience orbs: "+ orbs.length)
         
@@ -73,7 +73,7 @@ class Chromedriver{
         console.log("temp:",temp)
         if(temp > 0){
             let bullet = new Bullet(asteroids[0].x, asteroids[0].y)
-            player.checkBulletHit(asteroids, bullets, exp, score);
+            player.checkBulletHit(asteroids, bullets, score);
             console.log("asteroid length:",asteroids.length)
 
             console.log("Checking delete Asteroid: ", asteroids.length == temp -1);

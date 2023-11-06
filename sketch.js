@@ -1,6 +1,4 @@
 let timer;
-let asteroid;
-let tracker;
 var player;
 let playerObject;
 let exp;
@@ -9,22 +7,20 @@ let items;
 let itmNumChance;
 let shield;
 var nextLevel;
-var Health;
+var allBullets = [];
 let score;
-//let bestScore;
 var non_colliding;
 var colliding;
 var asteroidGroup;
 var trackerGroup;
+var bulletGroup;
 var asteroids;
 var trackers;
+var shooters;
 var bullets;
 var orbs;
-var inMenu;
 var opacity;
 var opacShouldIncrease;
-var paused;
-var levelingup;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
@@ -62,6 +58,7 @@ function preload() {
     itmBoxes.overlaps(non_colliding)
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
+    bulletGroup = new colliding.Group()
     Player.preload()
     bgimage1 = loadImage('assets/bgimage2.png');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
@@ -74,9 +71,7 @@ function setup() {
     new Canvas();
     allSprites.autoCull = false
     
-    inMenu = true;
     frameRate(60); //set framerate to be system independent 
-    paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
@@ -87,6 +82,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
+    shooters = []
     chromedriver = new Chromedriver()
     state.init()
   }

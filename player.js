@@ -10,9 +10,10 @@ class Player{
         this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
         this.immune = false;
-        this.fireRate = 25;
-        this.speed = 8;
+        this.fireRate = 30;
+        this.speed = 5;
         this.health = new PlayerHealth()
+        this.exp = new Experience()
         this.damage = 10;
         
     }
@@ -78,6 +79,7 @@ class Player{
         if (kb.pressing('right')&& this.player.x + this.speed <= width) { this.player.vel.x = this.speed; } 
         
     }
+
     // rotates the player towards the mouse
     aiming(){
         this.player.rotateTowards(mouse,1,0);
@@ -85,9 +87,18 @@ class Player{
     isDead(){
         return this.health.isDead()
     }
+    getLevel(){
+        return this.exp.getLevel()
+    }
+    getLevelUps(){return this.exp.getLevelUps()}
+    setLevelUps(num){this.exp.setLevelUps(num)}
     drawHealth(){
         this.health.draw()
     }
+    drawExp(){
+        this.exp.draw()
+    }
+
     increaseHealth(num){
         this.health.increaseHealth(num)
     }
@@ -104,15 +115,17 @@ class Player{
     }
     // checks if the bullet hit an oject in the passed array
     // you can pass any array whiich contains sprite objects
-    checkBulletHit(array, bullets, exp, score){
+    checkBulletHit(array, bullets, score){
         array.forEach(object => {
             bullets.forEach(bullet => {
                 if(bullet.removed == true){
                     removal(bullets, bullet)
+                    removal(allBullets, bullet)
                 }
                 if(bullet.collides(object)){ // hit
                     object.damage(this.damage,object.x, object.y)   
                     removal(bullets, bullet);
+                    removal(allBullets, bullet)
                     score.increaseScore(100);
                     asteroidHitSound.play();
 
@@ -124,11 +137,15 @@ class Player{
     
     // checks if the ship has hit on object in the passed array
     // if so, colide with it and take damage
-    checkShipHit(array) {
+    checkShipHit(array, bullet = false) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
                     if(this.player.ani.name == 'idle' && !this.immune){ // if not immune
                     this.collision(object);
+                    if(bullet){
+                        removal(array, object)
+                        removal(allBullets, object)
+                    }
                     this.health.healthDecrease();
                     }
                     else if(this.immune)
@@ -154,14 +171,14 @@ class Player{
             this.player.changeAni('shield')
     }
     
-    trackerAttract(tracker){
-        tracker.moveTo(this.player, tracker.trackerSpeed);
+    attract(enemy){
+        enemy .moveTo(this.player, enemy.Trackingspeed);
     }
     checkExpHit(){
         orbs.forEach(orb => {
             if(orb.overlaps(this.player)){
                 removal(orbs,orb)
-                exp.xpGain();
+                this.exp.increase(orb.amount);
             }
         });
     }

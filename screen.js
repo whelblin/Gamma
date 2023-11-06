@@ -96,7 +96,7 @@ class gameState{
         shooters = []
         orbs = []
         allSprites.remove()
-        print(asteroids.length, trackers.legnth)
+      //  print(asteroids.length, trackers.legnth)
         this.changeState(DeadScreen.instance())
     }
 
@@ -208,7 +208,6 @@ class GameScreen extends Screen {
         player.shoot();
         timer.enemySpawn(asteroids,trackers);
         cullObjects()
-  
         for(let t = 0; t < trackers.length; t++){
           player.attract(trackers[t]);
         }

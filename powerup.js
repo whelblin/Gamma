@@ -92,6 +92,47 @@ class DamageIncrease extends PowerUp{
     type(){return this.type;}
 };
 
+class ShieldPowerup extends PowerUp{
+    constructor(){
+        super()
+        this.rate = 10;
+        this.declared = false
+        this.limit = 1;
+        this.time = -1;
+        this.interval = 150;
+    }
+    activate(object, index){
+        if(this.declared == false){
+            print("activated shield")
+            this.declared = true;
+            activePowers.push(this)
+        }
+        this.currentAmount +=1;
+        // removes the option once it reaches its limit
+        if(this.currentAmount >this.limit){
+            powerups.splice(index,1)
+            print("removing the Shield upgrade")
+           // print(powerups)
+        }
+    }
+    run()
+    {
+       // print("hi")
+        player.setImmune(!player.getImmune());
+        if(player.player.ani.name != 'hit')
+        {
+            player.handleAnimation()
+        }
+    }
+    getRate(){
+        return this.interval;
+    }
+    getTime(){
+        return this.time;
+    }
+    setTime(num){this.time = num;}
+};
+
 
 class turretPowerUp extends PowerUp {
     constructor(){

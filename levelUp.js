@@ -50,19 +50,24 @@ function enterLevelUpScreen(){
             }
             //ItemName(x) ItemDescription(x)
             setItem(){
-                let item = itemReload()
+               let item = itemReload()
+               while(LevelBox.checkDupes() == false){
+                   let item = itemReload();
+               }
                this.itmBox.text =String(item[0])
                if(item[1].type =="passive"){
-                this.itmBox.color = "blue"
-            }
-            else if (item[1].type =="active"){
-                this.itmBox.color = "red"
-            }
+                    this.itmBox.color = "blue"
+               }
+               else if (item[1].type =="active"){
+                   this.itmBox.color = "red"
+               }
             }
             removeBoxes(){
                 this.itmBox.remove();
             }
-            
+            getText(){
+            return this.itmBox.text;
+            }
             checkClick(){
                 if (this.itmBox.mouse.pressed()){
                     powerups.every((value, index, array)=> {
@@ -93,10 +98,9 @@ class LevelBox{
         this.lvlBox.text = "escape to exit";
         this.lvlBox.visible = false;
         this.itemBoxes = [];
-        for(var i = 0; i < 3; ++i){
-            this.itemBoxes.push(new ItemBox(i))
+        for(var i = 0; i <3; ++i){
+            this.itemBoxes.push(new ItemBox (i));
         }
-        
     }
     // turns the boxes on and sets the items
     boxVis(){
@@ -117,6 +121,14 @@ class LevelBox{
             this.itemBoxes[i].checkClick();
         }
     }
+    static checkDupes(){
+        for(var i = 0; i < itemBoxes.size()-1; ++i){
+            if(this.itemBoxes[itemBoxes.size()].getText() == this.itemBoxes[i].getText()){
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
 // testing the power ups
@@ -126,10 +138,11 @@ let itemDesc = ['A sentry mounted on your ship that will attack the closest enem
                 'A large beam fires from your ship in the direction you are facing',
                 'A series of shields that rotate around your ship blocking incoming enemies and projectiles.'];
 
+
 function itemReload(){
     x = floor(random((powerups.length)));
     let text = powerups[x][0]
     let obj = powerups[x][1]
     return ([text, obj])
-  }
+}
 

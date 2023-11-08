@@ -213,7 +213,7 @@ class turretPowerUp extends PowerUp {
 class MagnetPowerUp extends PowerUp {
     constructor(){
         super()
-        this.limit = 5;
+        this.limit = 1;
         this.range = 200;
         this.interval = 100;
         this.declared = false
@@ -240,11 +240,11 @@ class MagnetPowerUp extends PowerUp {
         else{
             this.range +=this.amount;
 
-            if(this.currentAmount >=this.limit){
-                powerups.splice(index,1)
-                print("removing the Damage upgrade")
-                print("Power ups: ",powerups)
-            }
+        }
+        if(this.currentAmount >=this.limit){
+            powerups.splice(index,1)
+            print("removing the Damage upgrade")
+            print("Power ups: ",powerups)
         }
     }
     type(){return this.type;}

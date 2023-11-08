@@ -21,7 +21,6 @@ class gameState{
     // create the objects and switch states
     startGame(){
         player= new Player();
-        console.log(player.player.ani);
         timer = new Timer();
         lvlBox = new LevelBox();
         
@@ -96,6 +95,11 @@ class gameState{
         shooters = []
         orbs = []
         allSprites.remove()
+
+
+        powerups = allpowerups
+
+        print(asteroids.length, trackers.legnth)
       //  print(asteroids.length, trackers.legnth)
         this.changeState(DeadScreen.instance())
     }

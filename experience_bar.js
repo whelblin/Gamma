@@ -33,6 +33,7 @@ class Experience{
                 this.levelUps++;
                 this.amount = this.amount -this.needed;
                 toggle = true
+                print("entering level up state")
                 state.levelingup()
             }
             if(toggle)

@@ -18,7 +18,7 @@ class Asteroid{
        this.asteroid.addAnimation('normal', 'assets/asteroid.png');
        this.asteroidSpeed = 10;
        this.health = 10;
-       this.experericeAmount = 25
+       this.experericeAmount = 1000 // change this back
        this.asteroid.damage = (num,x,y)=>{
             this.health -=num;
             if(this.health <= 0){

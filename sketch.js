@@ -2,7 +2,7 @@ let timer;
 var player;
 let playerObject;
 let exp;
-let lvlBox;
+var lvlBox;
 let items;
 let itmNumChance;
 let shield;
@@ -33,7 +33,8 @@ var state;
 let newItem;
 var chromedriver = -1;
 // list of power ups that are allowed
-var powerups = [
+
+var allpowerups = [
   ["Fire Rate", new FireRate()],
   ['Shields', new ShieldPowerup()],
   ['Magnet', new MagnetPowerUp()],
@@ -42,6 +43,7 @@ var powerups = [
   ['Damage', new DamageIncrease()],
   ['Sentry Cannon', new turretPowerUp()]
 ]
+var powerups = allpowerups
 var activePowers = []
 
 

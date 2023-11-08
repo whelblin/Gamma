@@ -8,6 +8,10 @@ class Chromedriver{
         this.deleteAsteroidButton.position(25, windowHeight-30)
         this.deleteAsteroidButton.mousePressed(Chromedriver.DeleteAsteroid)
 
+        this.levelAsteroidButton = createButton("Level Up")
+        this.levelAsteroidButton.position(600, windowHeight-30)
+        this.levelAsteroidButton.mousePressed(Chromedriver.LevelUp)
+
         this.hitShitWithAsteroidButton = createButton("Hit ship with asteroid")
         this.hitShitWithAsteroidButton.position(150, windowHeight-30)
         this.hitShitWithAsteroidButton.mousePressed(Chromedriver.HitByAsteroid)
@@ -98,5 +102,9 @@ class Chromedriver{
     }
     static KillPlayer(){
         Health.health = 0;
+    }
+    static LevelUp(){
+        player.exp.amount = player.exp.needed
+        player.exp.increase(0)
     }
 };

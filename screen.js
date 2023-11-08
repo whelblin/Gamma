@@ -327,14 +327,12 @@ class PauseScreen extends Screen {
 
     active(){
         // we add add functionalilty if needed
-        paused = true;
         image(bgimage2, 0, 0, width, height);
         timer.printTimer(width/2, 80);
         score.printScore(width - 100, 80);
         player.drawExp();
         world.step(0.0000001/240);
         if(kb.pressed('escape')){
-            paused = false;
             state.resumeGame()
         }
     }

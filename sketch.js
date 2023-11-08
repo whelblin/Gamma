@@ -35,11 +35,8 @@ var chromedriver = -1;
 // list of power ups that are allowed
 var powerups = [
   ["Fire Rate", new FireRate()],
-  /*
-  ['Sentry Cannon', null],
-  ['Big Beam', null],
-  */
   ['Shields', new ShieldPowerup()],
+  ['Magnet', new MagnetPowerUp()],
   ['Movement Speed', new MovementSpeed()],
   ['Health', new HealthIncrease()],
   ['Damage', new DamageIncrease()],

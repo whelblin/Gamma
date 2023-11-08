@@ -2,7 +2,7 @@ let timer;
 var player;
 let playerObject;
 let exp;
-let lvlBox;
+var lvlBox;
 let items;
 var nextLevel;
 var allBullets = [];
@@ -31,18 +31,16 @@ var state;
 let newItem;
 var chromedriver = -1;
 // list of power ups that are allowed
-var powerups = [
+
+var allpowerups = [
   ["Fire Rate", new FireRate()],
-  /*
-  ['Sentry Cannon', null],
-  ['Big Beam', null],
-  ['Shields', null],
-  */
+ 
   ['Movement Speed', new MovementSpeed()],
   ['Health', new HealthIncrease()],
   ['Damage', new DamageIncrease()],
   ['Sentry Cannon', new turretPowerUp()]
 ]
+var powerups = allpowerups
 var activePowers = []
 
 

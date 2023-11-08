@@ -118,11 +118,11 @@ class turretPowerUp extends PowerUp {
                 this.fireRate = 5;
             }
 
-            if(this.currentAmount >=this.limit){
-                powerups.splice(index,1)
-                print("removing the Damage upgrade")
-                print(powerups)
-            }
+        }
+        if(this.currentAmount >=this.limit){
+            powerups.splice(index,1)
+            print("removing the Damage upgrade")
+            print(powerups)
         }
     }
     type(){return this.type;}

@@ -4,6 +4,8 @@ let playerObject;
 let exp;
 var lvlBox;
 let items;
+let itmNumChance;
+let shield;
 var nextLevel;
 var allBullets = [];
 let score;
@@ -34,7 +36,8 @@ var chromedriver = -1;
 
 var allpowerups = [
   ["Fire Rate", new FireRate()],
- 
+  ['Shields', new ShieldPowerup()],
+  ['Magnet', new MagnetPowerUp()],
   ['Movement Speed', new MovementSpeed()],
   ['Health', new HealthIncrease()],
   ['Damage', new DamageIncrease()],
@@ -61,8 +64,6 @@ function preload() {
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
     state = new gameState();
-   
-
   }
 
 function setup() {

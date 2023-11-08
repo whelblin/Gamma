@@ -73,7 +73,6 @@ class Timer{
     activatePowers(){
         let time = frameCount;
         activePowers.forEach(e => {
-            print(time % e.getRate())
             if(time % e.getRate() == 0 && e.getTime() != time){
                 e.run()
                 e.setTime(time)

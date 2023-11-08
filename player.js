@@ -7,6 +7,7 @@ class Player{
         this.player = new colliding.Sprite(width/2,height/2,80)
         this.player.addAnis(this.idleAni);
         this.player.addAnis(this.hitAni);
+        this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
         this.immune = false;
         this.fireRate = 30;
@@ -14,9 +15,11 @@ class Player{
         this.health = new PlayerHealth()
         this.exp = new Experience()
         this.damage = 10;
+        
     }
-     // loads the aniamtion during the reload function
+     // loads the animation during the reload function
     static preload(){
+        
         this.spriteSheet = 'assets/sheet.png';
         this.frameDelay = 4;
         this.idleAni = loadAni("idle",this.spriteSheet,{
@@ -25,10 +28,23 @@ class Player{
         this.hitAni = loadAni("hit",this.spriteSheet,{
             frameSize: [80,80], frames: 4
         })
+        this.shieldSprite = 'assets/shieldSprite.png';
+        this.shieldedAnim = loadAni("shield",this.shieldSprite,{
+            frameSize: [100,100], frames: 1
+        })
     }
     increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
     increaseMovementSpeed(num){this.speed += num;}
     increaseDamage(num){this.damage +=num;}
+    setImmune(val)
+    {
+        print("immuned set to" +val);
+        this.immune = val;
+    }
+    getImmune()
+    {
+        return this.immune;
+    }
     /*
     movement(){
         this.player.speed = 8;
@@ -124,7 +140,7 @@ class Player{
     checkShipHit(array, bullet = false) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
-                    if(this.player.ani.name == 'idle'){ // if not immune
+                    if(this.player.ani.name == 'idle' && !this.immune){ // if not immune
                     this.collision(object);
                     if(bullet){
                         removal(array, object)
@@ -132,6 +148,8 @@ class Player{
                     }
                     this.health.healthDecrease();
                     }
+                    else if(this.immune)
+                        print("was immune")
                 }
         });
     }
@@ -142,6 +160,15 @@ class Player{
         object.vel.y = -object.vel.y * 1.2;
         // plays animation
         this.player.changeAni(['hit','hit','hit','idle'])
+        this.handleAnimation()
+    }
+
+    handleAnimation()
+    {
+        if(!this.immune)
+            this.player.changeAni('idle')
+        else
+            this.player.changeAni('shield')
     }
     
     attract(enemy){

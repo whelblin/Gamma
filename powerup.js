@@ -92,6 +92,49 @@ class DamageIncrease extends PowerUp{
     type(){return this.type;}
 };
 
+class ShieldPowerup extends PowerUp{
+    constructor(){
+        super()
+        this.rate = 10;
+        this.declared = false
+        this.limit = 1;
+        this.time = -1;
+        this.interval = 150;
+        this.type = "active"
+    }
+    activate(object, index){
+        if(this.declared == false){
+            print("activated shield")
+            this.declared = true;
+            activePowers.push(this)
+        }
+        this.currentAmount +=1;
+        // removes the option once it reaches its limit
+        if(this.currentAmount >this.limit){
+            powerups.splice(index,1)
+            print("removing the Shield upgrade")
+           // print(powerups)
+        }
+    }
+    type(){return this.type;}
+    run()
+    {
+       // print("hi")
+        player.setImmune(!player.getImmune());
+        if(player.player.ani.name != 'hit')
+        {
+            player.handleAnimation()
+        }
+    }
+    getRate(){
+        return this.interval;
+    }
+    getTime(){
+        return this.time;
+    }
+    setTime(num){this.time = num;}
+};
+
 
 class turretPowerUp extends PowerUp {
     constructor(){
@@ -159,6 +202,61 @@ class turretPowerUp extends PowerUp {
     }
     getRate(){
         return this.fireRate;
+    }
+    getTime(){
+        return this.time;
+    }
+    setTime(num){this.time = num;}
+
+};
+
+class MagnetPowerUp extends PowerUp {
+    constructor(){
+        super()
+        this.limit = 1;
+        this.range = 200;
+        this.interval = 100;
+        this.declared = false
+        this.amount = 20;
+        this.time = -1;
+        this.currentAmount = 0;
+        this.type = "active";
+        this.frames = 500;
+        this.magnet;
+    }
+
+    activate(object, index){
+        this.currentAmount +=1;
+        if(this.declared == false){
+            this.declared = true;
+            this.magnet = new non_colliding.Sprite(player.player.x,player.player.y,this.range);
+            this.magnet.layer = -1 ;
+            this.magnet.visible = false;
+            player.player.overlaps(this.magnet);
+            //new GlueJoint(player.player, temp)
+            activePowers.push(this)
+            print("active",activePowers)
+        }
+        else{
+            this.range +=this.amount;
+
+        }
+        if(this.currentAmount >=this.limit){
+            powerups.splice(index,1)
+            print("removing the Damage upgrade")
+            print("Power ups: ",powerups)
+        }
+    }
+    type(){return this.type;}
+    run(){
+        print("Magnet Active")
+        orbs.forEach(e => {
+            e.attractTo(player.player,800)
+        });
+        
+    }
+    getRate(){
+        return this.interval;
     }
     getTime(){
         return this.time;

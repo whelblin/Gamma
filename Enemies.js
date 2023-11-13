@@ -15,6 +15,7 @@ class Tracker{
             if(this.health <= 0){
                 removal(trackers,this.tracker)
                 ExpOrb.createExp(x, y, this.experericeAmount)
+                HealthPack.createHealth(x, y)
             }
         }
        trackers.push(this.tracker);
@@ -62,6 +63,7 @@ class Shooter{
             if(this.health <= 0){
                 removal(shooters,this.shooter)
                 ExpOrb.createExp(x, y, this.experericeAmount)
+                HealthPack.createHealth(x, y)
             }
         }
         this.shooter.shoot = () =>{

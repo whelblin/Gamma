@@ -102,6 +102,10 @@ class Player{
     increaseHealth(num){
         this.health.increaseHealth(num)
     }
+
+    healHealth(num){
+        this.health.healHealth(num)
+    }
     // shoots bullets at the firerate 
     shoot(){
         if((kb.pressing(' ')) ||(mouseIsPressed === true)){
@@ -181,6 +185,21 @@ class Player{
                 this.exp.increase(orb.amount);
             }
         });
+    }
+
+    //Scans every pack, and calculates heal when picked up
+    checkHealthHit(){
+        packs.forEach(pack => {
+            if(pack.overlaps(this.player)){
+                removal(packs, pack)
+                let heal = this.health.returnMaxHealth()/5 // Determines heal amount from max health
+                if((heal + this.health.returnHealth()) > this.health.returnMaxHealth()){ // Prevents overheal by setting heal
+                    heal = this.health.returnMaxHealth() - this.health.returnHealth(); // to not exceed maxHealth
+                }
+                this.healHealth(heal);
+            }
+        });
+
     }
 
     returnPlayerObject(){

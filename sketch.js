@@ -19,6 +19,7 @@ var trackers;
 var shooters;
 var bullets;
 var orbs;
+var packs;
 var opacity;
 var opacShouldIncrease;
 let mainFont = 'Chakra Petch';
@@ -81,6 +82,7 @@ function setup() {
     trackers = [];
     bullets = [];
     orbs = [];
+    packs = [];
     shooters = []
     chromedriver = new Chromedriver()
     state.init()

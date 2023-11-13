@@ -95,7 +95,7 @@ class gameState{
         shooters = []
         orbs = []
         allSprites.remove()
-
+        currentStage = new StageHandler()
 
         powerups = allpowerups
 
@@ -234,6 +234,8 @@ class GameScreen extends Screen {
         player.drawExp();
         player.drawHealth()
         drawScore()
+
+        currentStage.checkStage()
         //tests();
         // level up screens
         /*

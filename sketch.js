@@ -32,6 +32,8 @@ let backgroundMusic;
 var state;
 let newItem;
 var chromedriver = -1;
+
+var currentStage;
 // list of power ups that are allowed
 
 var allpowerups = [
@@ -64,6 +66,7 @@ function preload() {
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
     state = new gameState();
+    currentStage = new StageHandler()
   }
 
 function setup() {
@@ -82,7 +85,7 @@ function setup() {
     bullets = [];
     orbs = [];
     shooters = []
-    chromedriver = new Chromedriver()
+    chromedriver = new Chromedriver(1)
     state.init()
   }
 

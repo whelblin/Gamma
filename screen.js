@@ -210,7 +210,7 @@ class GameScreen extends Screen {
         player.movement();
         player.aiming();
         player.shoot();
-        timer.enemySpawn(asteroids,trackers);
+        //timer.enemySpawn(asteroids,trackers);
         cullObjects()
         for(let t = 0; t < trackers.length; t++){
           player.attract(trackers[t]);

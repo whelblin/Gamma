@@ -24,6 +24,7 @@ class Asteroid{
             if(this.health <= 0){
                 removal(asteroids,this.asteroid)
                 ExpOrb.createExp(x, y, this.experericeAmount)
+                HealthPack.createHealth(x, y)
             }
        }
        asteroids.push(this.asteroid);

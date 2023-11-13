@@ -231,6 +231,7 @@ class GameScreen extends Screen {
         player.checkShipHit(trackers);
         player.checkShipHit(shooters);
         player.checkExpHit()
+        player.checkHealthHit();
         player.drawExp();
         player.drawHealth()
         drawScore()

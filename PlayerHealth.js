@@ -37,10 +37,17 @@ class PlayerHealth {
         this.health +=num // keeps the same health
         this.#update()
     }
+
+    //Replenishes health rather than extend the bar
+    healHealth(num){
+        this.health += num
+        this.#update()
+    }
     isDead(){
         return this.dead;
     }
     returnHealth(){return this.health;}
 
+    returnMaxHealth(){return this.maxHealth;} // For use in determining pack heal amount
 
 };

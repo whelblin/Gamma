@@ -1,29 +1,52 @@
 let timer;
-let asteroid;
 var player;
 let playerObject;
 let exp;
-let lvlBox;
+var lvlBox;
 let items;
 let itmNumChance;
+let shield;
 var nextLevel;
-let Health;
+var allBullets = [];
 let score;
 var non_colliding;
 var colliding;
+var asteroidGroup;
+var trackerGroup;
+var bulletGroup;
 var asteroids;
+var trackers;
+var shooters;
 var bullets;
 var orbs;
-var inMenu;
+var packs;
 var opacity;
 var opacShouldIncrease;
-var paused;
 let mainFont = 'Chakra Petch';
 let bgimage1;
 let bgimage2;
+let bgimage3;
 var playerAni;
-let itemName = ["TestName"];
-let itemDescription = ["TestDescription"];
+let bulletSound;
+let asteroidHitSound;
+let backgroundMusic;
+var state;
+let newItem;
+var chromedriver = -1;
+// list of power ups that are allowed
+
+var allpowerups = [
+  ["Fire Rate", new FireRate()],
+  ['Shields', new ShieldPowerup()],
+  ['Magnet', new MagnetPowerUp()],
+  ['Movement Speed', new MovementSpeed()],
+  ['Health', new HealthIncrease()],
+  ['Damage', new DamageIncrease()],
+  ['Sentry Cannon', new turretPowerUp()]
+]
+var powerups = allpowerups
+var activePowers = []
+
 
 function preload() {
     //mainFont = loadFont('assets/comici.tff');
@@ -31,145 +54,45 @@ function preload() {
     colliding = new Group();
     itmBoxes = new Group();
     colliding.overlaps(non_colliding);
+    itmBoxes.overlaps(colliding)
+    itmBoxes.overlaps(non_colliding)
+    asteroidGroup = new colliding.Group();
+    trackerGroup = new colliding.Group();
+    bulletGroup = new colliding.Group()
     Player.preload()
+    bgimage1 = loadImage('assets/bgimage2.png');
+    bulletSound = loadSound('assets/shoot02wav-14562.mp3');
+    asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
+    backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
+    state = new gameState();
   }
 
 function setup() {
     new Canvas();
-    inMenu = true;
+    allSprites.autoCull = false
+    
     frameRate(60); //set framerate to be system independent 
-    paused = false;
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
-    bgimage1 = loadImage('assets/bgimage2.png');
     bgimage2 = loadImage('assets/bgimage3.gif');
-
+    bgimage3 = loadImage('assets/gameover.png');
+    backgroundSong();
+    asteroids = [];
+    trackers = [];
+    bullets = [];
+    orbs = [];
+    packs = [];
+    shooters = []
+    chromedriver = new Chromedriver()
+    state.init()
   }
-  
+
   function draw() {
-
-    image(bgimage1, 0, 0, width, height);
-    if(!inMenu && paused == false)
-    {
-      image(bgimage2, 0, 0, width, height);
-      colliding.overlaps(non_colliding);
-      itmBoxes.overlaps(non_colliding);
-      itmBoxes.overlaps(colliding);
-      timer.printTimer(width/2, 80);
-      score.printScore(width, 80)
-      player.movement();
-      player.aiming();
-      player.shoot();
-      timer.asteroidSpawn(asteroids);
-      // checks if a bullet hits an asteroid
-      player.checkBulletHit(asteroids, bullets, exp, score);
-      player.checkAstroidHit(asteroids, player, orbs, Health);
-      player.checkExpHit()
-      //tests();
-      if(exp.level == nextLevel){
-        for(i=0; i < 3; i++){
-          items == new ItemBox();
-          //itemBoxes[i].boxVis();
-        }
-        lvlBox.boxVis();
-        nextLevel += 1;
-        paused = true;
-      }
-      if(kb.pressed('escape')){
-        paused = true;
-      }
-      if(Health.isDead()){
-        resetGame();
-      }
-    }
-    else if(!inMenu && paused == true){
-      image(bgimage2, 0, 0, width, height);
-      world.step(0.001/240);
-      if(kb.pressed('escape')){
-        for(let y = 0; y < items.length; y++){
-          items[y].remove();
-        }
-        lvlBox.boxInvis();
-        paused = false;
-    }
-  }
-    else
-    {
-   //   drawTitle();
-      drawStart();
-      drawScore();
-      if (kb.presses(' '))
-      {
-        inMenu = false;
-        asteroids = [];
-        bullets = [];
-        orbs = [];
-        player= new Player();
-        console.log(player.player.ani);
-        timer = new Timer();
-        exp = new Experience();
-        lvlBox = new LevelBox();
-        items = [];
-        nextLevel = 2;
-        Health = new PlayerHealth();
-        score = new ScoreCounter();
-      }
-    }
+    // runs the current state
+    state.run() 
   }
 
-/*
-function drawTitle()
-{
-    textSize(150);
-    textAlign(CENTER);
-    textFont(mainFont);
-    fill(0,0,0);
-//    text("SPACE SURVIVORS",width/2, 300);
-} */
-
-function drawStart()
-{
-    
-    fill(215,175, 55, opacity);
-    stroke(0);
-    strokeWeight(5);
-    rectMode(CENTER);
-    rect(width/2, height/2+200, 400, 150, 30);
-
-    textSize(120);
-    textFont(mainFont);
-    fill(0,0,0);
-    text("Play",width/2, height/2+230);
-
-
-    if(opacity < 212 && opacShouldIncrease)
-    {
-      opacity+=10;
-    }
-    else
-    {
-      opacShouldIncrease = false;
-      opacity-= 10;
-      if(opacity < 0)
-      {
-        opacShouldIncrease = true;
-      }
-    }   
-
-
-}
-
-function drawScore()
-{
-    var score = 0; // temp
-    textSize(80);
-    textAlign(RIGHT);
-    textFont(mainFont);
-    fill(255);
-    text("Best Score: "+ score,width - 10, 70)
-    textAlign(CENTER)
-}
 
 function tests(){
   exp.test_increase();
@@ -177,18 +100,11 @@ function tests(){
 }
 
 
-
-
-
-function resetGame() {
-  inMenu = true;
-  exp.outerBar.remove();
-  exp.innerBar.remove();
-  Health.outerBar.remove();
-  Health.innerBar.remove();
-  player.player.remove();
-  for(let i = 0; i < asteroids.length; i++){
-    asteroids[i].remove();
-  }
+function backgroundSong(){
+  backgroundMusic.play();
+  backgroundMusic.loop();
+  backgroundMusic.setVolume(.05);
+  userStartAudio();
 }
+
 

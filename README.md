@@ -1,6 +1,9 @@
 # Gamma
 ## GitHub page to run the deployment code
 https://whelblin.github.io/Gamma/
+## Game State Pattern
+![plot](docs/state_design.png)
+
 ## Instructions to get started
 ### Clone the code
 if you have github desktop, you should use that.

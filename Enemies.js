@@ -9,6 +9,7 @@ class Tracker{
         this.tracker.Trackingspeed = 3;
        //this.tracker.attractTo(player,25);
         this.health = 20
+        this.attack = 15
         this.experericeAmount = 50
         this.tracker.damage = (num,x,y)=>{
             this.health -=num;
@@ -55,8 +56,8 @@ class Shooter{
         this.shooter.addAnimation('small','assets/invader.png');
         this.shooter.Trackingspeed = .5;
         this.health = 10
-        this.fireRate = 150;
-        this.attack = 10;
+        this.fireRate = 150
+        this.attack = 15
         this.experericeAmount = 50
         this.shooter.damage = (num,x,y)=>{
             this.health -=num;

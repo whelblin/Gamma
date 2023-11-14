@@ -150,7 +150,7 @@ class Player{
                         removal(array, object)
                         removal(allBullets, object)
                     }
-                    this.health.healthDecrease();
+                    this.health.healthDecrease(object.attack);
                     }
                     else if(this.immune)
                         print("was immune")

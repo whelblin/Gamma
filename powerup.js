@@ -13,19 +13,20 @@ class PowerUp{
 class FireRate extends PowerUp{
     constructor(){
         super()
-        this.rate = 3;
+        this.rate = 4;
         this.limit = 5;
         this.type = "passive";
        
     }
     activate(object, index){
-        object.increaseFireRate(this.rate)
-        this.currentAmount +=1;
         // removes the option once it reaches its limit
         if(this.currentAmount >=this.limit){
             powerups.splice(index,1)
             print("removing the fire up upgrade")
             print(powerups)
+        }else{
+            object.increaseFireRate(this.rate)
+            this.currentAmount +=1;
         }
     }
     type(){return this.type;}
@@ -101,10 +102,11 @@ class ShieldPowerup extends PowerUp{
         this.time = -1;
         this.interval = 150;
         this.type = "active"
+        this.timer = 3000;
+        this.blocker = false;
     }
     activate(object, index){
         if(this.declared == false){
-            print("activated shield")
             this.declared = true;
             activePowers.push(this)
         }
@@ -119,11 +121,17 @@ class ShieldPowerup extends PowerUp{
     type(){return this.type;}
     run()
     {
-       // print("hi")
-        player.setImmune(!player.getImmune());
-        if(player.player.ani.name != 'hit')
-        {
-            player.handleAnimation()
+        if(this.declared && millis()% (this.timer) > this.timer/2){
+            if(this.blocker){
+                this.blocker = false
+                player.setImmune(!player.getImmune());
+                if(player.player.ani.name != 'hit')
+                {
+                    player.handleAnimation()
+                }
+            }
+        }else if (this.declared){
+            this.blocker = true;
         }
     }
     getRate(){
@@ -142,10 +150,12 @@ class turretPowerUp extends PowerUp {
         this.limit = 5;
         this.fireRate = 100;
         this.declared = false
-        this.amount = 20;
+        this.amount = 600;
         this.time = -1;
         this.currentAmount = 0;
         this.type = "active";
+        this.timer = 3000;
+        this.blocker = false;
     }
 
     activate(object, index){
@@ -155,10 +165,10 @@ class turretPowerUp extends PowerUp {
             activePowers.push(this)
         }
         else{
-            if(this.fireRate - this.amount > 1)
-                this.fireRate -= this.amount
+            if(this.timer - this.amount > 1)
+                this.timer -= this.amount
             else{
-                this.fireRate = 5;
+                this.timer = 100;
             }
 
         }
@@ -170,36 +180,43 @@ class turretPowerUp extends PowerUp {
     }
     type(){return this.type;}
     run(){
-
-        let closest = 100000;
-        let target;
-        asteroids.forEach(e => {
-            let temp = dist(e.x, e.y,player.player.x,player.player.y)
-            if(temp < closest){
-                closest = temp;
-                target = e
+        if(this.declared && millis()% (this.timer) > this.timer/2){
+            if(this.blocker){
+                this.blocker = false;
+                let closest = 100000;
+                let target;
+                asteroids.forEach(e => {
+                    let temp = dist(e.x, e.y,player.player.x,player.player.y)
+                    if(temp < closest){
+                        closest = temp;
+                        target = e
+                    }
+                });
+                trackers.forEach(e => {
+                    let temp = dist(e.x, e.y,player.player.x,player.player.y)
+                    if(temp < closest){
+                        closest = temp;
+                        target = e
+                    }
+                });
+                shooters.forEach(e => {
+                    let temp = dist(e.x, e.y,player.player.x,player.player.y)
+                    if(temp < closest){
+                        closest = temp;
+                        target = e
+                    }
+                });
+                if(target != undefined){
+                let bullet = new Bullet(player.player.x,player.player.y, bullets);
+                player.player.overlaps(bullet.getObject());
+                bullet.movement(target);
+                }
             }
-        });
-        trackers.forEach(e => {
-            let temp = dist(e.x, e.y,player.player.x,player.player.y)
-            if(temp < closest){
-                closest = temp;
-                target = e
-            }
-        });
-        shooters.forEach(e => {
-            let temp = dist(e.x, e.y,player.player.x,player.player.y)
-            if(temp < closest){
-                closest = temp;
-                target = e
-            }
-        });
-        if(target != undefined){
-        let bullet = new Bullet(player.player.x,player.player.y, bullets);
-        player.player.overlaps(bullet.getObject());
-        bullet.movement(target);
+        }else if (this.declared){
+            this.blocker = true;
         }
     }
+    
     getRate(){
         return this.fireRate;
     }
@@ -217,12 +234,15 @@ class MagnetPowerUp extends PowerUp {
         this.range = 200;
         this.interval = 100;
         this.declared = false
-        this.amount = 20;
+        this.amount = 300;
         this.time = -1;
         this.currentAmount = 0;
         this.type = "active";
         this.frames = 500;
         this.magnet;
+        this.timer = 3000;
+        this.blocker = false;
+        this.pullingOrbs = []
     }
 
     activate(object, index){
@@ -233,12 +253,14 @@ class MagnetPowerUp extends PowerUp {
             this.magnet.layer = -1 ;
             this.magnet.visible = false;
             player.player.overlaps(this.magnet);
-            //new GlueJoint(player.player, temp)
             activePowers.push(this)
-            print("active",activePowers)
         }
         else{
-            this.range +=this.amount;
+            if(this.timer - this.amount > 1)
+            this.timer -= this.amount
+        else{
+            this.timer = 100;
+        }
 
         }
         if(this.currentAmount >=this.limit){
@@ -249,12 +271,19 @@ class MagnetPowerUp extends PowerUp {
     }
     type(){return this.type;}
     run(){
-        print("Magnet Active")
-        orbs.forEach(e => {
-            e.attractTo(player.player,800)
-        });
+        if(this.declared && millis()% (this.timer) > this.timer/2){
+            if(this.blocker){
+                this.blocker = false
+                orbs.forEach(e => {
+                    e.moveTo(player.player, 20)
+                    
+                });
+            }
+    }else if (this.declared){
+        this.blocker = true;
+    }   
+}
         
-    }
     getRate(){
         return this.interval;
     }
@@ -264,3 +293,9 @@ class MagnetPowerUp extends PowerUp {
     setTime(num){this.time = num;}
 
 };
+
+function runActivePowerups(){
+    activePowers.forEach(e => {
+            e.run()
+    });
+}

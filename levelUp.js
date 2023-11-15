@@ -90,6 +90,7 @@ function enterLevelUpScreen(){
                             value[1].activate(player, index)
                             
                             state.leveledUp()
+                            player.player.changeAni(['hit','hit','hit','hit','hit','hit','idle'])
                             print("return")
                             if(powerups.length <  lvlBox.itemBoxes.length){
                                 lvlBox.itemBoxes.pop()

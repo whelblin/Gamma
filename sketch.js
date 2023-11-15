@@ -1,4 +1,4 @@
-let timer;
+var timer;
 var player;
 let playerObject;
 let exp;
@@ -67,7 +67,7 @@ function preload() {
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
     state = new gameState();
-    currentStage = new StageHandler()
+    currentStage = new StageHandler();
   }
 
 function setup() {
@@ -87,7 +87,7 @@ function setup() {
     orbs = [];
     packs = [];
     shooters = []
-    chromedriver = new Chromedriver(1)
+    chromedriver = new Chromedriver(1) // add one for debug
     state.init()
   }
 

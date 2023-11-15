@@ -6,7 +6,7 @@ class ExpOrb {
      * @param {Int16Array} [amount] - the amount of exerience the orb contains: default is 25 
      */
     constructor(x,y, amount = 25){
-        this.expOrb = new non_colliding.Sprite(x,y, 25, 'pentagon');
+        this.expOrb = new non_colliding.Sprite(x,y, 15, 'pentagon');
         this.expOrb.collides(player.returnPlayerObject())
         this.expOrb.overlaps(itmBoxes)
         this.expOrb.overlaps(non_colliding)

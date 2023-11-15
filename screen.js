@@ -23,7 +23,7 @@ class gameState{
         player= new Player();
         timer = new Timer();
         lvlBox = new LevelBox();
-        
+        currentStage = new StageHandler();
         nextLevel = 2;
         score = new ScoreCounter();
      //   bestScore = new ScoreCounter();
@@ -205,7 +205,8 @@ class GameScreen extends Screen {
         itmBoxes.overlaps(non_colliding);
         itmBoxes.overlaps(colliding);
         timer.printTimer(width/2, 80);
-        timer.activatePowers()
+        //timer.activatePowers()
+        runActivePowerups()
         score.printScore(width - 100, 80);
         player.movement();
         player.aiming();
@@ -236,7 +237,7 @@ class GameScreen extends Screen {
         player.drawHealth()
         drawScore()
 
-        currentStage.checkStage()
+        StageHandler.checkStage()
         //tests();
         // level up screens
         /*

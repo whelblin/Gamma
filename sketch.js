@@ -87,7 +87,7 @@ function setup() {
     orbs = [];
     packs = [];
     shooters = []
-    chromedriver = new Chromedriver(1) // add one for debug
+    chromedriver = new Chromedriver() // add one for debug
     state.init()
   }
 

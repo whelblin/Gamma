@@ -275,7 +275,7 @@ class MagnetPowerUp extends PowerUp {
             if(this.blocker){
                 this.blocker = false
                 orbs.forEach(e => {
-                    e.moveTo(player.player, 20)
+                    e.moveTo(player.player, 50)
                     
                 });
             }

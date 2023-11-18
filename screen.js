@@ -23,7 +23,7 @@ class gameState{
         player= new Player();
         timer = new Timer();
         lvlBox = new LevelBox();
-        currentStage = new StageHandler();
+        
         nextLevel = 2;
         score = new ScoreCounter();
      //   bestScore = new ScoreCounter();
@@ -95,7 +95,7 @@ class gameState{
         shooters = []
         orbs = []
         allSprites.remove()
-        currentStage = new StageHandler()
+
 
         powerups = allpowerups
 
@@ -205,13 +205,12 @@ class GameScreen extends Screen {
         itmBoxes.overlaps(non_colliding);
         itmBoxes.overlaps(colliding);
         timer.printTimer(width/2, 80);
-        //timer.activatePowers()
-        runActivePowerups()
+        timer.activatePowers()
         score.printScore(width - 100, 80);
         player.movement();
         player.aiming();
         player.shoot();
-        //timer.enemySpawn(asteroids,trackers);
+        timer.enemySpawn(asteroids,trackers);
         cullObjects()
         for(let t = 0; t < trackers.length; t++){
           player.attract(trackers[t]);
@@ -236,8 +235,6 @@ class GameScreen extends Screen {
         player.drawExp();
         player.drawHealth()
         drawScore()
-
-        StageHandler.checkStage()
         //tests();
         // level up screens
         /*

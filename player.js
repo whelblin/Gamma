@@ -188,6 +188,8 @@ class Player{
     }
 
     //Scans every pack, and calculates heal when picked up
+    //Note: heal amount calculation is performed here rather than in the healthpack class
+    //Itself to ensure that the healthpack will always heal 20% in the event the player picks up max health powerup
     checkHealthHit(){
         packs.forEach(pack => {
             if(pack.overlaps(this.player)){

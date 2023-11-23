@@ -6,7 +6,7 @@ the run method is used to activate whatever state it is in
 
 There is no longer a need for a inmenu, paused, or leveling up variable. The states take care of everything
 */
-
+var pausedTimer;
 class gameState{
 
     // sets the stat of the game
@@ -38,6 +38,7 @@ class gameState{
          if(powerups.length > 0){
         lvlBox.boxVis();
         nextLevel += 1;
+        timer.startPause()
         this.changeState(LevelScreen.instance())
         }
         else{
@@ -53,6 +54,7 @@ class gameState{
         print(player.getLevelUps())
         lvlBox.boxInvis();
         colliding.visible = true;
+        timer.endPause()
         player.setLevelUps(player.getLevelUps()- 1);
         if(player.getLevelUps() == 0)
             this.changeState(GameScreen.instance())
@@ -95,11 +97,12 @@ class gameState{
         shooters = []
         orbs = []
         allSprites.remove()
-        currentStage = new StageHandler()
+        StageHandler.restart()
 
         powerups = allpowerups
 
         print(asteroids.length, trackers.legnth)
+        timer.endTimer()
       //  print(asteroids.length, trackers.legnth)
         this.changeState(DeadScreen.instance())
     }
@@ -110,6 +113,7 @@ class gameState{
     }
     // transition from PauseScreen to GameScreen
     resumeGame(){
+        timer.endPause()
         this.changeState(GameScreen.instance())
     }
     // runs the current state's action
@@ -162,8 +166,6 @@ class StartScreen extends Screen {
         textAlign(CENTER);
         fill(0,0,0);
         text("Play",width/2, height/2+230);
-
-
         if(opacity < 212 && opacShouldIncrease)
         {
         opacity+=10;
@@ -176,15 +178,17 @@ class StartScreen extends Screen {
         {
             opacShouldIncrease = true;
         }
-        }   
+        }
+        
+        //button.mousePressed(changeBG);
         
         drawScore();
         // switches the state to gameScreen when the mouseIsPressed or space is pressed
-        if ((kb.presses(' '))||(mouseIsPressed === true))
+       
+ if ((kb.presses(' '))||(mouseIsPressed === true))
         {
             state.startGame()
         } 
-
     }
 }
 
@@ -246,6 +250,7 @@ class GameScreen extends Screen {
         }
         */
         if(kb.pressed('escape')){
+            timer.startPause()
           state.pause()
         }
         if(player.isDead()){
@@ -271,7 +276,7 @@ class LevelScreen extends Screen {
         world.step(0.0000001/240);
         colliding.visible = false;
         lvlBox.checkClick();
-    
+        timer.pausedTime()
         if(kb.pressed('escape')){
            state.leveledUp()
         }
@@ -293,7 +298,7 @@ class DeadScreen extends Screen {
         image(bgimage3, 0, 0, width, height);
         fill(111,168,220);
         score.printBestScore(width/2,height/2);
-
+        timer.printFinalTimer(width/2, height/2 + 100)
         fill(215,175, 55, opacity);
         stroke(0);
         strokeWeight(5);
@@ -336,7 +341,7 @@ class PauseScreen extends Screen {
     active(){
         // we add add functionalilty if needed
         image(bgimage2, 0, 0, width, height);
-        timer.printTimer(width/2, 80);
+        timer.pausedTime()
         score.printScore(width - 100, 80);
         player.drawExp();
         world.step(0.0000001/240);

@@ -15,6 +15,8 @@ class Player{
         this.health = new PlayerHealth()
         this.exp = new Experience()
         this.damage = 10;
+        this.canFire = -1
+        this.spam = 300;
         
     }
      // loads the animation during the reload function
@@ -108,7 +110,13 @@ class Player{
     }
     // shoots bullets at the firerate 
     shoot(){
-        if((kb.pressing(' ')) ||(mouseIsPressed === true)){
+        if(millis() > this.canFire &&( kb.presses(' ') ||(mouse.presses() === true))){
+            this.canFire = millis() + this.spam
+            let bullet = new Bullet(this.player.x, this.player.y,bullets);
+            this.player.overlaps(bullet.getObject());
+            bullet.movement(mouse); 
+        }
+        else if((kb.pressing(' ')) ||(mouseIsPressed === true)){
             // uses framecount because it is constant on system
             if(frameCount % this.fireRate == 0){
                 let bullet = new Bullet(this.player.x, this.player.y,bullets);

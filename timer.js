@@ -7,24 +7,63 @@ class Timer{
         this.timer = new Date();
         // get the initial time when the program is started
         this.initSec =this.timer.getTime()/1000;
-        this.rockPrev = -1;
-        this.trackerPrev = -1;
-        this.prevTime = -1;
-        this.shooterPrev = -1;
+        //this.rockPrev = -1;
+        //this.trackerPrev = -1;
+        //this.prevTime = -1;
+        //this.shooterPrev = -1;
+        this.pausedSec = 0;
+        this.pausedMin = 0;
+        this.totalPausedSec = 0;
+        this.totalPausedMin = 0;
+        this.startPauseTime = 0;
+        this.deathTime = new Date()
+        this.minute = 0;
+        this.flag = false;
+
+    }
+    startPause(){
+        var temp = new Date();
+        this.startPauseTime = Math.floor(temp.getTime()/1000)
+    }
+    endPause(){
+        this.startPauseTime = 0;
+        this.totalPausedSec += this.pausedSec;
+        this.totalPausedMin += this.pausedMin;
+    }
+    
+    pausedTime(){
+        var temp = new Date();
+        let time = Math.floor(temp.getTime()/1000 - this.startPauseTime)
+        print(time)
+        this.pausedSec = time%60
+        this.pausedMin = Math.floor(time/60)
+
+        
+    }
+    endTimer(){
+        this.deathTime = new Date()
     }
     // gets the amount of seconds
-    getCurrentSec(){
+    getCurrentSec(timer = new Date()){
         // substracts the current time by the initial time
         // modulus 60 to wrap the seconds
-        var temp = new Date();
-        var num = Math.floor(temp.getTime()/1000 - this.initSec)% 60;
+        var temp = timer;
+        var num = (Math.floor(temp.getTime()/1000 - this.initSec) - this.totalPausedSec )% 60;
         // puts a 0 infront if the seconds are single digits
+        
         // example: 1:01
+        if(num > 0){
+            this.flag =true
+        }
+        if(num == 0 && this.flag){
+            this.minute +=1;
+            this.flag = false;
+        }
         if(Math.floor(num/10) == 0){
             let newNum = "0"+String(num)   
             return (newNum);         
         }
-        return (num);
+        return (num %60);
     }
     getMillis(){
         var temp = new Date();
@@ -32,9 +71,8 @@ class Timer{
         return (num);
     }
     // gets the amount of seconds
-    getCurrentMin(){
-        let temp = new Date();
-        return Math.floor(temp.getTime()/(1000 * 60) - this.initSec/60);
+    getCurrentMin(timer = new Date()){
+        return this.minute
     }
     // prints the timer to the screen
     printTimer(x,y){
@@ -42,6 +80,12 @@ class Timer{
         textAlign(CENTER);
       //  textFont("comic sans");
         text("Time: " + timer.getCurrentMin() + ":"+ timer.getCurrentSec(), x,y);
+    }
+    printFinalTimer(x,y){
+        textSize(60);
+        textAlign(CENTER);
+      //  textFont("comic sans");
+        text("Time: " + timer.getCurrentMin(this.deathTime) + ":"+ timer.getCurrentSec(this.deathTime), x,y);
     }
     enemySpawn(asteroids,trackers){
         let rockNow = parseInt(timer.getCurrentSec());

@@ -23,6 +23,7 @@ class gameState{
         player= new Player();
         timer = new Timer();
         lvlBox = new LevelBox();
+        expOrb = new ExpOrb();
         currentStage = new StageHandler();
         nextLevel = 2;
         score = new ScoreCounter();
@@ -37,6 +38,7 @@ class gameState{
     levelingup(){
          if(powerups.length > 0){
         lvlBox.boxVis();
+        expOrb.orbInvis();
         nextLevel += 1;
         timer.startPause()
         this.changeState(LevelScreen.instance())
@@ -53,6 +55,7 @@ class gameState{
     leveledUp(){
         print(player.getLevelUps())
         lvlBox.boxInvis();
+        expOrb.orbVis();
         colliding.visible = true;
         timer.endPause()
         player.setLevelUps(player.getLevelUps()- 1);
@@ -276,7 +279,7 @@ class LevelScreen extends Screen {
         world.step(0.0000001/240);
         colliding.visible = false;
         lvlBox.checkClick();
-        timer.pausedTime()
+        timer.pausedTime();
         if(kb.pressed('escape')){
            state.leveledUp()
         }

@@ -29,7 +29,7 @@ class ExpOrb {
             new ExpOrb(x,y,amount);
         }
         else{
-            orbs[orbs.length-1].amount +=amount;
+            orbs[orbs.length-1].amount += amount;
             orbs[orbs.length-1].color = 'red'
         }
     }

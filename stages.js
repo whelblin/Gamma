@@ -2,7 +2,11 @@ class StageHandler{
     constructor(){}
     static checkStage(){
         //8 to 10 minutes
-        if (timer.getCurrentMin() >= 8){
+        if (timer.getCurrentMin()>= 10){
+            state.win()
+            currentStage = EndStage.instance()
+        }
+        else if (timer.getCurrentMin() >= 8){
             currentStage = ThirdStage.instance() // switch to three once done
         // 3 to 8 minutes
         } else if (timer.getCurrentMin() >=3){
@@ -91,7 +95,7 @@ class SecondStage extends Stage{
         this.trackerStartRate = 8;
         this.shooterMaxSpawn = 10;
         this.trackerSpawnRate = this.trackerStartRate;
-        this.shooterStartRate = 25;
+        this.shooterStartRate = 40;
         this.shooterSpawnRate = this.shooterStartRate;
         this.minute = 2;
 
@@ -111,7 +115,7 @@ class SecondStage extends Stage{
         this.trackerStartRate = 8;
         this.shooterMaxSpawn = 10;
         this.trackerSpawnRate = this.trackerStartRate;
-        this.shooterStartRate = 25;
+        this.shooterStartRate = 40;
         this.shooterSpawnRate = this.shooterStartRate;
         this.minute = 2;
     }
@@ -212,5 +216,24 @@ class ThirdStage extends Stage{
             
             this.shooterPrev = shooterNow;
           }
+    }
+}
+
+
+class EndStage extends Stage{
+    static endStage =  new EndStage()
+    static instance(){
+        return EndStage.endStage;
+    }
+    static restart(){
+       
+    }
+    constructor(){
+        super()
+       
+    }
+   
+    run(){
+       
     }
 }

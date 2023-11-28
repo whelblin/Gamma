@@ -86,7 +86,7 @@ class Chromedriver{
     }
     static HitByAsteroid(){
         let temp = new Asteroid(player.returnPlayerObject().x,player.returnPlayerObject().y);
-        player.checkShipHit(asteroids, Health);
+        player.checkShipHit(asteroids);
         setTimeout(function(){ removal(asteroids, temp.asteroid)}, 100)
     }
     static SetImmunity(){
@@ -101,7 +101,7 @@ class Chromedriver{
         player.checkExpHit()
     }
     static KillPlayer(){
-        Health.health = 0;
+        player.health.health = 0;
     }
     static LevelUp(){
         player.exp.amount = player.exp.needed

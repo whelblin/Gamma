@@ -99,12 +99,64 @@ class gameState{
         allSprites.remove()
         StageHandler.restart()
 
-        powerups = allpowerups
-
+        powerups = [
+            ["Fire Rate", new FireRate()],
+            ['Shields', new ShieldPowerup()],
+            ['Magnet', new MagnetPowerUp()],
+            ['Movement Speed', new MovementSpeed()],
+            ['Health', new HealthIncrease()],
+            ['Damage', new DamageIncrease()],
+            ['Sentry Cannon', new turretPowerUp()]
+          ]
+        activePowers = []
         print(asteroids.length, trackers.legnth)
         timer.endTimer()
       //  print(asteroids.length, trackers.legnth)
         this.changeState(DeadScreen.instance())
+    }
+
+    win(){
+        player.player.remove();
+       
+        for(let i = 0; i < asteroids.length; i++){
+            removal(asteroids, asteroids[i])
+        }
+        activePowers = []
+        asteroids = []
+        for(let i = 0; i < bullets.length; i++){
+            removal(bullets, bullets[i])
+        }
+        bullets = [];
+        for(let i = 0; i < trackers.length; i++){
+            removal(trackers, trackers[i])
+        }
+        trackers = []
+        for(let i = 0; i < orbs.length; i++){
+            removal(orbs, orbs[i])
+        }
+        for(let i = 0; i < shooters.length; i++){
+            removal(shooters, shooters[i])
+        }
+        shooters = []
+        orbs = []
+        allSprites.remove()
+        StageHandler.restart()
+
+        powerups = [
+            ["Fire Rate", new FireRate()],
+            ['Shields', new ShieldPowerup()],
+            ['Magnet', new MagnetPowerUp()],
+            ['Movement Speed', new MovementSpeed()],
+            ['Health', new HealthIncrease()],
+            ['Damage', new DamageIncrease()],
+            ['Sentry Cannon', new turretPowerUp()]
+          ]
+          activePowers = []
+
+        print(asteroids.length, trackers.legnth)
+        timer.endTimer()
+      //  print(asteroids.length, trackers.legnth)
+        this.changeState(WinScreen.instance())
     }
 
     // transition from GameScreen to PauseScreen
@@ -303,13 +355,13 @@ class DeadScreen extends Screen {
         stroke(0);
         strokeWeight(5);
         rectMode(CENTER);
-        rect(width/2, height/2+192, 300, 100, 20);
+        rect(width/2, height/2+192, 650, 100, 20);
 
         textSize(55);
         textFont(mainFont);
         fill(0,0,0);
         textAlign(CENTER);
-        text("Play Again",width/2, height/2+208);
+        text("Press Enter To Play Again",width/2, height/2+208);
         if(opacity < 212 && opacShouldIncrease){
             opacity+=10;
         }else{
@@ -322,7 +374,7 @@ class DeadScreen extends Screen {
 
 
         
-        if ((kb.presses(' '))||(mouseIsPressed === true))
+        if ((kb.presses('enter')))
         {
             state.startGame()
         } 
@@ -349,4 +401,56 @@ class PauseScreen extends Screen {
             state.resumeGame()
         }
     }
+}
+
+class WinScreen extends Screen {
+    // static object so there is only one dead screen
+   static winScreen = new WinScreen()
+    // static method that can be called without creating an object of the class
+   // it returns the static object to use as the state
+   static instance(){
+       return WinScreen.winScreen;
+   }
+
+   active(){
+       // needs to be implimented
+       player.player.visible = false;
+       image(bgimage2, 0, 0, width, height);
+       fill(111,168,220);
+       textSize(80);
+       textStyle(BOLD);
+       textAlign(CENTER);
+       text("You Won",width/2, height/2-208);
+       score.printBestScore(width/2,height/2);
+       timer.printFinalTimer(width/2, height/2 + 100)
+       fill(215,175, 55, opacity);
+       stroke(0);
+       strokeWeight(5);
+       rectMode(CENTER);
+       rect(width/2, height/2+192, 650, 100, 20);
+
+       textSize(55);
+       textFont(mainFont);
+       fill(0,0,0);
+       textAlign(CENTER);
+       textStyle(NORMAL);
+
+       text("Press Enter To Play Again",width/2, height/2+208);
+       if(opacity < 212 && opacShouldIncrease){
+           opacity+=10;
+       }else{
+       opacShouldIncrease = false;
+       opacity-=10;
+       if(opacity < 0){
+           opacShouldIncrease = true;
+     }
+   }   
+
+
+       
+       if ((kb.presses('enter')))
+       {
+           state.startGame()
+       } 
+   }
 }

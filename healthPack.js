@@ -13,6 +13,7 @@ class HealthPack {
         this.healthPack.overlaps(non_colliding)
         packs.push(this.healthPack);
         this.healthPack.color = 'red';
+        this.healthPack.visible = true;
        
     }
 
@@ -20,7 +21,7 @@ class HealthPack {
         // Spawns a pack with a base chance of 5%, but up to 5% more based on missing health for a total of 10
         // Drop likelyhood calc: 5 + (((H - MH)100)5)
         // Hard limit of two packs on screen at any given time.
-        if(packs.length < 2){
+        if(packs.length < 100){
             let chance = 5 + ((player.health.returnHealth() - player.health.returnMaxHealth())/500); // Drop likelyhood calc
             let threshold = random(1, 100); //Must be less than or equal to chance to spawn pack
             if(chance >= threshold){ 

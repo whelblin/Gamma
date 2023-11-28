@@ -16,12 +16,6 @@ class ExpOrb {
         this.expOrb.visible = true;
        
     }
-    orbInvis(){
-        this.expOrb.visible = false;
-    }
-    orbVis(){
-        this.expOrb.visible = true;
-    }
     /**
      * 
      * @returns the amount of experience the orb contains

@@ -180,6 +180,9 @@ class gameState{
         timer.endPause()
         this.changeState(GameScreen.instance())
     }
+    tutorial(){
+        this.changeState(TutorialScreen.instance())
+    }
     // runs the current state's action
     run(){
         this.#state_.active()
@@ -223,13 +226,22 @@ class StartScreen extends Screen {
         stroke(0);
         strokeWeight(5);
         rectMode(CENTER);
-        rect(width/2, height/2+200, 400, 150, 30);
-
-        textSize(120);
+        rect(width/2, height/2+200, 875, 150, 30);
+        push()
+        textSize(20);
+        fill(215,175, 55);
+        rect(width-100, 75, 100, 100, 30);
+        textStyle(NORMAL)
+        textFont(mainFont);
+        textAlign(CENTER);
+        fill(255,255,255);
+        text("Press t\n for\n tutorial",width - 100, 55);
+        pop()
+        textSize(100);
         textFont(mainFont);
         textAlign(CENTER);
         fill(0,0,0);
-        text("Play",width/2, height/2+230);
+        text("Press Enter to Play",width/2, height/2+230);
         if(opacity < 212 && opacShouldIncrease)
         {
         opacity+=10;
@@ -249,10 +261,12 @@ class StartScreen extends Screen {
         drawScore();
         // switches the state to gameScreen when the mouseIsPressed or space is pressed
        
- if ((kb.presses(' '))||(mouseIsPressed === true))
-        {
+        if ((kb.presses('enter'))){
             state.startGame()
         } 
+        if(kb.presses('t')){
+            state.tutorial()
+        }
     }
 }
 
@@ -463,6 +477,107 @@ class WinScreen extends Screen {
        if ((kb.presses('enter')))
        {
            state.startGame()
+       } 
+   }
+}
+
+
+class TutorialScreen extends Screen {
+    // static object so there is only one dead screen
+   static tutorialScreen = new TutorialScreen()
+    // static method that can be called without creating an object of the class
+   // it returns the static object to use as the state
+   static instance(){
+       return TutorialScreen.tutorialScreen;
+   }
+
+   active(){
+       // needs to be implimented
+       image(bgimage2, 0, 0, width, height);
+       push()
+       fill(111,168,220);
+       textSize(80);
+       textStyle(BOLD);
+       textAlign(CENTER);
+       text("Tutorial",width/2, height/2-250);
+       fill(215,175, 55, opacity);
+       stroke(0);
+       strokeWeight(5);
+       rectMode(CENTER);
+       rect(width/2, height/2+272, 650, 100, 20);
+       pop()
+        push()
+       textSize(55);
+       textFont(mainFont);
+       fill(0,0,0);
+       textAlign(CENTER);
+       textStyle(NORMAL);
+
+       text("Press Enter To Go Back",width/2, height/2+282);
+       pop()
+       push()
+       fill(215,175, 55);
+       stroke(0);
+       strokeWeight(5);
+       rectMode(CORNER);
+       rect(width/16, height/4-50, 600, 400, 20);
+       fill(111,168,220);
+       textSize(70);
+       textStyle(BOLD);
+       textAlign(CENTER);
+       text("Rules",width/16+300, height/2-150);
+       textSize(20);
+       textStyle(NORMAL);
+       textAlign(CENTER);
+       fill(255,255,255);
+       text(`You need to survive for 10 minutes\n
+       Defeat the enemies that spawn all around you\n
+       Enemies will drop green experience orbs. Pick them up to level up\n
+       Enemies also have a chance to drop a health pack that heals you\n
+       Leveling up allows you to choose a power up. However leveling up also increases the amount of enemies\n
+       `,width/16, height/2-125, 600);
+       pop()
+
+       push()
+       fill(215,175, 55);
+       stroke(0);
+       strokeWeight(5);
+       rectMode(CORNER);
+       rect(width-width/16-600, height/4-50, 600, 400, 20);
+       fill(111,168,220);
+       textSize(70);
+       textStyle(BOLD);
+       textAlign(CENTER);
+       text("Controls",width - width/16-300, height/2-150);
+       textSize(20);
+       textStyle(NORMAL);
+       textAlign(CENTER);
+       fill(255,255,255);
+       text(`WASD or arrows to move\n
+       Left click or space bar to shoot\n
+       Enter to start the game\n
+       Escape key to pause or unpause the game\n
+       `,width - width/16 - 600, height/2-125, 600);
+       pop()
+
+       push()
+
+
+       if(opacity < 212 && opacShouldIncrease){
+           opacity+=10;
+       }else{
+       opacShouldIncrease = false;
+       opacity-=10;
+       if(opacity < 0){
+           opacShouldIncrease = true;
+     }
+   }   
+
+
+       
+       if ((kb.presses('enter')))
+       {
+           state.init()
        } 
    }
 }

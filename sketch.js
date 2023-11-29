@@ -74,7 +74,7 @@ function setup() {
     new Canvas();
     allSprites.autoCull = false
     
-    frameRate(60); //set framerate to be system independent 
+   
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
@@ -92,6 +92,7 @@ function setup() {
   }
 
   function draw() {
+    frameRate(50); //set framerate to be system independent 
     // runs the current state
     state.run() 
   }

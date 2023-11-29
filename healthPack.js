@@ -13,6 +13,7 @@ class HealthPack {
         this.healthPack.overlaps(non_colliding)
         packs.push(this.healthPack);
         this.healthPack.color = 'red';
+        this.healthPack.visible = true;
        
     }
 

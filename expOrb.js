@@ -13,6 +13,7 @@ class ExpOrb {
         orbs.push(this.expOrb);
         this.expOrb.color = 'lime';
         this.expOrb.amount = amount;
+        this.expOrb.visible = true;
        
     }
     /**

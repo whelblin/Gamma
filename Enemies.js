@@ -53,9 +53,9 @@ class Shooter{
 
         this.shooter = new trackerGroup.Sprite(width/2,height/2, 50);
         this.shooter.addAnimation('small','assets/invader.png');
-        this.shooter.Trackingspeed = .5;
+        this.shooter.Trackingspeed = .7;
         this.health = 10
-        this.fireRate = 150;
+        this.fireRate = 300;
         this.attack = 10;
         this.experericeAmount = 50
         this.shooter.damage = (num,x,y)=>{

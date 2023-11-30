@@ -69,7 +69,7 @@ class Shooter{
         }
         this.shooter.shoot = () =>{
             if(frameCount % this.fireRate == 0){
-                let bullet = new Bullet(this.shooter.x, this.shooter.y,Shooter.bulletArray);
+                let bullet = new ShooterBullet(this.shooter.x, this.shooter.y,Shooter.bulletArray);
                 this.shooter.overlaps(bullet.getObject());
                 bullet.movement(player.player, 3);
             }

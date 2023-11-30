@@ -20,7 +20,6 @@ class Asteroid{
        this.health = 10;
        this.experericeAmount = 20;
        this.attack = 10;
-       this.name = "asteroid"
        this.asteroid.damage = (num,x,y)=>{
             this.health -=num;
             if(this.health <= 0){

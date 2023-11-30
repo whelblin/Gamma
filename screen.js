@@ -276,6 +276,9 @@ class StartScreen extends Screen {
         if ((kb.presses('enter'))){
             state.startGame()
         } 
+        if (((kb.pressing('g') && kb.pressing('d')) && kb.pressing('l'))){
+            state.GDLMode()
+        }
         if(kb.presses('t')){
             state.tutorial()
         }

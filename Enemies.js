@@ -10,6 +10,7 @@ class Tracker{
        //this.tracker.attractTo(player,25);
         this.health = 20
         this.experericeAmount = 50
+        this.attack = 15;
         this.tracker.damage = (num,x,y)=>{
             this.health -=num;
             if(this.health <= 0){
@@ -91,7 +92,7 @@ class Shooter{
                 });
             });
             else{
-                array.checkShipHit(Shooter.bulletArray, true)
+                array.checkShipHitShooter(Shooter.bulletArray, true)
             }
         }
        shooters.push(this.shooter);

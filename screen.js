@@ -310,9 +310,9 @@ class GameScreen extends Screen {
         player.checkBulletHit(asteroids, bullets, score);
         player.checkBulletHit(trackers, bullets, score);
         player.checkBulletHit(shooters, bullets, score);
-        player.checkShipHit(asteroids);
-        player.checkShipHit(trackers);
-        player.checkShipHit(shooters);
+        player.checkShipHitRock(asteroids);
+        player.checkShipHitTrack(trackers);
+        player.checkShipHitShooter(shooters);
         player.checkExpHit()
         player.checkHealthHit();
         player.drawExp();

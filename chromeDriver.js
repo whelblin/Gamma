@@ -16,6 +16,14 @@ class Chromedriver{
         this.hitShitWithAsteroidButton.position(150, windowHeight-30)
         this.hitShitWithAsteroidButton.mousePressed(Chromedriver.HitByAsteroid)
 
+        this.hitShitWithTrackerButton = createButton("Hit ship with tracker")
+        this.hitShitWithTrackerButton.position(760, windowHeight-30)
+        this.hitShitWithTrackerButton.mousePressed(Chromedriver.HitByTracker)
+
+        this.hitShitWithShooterButton = createButton("Hit ship with shooter")
+        this.hitShitWithShooterButton.position(900, windowHeight-30)
+        this.hitShitWithShooterButton.mousePressed(Chromedriver.HitByShooter)
+
         this.enterImmunityButton = createButton("Toggle immunity frames")
         this.enterImmunityButton.position(300, windowHeight-30)
         this.enterImmunityButton.mousePressed(Chromedriver.SetImmunity)
@@ -86,8 +94,18 @@ class Chromedriver{
     }
     static HitByAsteroid(){
         let temp = new Asteroid(player.returnPlayerObject().x,player.returnPlayerObject().y);
-        player.checkShipHit(asteroids);
+        player.checkShipHitRock(asteroids);
         setTimeout(function(){ removal(asteroids, temp.asteroid)}, 100)
+    }
+    static HitByTracker(){
+        let temp = new Tracker(player.returnPlayerObject().x,player.returnPlayerObject().y);
+        player.checkShipHitTrack(trackers);
+        setTimeout(function(){ removal(trackers, temp.tracker)}, 100)
+    }
+    static HitByShooter(){
+        let temp = new Shooter(player.returnPlayerObject().x,player.returnPlayerObject().y);
+        player.checkShipHitShooter(shooters);
+        setTimeout(function(){ removal(shooters, temp.shooter)}, 100)
     }
     static SetImmunity(){
         if(player.player.animation.name == 'idle')

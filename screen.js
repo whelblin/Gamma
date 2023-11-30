@@ -19,8 +19,20 @@ class gameState{
     }
     // transition from startScreen to GameScreen
     // create the objects and switch states
+    
     startGame(){
-        player= new Player();
+        player= new Player(false);
+        timer = new Timer();
+        lvlBox = new LevelBox();
+        currentStage = new StageHandler();
+        nextLevel = 2;
+        score = new ScoreCounter();
+     //   bestScore = new ScoreCounter();
+
+        this.changeState(GameScreen.instance())
+    }
+    GDLMode(){
+        player= new Player(true);
         timer = new Timer();
         lvlBox = new LevelBox();
         currentStage = new StageHandler();

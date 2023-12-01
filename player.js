@@ -3,13 +3,13 @@
 // methods will act on the sprite, such as movement
 
 class Player{
-    constructor(){
+    constructor(immuneState){
         this.player = new colliding.Sprite(width/2,height/2,80)
         this.player.addAnis(this.idleAni);
         this.player.addAnis(this.hitAni);
         this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
-        this.immune = false;
+        this.immune = immuneState;
         this.fireRate = 30;
         this.speed = 5;
         this.health = new PlayerHealth()

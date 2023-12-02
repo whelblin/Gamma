@@ -42,7 +42,7 @@ if (typeof window == 'undefined') {
     // Press to start opacity control
     test.test_timer()
     test.test_pause()
-    process.exit(1)
+    process.exit(0)
 }
 //end of testing area
 ////////////////////////////////////////////////////////////////////////////

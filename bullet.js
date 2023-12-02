@@ -1,3 +1,4 @@
+//bullet class
 class Bullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);

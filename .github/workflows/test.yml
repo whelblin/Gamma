@@ -22,5 +22,5 @@ jobs:
       - name: Run tests
         run: |
           npm install chai
-        
+          node sketch.js
 

@@ -19,5 +19,4 @@ jobs:
         run: |
           npm install chai
           node sketch.js
-          name: 'Bouncer Example'
 

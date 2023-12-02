@@ -1,0 +1,23 @@
+name: 'Bouncer Example'
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  example-job:
+    name: Test Functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Show directories
+        run: |
+          ls -la
+          pwd
+          whoami
+      - name: Run tests
+        run: |
+          npm install chai
+          node sketch.js
+          name: 'Bouncer Example'
+

@@ -1,0 +1,14 @@
+{
+    "name": "vampire_survirors",
+    "version": "1.0.0",
+    "description": "Gamma application",
+    "main": "sketch.js",
+    "scripts": {
+        "test": "node sketch.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chai": "^4.3.10"
+    }
+}

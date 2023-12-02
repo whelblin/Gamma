@@ -34,7 +34,6 @@ class Timer{
     pausedTime(){
         var temp = new Date();
         let time = Math.floor(temp.getTime()/1000 - this.startPauseTime)
-        print(time)
         this.pausedSec = time%60
         this.pausedMin = Math.floor(time/60)
 
@@ -126,4 +125,8 @@ class Timer{
     
     }
 
+}
+
+if (typeof window == 'undefined') {
+module.exports = {Timer}
 }

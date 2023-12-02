@@ -35,6 +35,17 @@ let newItem;
 var chromedriver = -1;
 
 var currentStage;
+//testing area
+/////////////////////////////////////////////////////////////////////////////////
+if (typeof window == 'undefined') {
+    test = require("./tests")
+    // Press to start opacity control
+    test.test_timer()
+    test.test_pause()
+    process.exit(1)
+}
+//end of testing area
+////////////////////////////////////////////////////////////////////////////
 // list of power ups that are allowed
 
 var allpowerups = [
@@ -47,7 +58,7 @@ var allpowerups = [
   ['Sentry Cannon', new turretPowerUp()]
 ]
 var powerups = allpowerups
-var activePowers = []
+var activePowers = [];
 
 
 function preload() {

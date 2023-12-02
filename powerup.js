@@ -1,4 +1,3 @@
-
 // abstract class for the powerups
 class PowerUp{
     constructor(){
@@ -296,6 +295,7 @@ class MagnetPowerUp extends PowerUp {
 
 function runActivePowerups(){
     activePowers.forEach(e => {
-            e.run()
+            e.run();
     });
 }
+

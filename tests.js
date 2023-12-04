@@ -1,8 +1,20 @@
+//testing window
+////////////////////////////////////////////////////////////////////////////
 if (typeof window == 'undefined') {
-chia = require('chai')
+  console.log("Testing...")
+  chia = require('chai')
   timer = require("./timer")
+  // Press to start opacity control
+  test_timer()
+  test_pause()
+  console.log("...Done")
+  process.exit(0)
 }
+//end of testing window
+////////////////////////////////////////////////////////////////////////////
 
+//testing functions
+////////////////////////////////////////////////////////////////////////////
 async function test_timer(){
     let timer_object = new timer.Timer()
     let sec = 1
@@ -23,6 +35,5 @@ async function test_pause(){
     chia.assert(num == 0, "should be 5")
 }
 
-if (typeof window == 'undefined') {
-module.exports = {test_timer, test_pause}
-}
+//end of testing functions
+////////////////////////////////////////////////////////////////////////////

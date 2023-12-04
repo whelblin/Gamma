@@ -4,7 +4,7 @@
     "description": "Gamma application",
     "main": "sketch.js",
     "scripts": {
-        "test": "node sketch.js"
+        "test": "node tests.js"
     },
     "author": "",
     "license": "ISC",

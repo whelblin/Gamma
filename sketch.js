@@ -35,17 +35,7 @@ let newItem;
 var chromedriver = -1;
 
 var currentStage;
-//testing area
-/////////////////////////////////////////////////////////////////////////////////
-if (typeof window == 'undefined') {
-    test = require("./tests")
-    // Press to start opacity control
-    test.test_timer()
-    test.test_pause()
-    process.exit(0)
-}
-//end of testing area
-////////////////////////////////////////////////////////////////////////////
+
 // list of power ups that are allowed
 
 var allpowerups = [

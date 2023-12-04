@@ -3,18 +3,20 @@
 // methods will act on the sprite, such as movement
 
 class Player{
-    constructor(){
+    constructor(immuneState){
         this.player = new colliding.Sprite(width/2,height/2,80)
         this.player.addAnis(this.idleAni);
         this.player.addAnis(this.hitAni);
         this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
-        this.immune = false;
+        this.immune = immuneState;
         this.fireRate = 30;
         this.speed = 5;
         this.health = new PlayerHealth()
         this.exp = new Experience()
         this.damage = 10;
+        this.canFire = -1
+        this.spam = 300;
         
     }
      // loads the animation during the reload function
@@ -108,7 +110,13 @@ class Player{
     }
     // shoots bullets at the firerate 
     shoot(){
-        if((kb.pressing(' ')) ||(mouseIsPressed === true)){
+        if(millis() > this.canFire &&( kb.presses(' ') ||(mouse.presses() === true))){
+            this.canFire = millis() + this.spam
+            let bullet = new Bullet(this.player.x, this.player.y,bullets);
+            this.player.overlaps(bullet.getObject());
+            bullet.movement(mouse); 
+        }
+        else if((kb.pressing(' ')) ||(mouseIsPressed === true)){
             // uses framecount because it is constant on system
             if(frameCount % this.fireRate == 0){
                 let bullet = new Bullet(this.player.x, this.player.y,bullets);
@@ -188,6 +196,8 @@ class Player{
     }
 
     //Scans every pack, and calculates heal when picked up
+    //Note: heal amount calculation is performed here rather than in the healthpack class
+    //Itself to ensure that the healthpack will always heal 20% in the event the player picks up max health powerup
     checkHealthHit(){
         packs.forEach(pack => {
             if(pack.overlaps(this.player)){

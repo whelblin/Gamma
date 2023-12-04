@@ -18,7 +18,7 @@ class Asteroid{
        this.asteroid.addAnimation('normal', 'assets/asteroid.png');
        this.asteroidSpeed = 10;
        this.health = 10;
-       this.experericeAmount = 20
+       this.experericeAmount = 20;
        this.asteroid.damage = (num,x,y)=>{
             this.health -=num;
             if(this.health <= 0){
@@ -31,7 +31,7 @@ class Asteroid{
 
     }
 
-
+/*
     movement(){
         let x = floor(random(4));
         // left side
@@ -63,6 +63,30 @@ class Asteroid{
             this.asteroid.vel.y = random(-this.asteroidSpeed,2);
         }
     }
-    
+*/
+    movement(){
+        let x = floor(random(4));
+        // left side
+        if(x == 0){
+            this.asteroid.x = floor(random(-20, 0));
+            this.asteroid.y = floor(random(0, height)); 
+        }
+        // top
+        else if(x ==1){
+            this.asteroid.x = floor(random(0, width));
+            this.asteroid.y = floor(random(-20, 0));
+        }
+        // right
+        else if(x ==2){
+            this.asteroid.x = floor(random(width, width+20));
+            this.asteroid.y = floor(random(0, height));
+        }
+        // bottom
+        else if(x ==3){
+            this.asteroid.x = floor(random(0,width));
+            this.asteroid.y = floor(random(height, height+20));
+        }
+        this.asteroid.moveTowards(random(width/4, 3*width/4), random(height/4, 3*height/4), random(0.005, 0.01))
+    }
 };
 

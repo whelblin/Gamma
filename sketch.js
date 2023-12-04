@@ -1,4 +1,4 @@
-let timer;
+var timer;
 var player;
 let playerObject;
 let exp;
@@ -33,6 +33,9 @@ let backgroundMusic;
 var state;
 let newItem;
 var chromedriver = -1;
+
+var currentStage;
+
 // list of power ups that are allowed
 
 var allpowerups = [
@@ -45,7 +48,7 @@ var allpowerups = [
   ['Sentry Cannon', new turretPowerUp()]
 ]
 var powerups = allpowerups
-var activePowers = []
+var activePowers = [];
 
 
 function preload() {
@@ -65,13 +68,14 @@ function preload() {
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
     state = new gameState();
+    currentStage = new StageHandler();
   }
 
 function setup() {
     new Canvas();
     allSprites.autoCull = false
     
-    frameRate(60); //set framerate to be system independent 
+   
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
@@ -84,11 +88,12 @@ function setup() {
     orbs = [];
     packs = [];
     shooters = []
-    chromedriver = new Chromedriver()
+    chromedriver = new Chromedriver() // add one for debug
     state.init()
   }
 
   function draw() {
+    frameRate(50); //set framerate to be system independent 
     // runs the current state
     state.run() 
   }

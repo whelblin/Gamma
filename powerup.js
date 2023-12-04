@@ -95,9 +95,11 @@ class DamageIncrease extends PowerUp{
 class ShieldPowerup extends PowerUp{
     constructor(){
         super()
+        this.ticker = 0;
+        this.ticksToActivate=5;
         this.rate = 10;
         this.declared = false
-        this.limit = 1;
+        this.limit = 5;
         this.time = -1;
         this.interval = 150;
         this.type = "active"
@@ -110,6 +112,10 @@ class ShieldPowerup extends PowerUp{
             activePowers.push(this)
         }
         this.currentAmount +=1;
+        if(this.ticksToActivate > 1)
+        {
+            this.ticksToActivate--;
+        }
         // removes the option once it reaches its limit
         if(this.currentAmount >this.limit){
             powerups.splice(index,1)
@@ -120,17 +126,22 @@ class ShieldPowerup extends PowerUp{
     type(){return this.type;}
     run()
     {
-        if(this.declared && millis()% (this.timer) > this.timer/2){
-            if(this.blocker){
-                this.blocker = false
-                player.setImmune(!player.getImmune());
-                if(player.player.ani.name != 'hit')
-                {
-                    player.handleAnimation()
-                }
+        this.ticker++;
+        if(player.getImmune() || this.ticker>this.ticksToActivate)
+        {
+            player.setImmune(!player.getImmune());
+            if(player.player.ani.name != 'hit')
+            {
+                player.handleAnimation()
             }
-        }else if (this.declared){
-            this.blocker = true;
+        }
+        if(this.ticker>this.ticksToActivate)
+        {
+            this.ticker = 0;
+        }
+        else
+        {
+            print("failed tick due to level " + this.ticker);
         }
     }
     getRate(){

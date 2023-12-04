@@ -171,7 +171,7 @@ class Player{
         object.vel.x = -object.vel.x * 1.2;
         object.vel.y = -object.vel.y * 1.2;
         // plays animation
-        this.player.changeAni(['hit','hit','hit','idle'])
+        this.player.changeAni(['hit','hit','hit','hit','hit','idle'])
         this.handleAnimation()
     }
 

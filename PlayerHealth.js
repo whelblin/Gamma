@@ -24,8 +24,8 @@ class PlayerHealth {
         let percentneeded = this.health/this.maxHealth;
         this.width = this.maxWidth * percentneeded;
     }
-    healthDecrease(){
-        this.health -= 20;
+    healthDecrease(num){
+        this.health -= num;
         this.#update()
         if(this.health <= 0){
             this.dead = true;

@@ -149,16 +149,51 @@ class Player{
     
     // checks if the ship has hit on object in the passed array
     // if so, colide with it and take damage
-    checkShipHit(array, bullet = false) {
+    checkShipHitRock(array, bullet = false) {
         array.forEach(object => {
                 if(this.player.collides(object)){ // hit
+                    print(array.name)
                     if(this.player.ani.name == 'idle' && !this.immune){ // if not immune
                     this.collision(object);
                     if(bullet){
                         removal(array, object)
                         removal(allBullets, object)
                     }
-                    this.health.healthDecrease();
+                    this.health.healthDecrease(10);
+                    }
+                    else if(this.immune)
+                        print("was immune")
+                }
+        });
+    }
+    checkShipHitTrack(array, bullet = false) {
+        array.forEach(object => {
+                if(this.player.collides(object)){ // hit
+                    print(array.name)
+                    if(this.player.ani.name == 'idle' && !this.immune){ // if not immune
+                    this.collision(object);
+                    if(bullet){
+                        removal(array, object)
+                        removal(allBullets, object)
+                    }
+                    this.health.healthDecrease(15);
+                    }
+                    else if(this.immune)
+                        print("was immune")
+                }
+        });
+    }
+    checkShipHitShooter(array, bullet = false) {
+        array.forEach(object => {
+                if(this.player.collides(object)){ // hit
+                    print(array.name)
+                    if(this.player.ani.name == 'idle' && !this.immune){ // if not immune
+                    this.collision(object);
+                    if(bullet){
+                        removal(array, object)
+                        removal(allBullets, object)
+                    }
+                    this.health.healthDecrease(20);
                     }
                     else if(this.immune)
                         print("was immune")

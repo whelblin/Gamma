@@ -33,7 +33,7 @@ class ShooterBullet{
         this.bullet.stroke = 15;
         this.bullet.height = 60;
         this.bullet.width = 13;
-        //this.bullet.life = 100;
+        this.bullet.life = 240;
 
         bulletSound.play();
         array.push(this.bullet);

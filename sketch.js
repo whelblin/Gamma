@@ -88,12 +88,12 @@ function setup() {
     orbs = [];
     packs = [];
     shooters = []
-    chromedriver = new Chromedriver() // add one for debug
+    chromedriver = new Chromedriver(1) // add one for debug
     state.init()
   }
 
   function draw() {
-    frameRate(50); //set framerate to be system independent 
+    frameRate(60); //set framerate to be system independent 
     // runs the current state
     state.run() 
   }

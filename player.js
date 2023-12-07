@@ -10,6 +10,7 @@ class Player{
         this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
         this.immune = immuneState;
+        this.hit = false;
         this.fireRate = 30;
         this.speed = 5;
         this.health = new PlayerHealth()
@@ -40,7 +41,6 @@ class Player{
     increaseDamage(num){this.damage +=num;}
     setImmune(val)
     {
-        print("immuned set to" +val);
         this.immune = val;
     }
     getImmune()
@@ -206,17 +206,21 @@ class Player{
         object.vel.x = -object.vel.x * 1.2;
         object.vel.y = -object.vel.y * 1.2;
         // plays animation
+        this.hit = true
         this.player.changeAni(['hit','hit','hit','hit','hit','idle'])
         this.handleAnimation()
     }
 
     handleAnimation()
     {
-        if(!this.immune)
-            this.player.changeAni('idle')
-        else
+        if(this.immune)
             this.player.changeAni('shield')
+        else if(this.player.ani.name == 'idle'){
+            this.player.changeAni('idle')
+        }else 
+            this.player.changeAni('idle')
     }
+    
     
     attract(enemy){
         enemy .moveTo(this.player, enemy.Trackingspeed);

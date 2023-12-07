@@ -101,7 +101,7 @@ class ShieldPowerup extends PowerUp{
         this.declared = false
         this.limit = 5;
         this.time = -1;
-        this.interval = 150;
+        this.interval = 2000;
         this.type = "active"
         this.timer = 3000;
         this.blocker = false;
@@ -112,10 +112,7 @@ class ShieldPowerup extends PowerUp{
             activePowers.push(this)
         }
         this.currentAmount +=1;
-        if(this.ticksToActivate > 1)
-        {
-            this.ticksToActivate--;
-        }
+        this.interval +=1000
         // removes the option once it reaches its limit
         if(this.currentAmount >this.limit){
             powerups.splice(index,1)
@@ -124,24 +121,30 @@ class ShieldPowerup extends PowerUp{
         }
     }
     type(){return this.type;}
+    disableSheild(){
+        if(player.getImmune()){
+            player.setImmune(false)
+            player.handleAnimation()
+        }
+    }
     run()
     {
-        this.ticker++;
-        if(player.getImmune() || this.ticker>this.ticksToActivate)
-        {
-            player.setImmune(!player.getImmune());
-            if(player.player.ani.name != 'hit')
-            {
+        if(this.declared && millis()% (this.timer+ this.interval) > (this.timer + this.interval)/2){
+            if(this.blocker && player.getImmune() == false){
+                this.blocker = false
+                player.setImmune(true)
                 player.handleAnimation()
+                setTimeout(this.disableSheild, this.interval) // turns off the shield after a set amount of time
+
             }
-        }
-        if(this.ticker>this.ticksToActivate)
-        {
-            this.ticker = 0;
-        }
-        else
-        {
-            print("failed tick due to level " + this.ticker);
+        
+        }else if (this.declared){
+        this.blocker = true;
+        
+        } 
+        // overrides the hit animation for the shield
+        if(player.getImmune()){
+            player.handleAnimation()
         }
     }
     getRate(){

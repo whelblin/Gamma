@@ -303,7 +303,7 @@ class GameScreen extends Screen {
         itmBoxes.overlaps(colliding);
         timer.printTimer(width/2, 80);
         //timer.activatePowers()
-        runActivePowerups()
+        
         score.printScore(width - 100, 80);
         player.movement();
         player.aiming();
@@ -333,7 +333,7 @@ class GameScreen extends Screen {
         player.drawExp();
         player.drawHealth()
         drawScore()
-
+        runActivePowerups()
         StageHandler.checkStage()
         //tests();
         // level up screens

@@ -23,13 +23,14 @@ class Player{
      // loads the animation during the reload function
     static preload(){
         
-        this.spriteSheet = 'assets/sheet.png';
+        this.spriteSheet = 'assets/purplesheet.gif';
         this.frameDelay = 4;
         this.idleAni = loadAni("idle",this.spriteSheet,{
-            frameSize: [80,80], frames: 1
+            frameSize: [117,100], frames: 1
         })
         this.hitAni = loadAni("hit",this.spriteSheet,{
-            frameSize: [80,80], frames: 4
+            frameSize: [117,100], frames: 4
+
         })
         this.shieldSprite = 'assets/shieldSprite.png';
         this.shieldedAnim = loadAni("shield",this.shieldSprite,{

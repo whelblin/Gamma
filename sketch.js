@@ -63,7 +63,7 @@ function preload() {
     trackerGroup = new colliding.Group();
     bulletGroup = new colliding.Group()
     Player.preload()
-    bgimage1 = loadImage('assets/bgimage2.png');
+    bgimage1 = loadImage('assets/space.gif');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');
     backgroundMusic = loadSound("assets/cyborg-ninja-kevin-macleod.mp3")
@@ -79,7 +79,7 @@ function setup() {
     // Press to start opacity control
     opacity = 0;
     opacShouldIncrease = false;
-    bgimage2 = loadImage('assets/bgimage3.gif');
+    bgimage2 = loadImage('assets/bgretro.png');
     bgimage3 = loadImage('assets/gameover.png');
     backgroundSong();
     asteroids = [];
@@ -88,7 +88,7 @@ function setup() {
     orbs = [];
     packs = [];
     shooters = []
-    chromedriver = new Chromedriver(1) // add one for debug
+    chromedriver = new Chromedriver() // add one for debug
     state.init()
   }
 

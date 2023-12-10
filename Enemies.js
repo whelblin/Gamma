@@ -53,7 +53,7 @@ class Shooter{
     constructor(){
 
         this.shooter = new trackerGroup.Sprite(width/2,height/2, 50);
-        this.shooter.addAnimation('small','assets/bird.gif');
+        this.shooter.addAnimation('small','assets/bird.png');
         this.shooter.Trackingspeed = .7;
         this.health = 10
         this.fireRate = 300;

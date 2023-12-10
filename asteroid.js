@@ -15,7 +15,7 @@ class Asteroid{
        
        // this.asteroid.spriteSheet = loadImage('assets/asteroid.png');
        this.asteroid = new asteroidGroup.Sprite(x,y, 50);
-       this.asteroid.addAnimation('normal', 'assets/asteroidd.gif');
+       this.asteroid.addAnimation('normal', 'assets/asteroid.png');
        this.asteroidSpeed = 10;
        this.health = 10;
        this.experericeAmount = 20;

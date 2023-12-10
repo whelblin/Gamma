@@ -23,19 +23,35 @@ class Player{
      // loads the animation during the reload function
     static preload(){
         
-        this.spriteSheet = 'assets/sheet.png';
-        this.frameDelay = 4;
+        // this.spriteSheet = 'assets/sheet.png';
+        // this.frameDelay = 4;
+        // this.idleAni = loadAni("idle",this.spriteSheet,{
+        //     frameSize: [80,80], frames: 1
+        // })
+        // this.hitAni = loadAni("hit",this.spriteSheet,{
+        //     frameSize: [80,80], frames: 4
+
+        // })
+        // this.shieldSprite = 'assets/shieldSprite.png';
+        // this.shieldedAnim = loadAni("shield",this.shieldSprite,{
+        //     frameSize: [100,100], frames: 1
+        // })
+
+        this.spriteSheet = 'assets/purplesheetp.png';
+        this.frameDelay = 1;
         this.idleAni = loadAni("idle",this.spriteSheet,{
-            frameSize: [80,80], frames: 1
+            frameSize: [117,100], frames: 1
         })
         this.hitAni = loadAni("hit",this.spriteSheet,{
-            frameSize: [80,80], frames: 4
+            frameSize: [117,100], frames: 1
 
         })
-        this.shieldSprite = 'assets/shieldSprite.png';
+        this.shieldSprite = 'assets/purpleshield.png';
         this.shieldedAnim = loadAni("shield",this.shieldSprite,{
-            frameSize: [100,100], frames: 1
+            frameSize: [120,133], frames: 1
         })
+
+
     }
     increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}
     increaseMovementSpeed(num){this.speed += num;}

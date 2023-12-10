@@ -26,10 +26,10 @@ class Player{
         this.spriteSheet = 'assets/sheet.png';
         this.frameDelay = 4;
         this.idleAni = loadAni("idle",this.spriteSheet,{
-            frameSize: [90,90], frames: 1
+            frameSize: [80,80], frames: 1
         })
         this.hitAni = loadAni("hit",this.spriteSheet,{
-            frameSize: [90,90], frames: 4
+            frameSize: [80,80], frames: 4
 
         })
         this.shieldSprite = 'assets/shieldSprite.png';

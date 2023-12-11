@@ -39,11 +39,15 @@ static preload(){
           frameSize:[78,78], frames: 4
 
         })
-        
-        this.shieldedAnim = loadAni('shield','assets/shield.png')
+         this.shieldedAnim = loadAni("shield",'assets/bluesheet_shield.png',{
+             frameSize: [100,100], frames: 1
+         })
         this.bulletAni = loadAni("bulletAni","assets/spr_bullet_strip.png",{
            frames: 3
         })
+        this.cannonAni = loadAni("cannonAni","assets/spr_bullet_strip02.png",{
+          frames: 3
+       })
         //this.expAni = loadImage("assets/Exp1.png")
         //this.healthAni= loadImage("assets/health_potion.png")
         //this.asteroidAni = loadImage("assets/asteroid.png")

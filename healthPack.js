@@ -7,7 +7,7 @@ class HealthPack {
     // Basically the orb constructor minus the unique exp value
     constructor(x,y){
         this.healthPack = new non_colliding.Sprite(x,y,20);
-        this.healthPack.addAnimation('small', 'assets/healthPack.png');
+        this.healthPack.img = "assets/health_potion.png"
         this.healthPack.collides(player.returnPlayerObject())
         this.healthPack.overlaps(itmBoxes)
         this.healthPack.overlaps(non_colliding)

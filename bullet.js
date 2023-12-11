@@ -2,12 +2,8 @@
 class Bullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
-        this.bullet.diameter = 45;
-        this.bullet.color = 'white';
-        this.bullet.stroke = 15;
-        this.bullet.height = 60;
-        this.bullet.width = 13;
-        //this.bullet.life = 100;
+        this.bullet.changeAni('bulletAni');
+        // this.bullet.addAnimation('normal', 'assets/spr_bullet_strip02.png');
 
         bulletSound.play();
         array.push(this.bullet);

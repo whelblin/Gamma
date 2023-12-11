@@ -73,7 +73,8 @@ class FirstStage extends Stage{
                 this.minute = timer.getCurrentMin()
             }
           }
-          if(trackerNow %this.trackerSpawnRate == 0 && trackerNow !=this.trackerPrev && this.trackerSpawnRate > 0 && this.trackerStartRate != this.trackerSpawnRate){
+          if(trackerNow %this.trackerSpawnRate == 0 && trackerNow !=this.trackerPrev
+             && this.trackerSpawnRate > 0 && this.trackerStartRate != this.trackerSpawnRate){
             for(let i = 0; i < Math.ceil(player.getLevel());++i){
             let track = new Tracker();
             track.movement();

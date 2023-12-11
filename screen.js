@@ -238,7 +238,7 @@ class StartScreen extends Screen {
         stroke(0);
         strokeWeight(5);
         rectMode(CENTER);
-        rect(width/2, height/2+200, 875, 150, 30);
+        rect(width/2, height/2+200, 600, 150, 30);
         push()
         textSize(20);
         fill(215,175, 55);
@@ -253,7 +253,7 @@ class StartScreen extends Screen {
         textFont(mainFont);
         textAlign(CENTER);
         fill(0,0,0);
-        text("Press Enter to Play",width/2, height/2+230);
+        text("Press Enter",width/2, height/2+230);
         if(opacity < 212 && opacShouldIncrease)
         {
         opacity+=10;
@@ -396,13 +396,13 @@ class DeadScreen extends Screen {
         stroke(0);
         strokeWeight(5);
         rectMode(CENTER);
-        rect(width/2, height/2+192, 650, 100, 20);
+        rect(width/2, height/2+200, 600, 140, 20);
 
-        textSize(55);
+        textSize(100);
         textFont(mainFont);
         fill(0,0,0);
         textAlign(CENTER);
-        text("Press Enter To Play Again",width/2, height/2+208);
+        text("Press Enter",width/2, height/2+230);
         if(opacity < 212 && opacShouldIncrease){
             opacity+=10;
         }else{

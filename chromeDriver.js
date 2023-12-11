@@ -105,7 +105,7 @@ class Chromedriver{
     static HitByShooter(){
         let temp = new Shooter(player.returnPlayerObject().x,player.returnPlayerObject().y);
         player.checkShipHitShooter(shooters);
-        setTimeout(function(){ removal(shooters, temp.shooter)}, 100)
+        //setTimeout(function(){ removal(shooters, temp.shooter)}, 100)
     }
     static SetImmunity(){
         if(player.player.animation.name == 'idle')

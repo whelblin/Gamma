@@ -3,6 +3,7 @@ class Bullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
         this.bullet.changeAni('bulletAni');
+        this.bullet.rotateTo(mouse,100,0);
         // this.bullet.addAnimation('normal', 'assets/spr_bullet_strip02.png');
 
         bulletSound.play();
@@ -23,11 +24,11 @@ class Bullet{
 }
 class ShooterBullet{
     constructor(x,y, array){
-        this.bullet = new bulletGroup.Sprite(x, y);
-        this.bullet.changeAni('bulletAni');
-        this.bullet.direction = this.bullet.angleTo(target);
-        //this.bullet.life = 100;
-
+        this.bullet = new bulletGroup.Sprite(x, y, 20);
+        this.bullet.changeAni('enemyBulletAni');
+        this.bullet.life = 240;
+        //this.bullet.debug = true;
+        
         bulletSound.play();
         array.push(this.bullet);
         allBullets.push(this.bullet);
@@ -39,6 +40,7 @@ class ShooterBullet{
         
         this.bullet.speed  = speed;
         this.bullet.direction = this.bullet.angleTo(target);
+        this.bullet.rotateTo(target, 100, 0);
     
     }
     

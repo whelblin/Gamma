@@ -221,7 +221,8 @@ class turretPowerUp extends PowerUp {
                 });
                 if(target != undefined){
                 let bullet = new Bullet(player.player.x,player.player.y, bullets);
-                bullet.bullet.changeAni('cannonAni')
+                bullet.bullet.changeAni('cannonAni');
+                bullet.bullet.rotateTo(target,100,0);
                 player.player.overlaps(bullet.getObject());
                 bullet.movement(target);
                 }

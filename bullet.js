@@ -24,8 +24,12 @@ class Bullet{
 class ShooterBullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
-        this.bullet.changeAni('enemyBulletAni');
-        this.bullet.direction = this.bullet.angleTo(target);
+        this.bullet.diameter = 45;
+        this.bullet.color = 'yellow';
+        this.bullet.stroke = 15;
+        this.bullet.height = 60;
+        this.bullet.width = 13;
+        this.bullet.life = 240;
         //this.bullet.life = 100;
 
         bulletSound.play();

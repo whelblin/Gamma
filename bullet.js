@@ -27,7 +27,7 @@ class ShooterBullet{
         this.bullet = new bulletGroup.Sprite(x, y);
         this.bullet.changeAni('enemyBulletAni');
         this.bullet.life = 240;
-        this.bullet.rotateTo(player, 100, 0);
+        
         //this.bullet.life = 100;
 
         bulletSound.play();
@@ -41,6 +41,7 @@ class ShooterBullet{
         
         this.bullet.speed  = speed;
         this.bullet.direction = this.bullet.angleTo(target);
+        this.bullet.rotateTo(target, 100, 0);
     
     }
     

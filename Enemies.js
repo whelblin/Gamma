@@ -55,7 +55,7 @@ class Shooter{
         this.shooter = new trackerGroup.Sprite(width/2,height/2, 50);
         this.shooter.img = "assets/bird.png"
         this.shooter.Trackingspeed = .7;
-        this.health = 10
+        this.health = 30
         this.fireRate = 300;
         this.attack = 10;
         this.experericeAmount = 50

@@ -24,12 +24,11 @@ class Bullet{
 }
 class ShooterBullet{
     constructor(x,y, array){
-        this.bullet = new bulletGroup.Sprite(x, y);
+        this.bullet = new bulletGroup.Sprite(x, y, 20);
         this.bullet.changeAni('enemyBulletAni');
         this.bullet.life = 240;
+        //this.bullet.debug = true;
         
-        //this.bullet.life = 100;
-
         bulletSound.play();
         array.push(this.bullet);
         allBullets.push(this.bullet);

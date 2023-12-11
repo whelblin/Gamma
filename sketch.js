@@ -97,7 +97,7 @@ function setup() {
   function draw() {
     //frameRate(50); //set framerate to be system independent 
     // runs the current state
-    console.log(allSprites.length)
+    //console.log(allSprites.length)
     state.run() 
   }
 

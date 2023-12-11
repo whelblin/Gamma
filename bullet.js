@@ -1,8 +1,9 @@
-e//bullet class
+//bullet class
 class Bullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
         this.bullet.changeAni('bulletAni');
+        this.bullet.rotateTo(mouse,100,0);
         // this.bullet.addAnimation('normal', 'assets/spr_bullet_strip02.png');
 
         bulletSound.play();
@@ -24,12 +25,9 @@ class Bullet{
 class ShooterBullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
-        this.bullet.diameter = 45;
-        this.bullet.color = 'yellow';
-        this.bullet.stroke = 15;
-        this.bullet.height = 60;
-        this.bullet.width = 13;
+        this.bullet.changeAni('enemyBulletAni');
         this.bullet.life = 240;
+        this.bullet.rotateTo(player, 100, 0);
         //this.bullet.life = 100;
 
         bulletSound.play();

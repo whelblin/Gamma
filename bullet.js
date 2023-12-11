@@ -1,4 +1,4 @@
-//bullet class
+e//bullet class
 class Bullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
@@ -24,7 +24,7 @@ class Bullet{
 class ShooterBullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
-        this.bullet.changeAni('bulletAni');
+        this.bullet.changeAni('enemyBulletAni');
         this.bullet.direction = this.bullet.angleTo(target);
         //this.bullet.life = 100;
 

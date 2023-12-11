@@ -32,15 +32,15 @@ function cullObjects(){
 class Animation{
 static preload(){
         this.frameDelay = 1;
-        this.idleAni = loadAni("idle",'assets/bluesheet_hit.png',{
+        this.idleAni = loadAni("idle",'assets/hitpurple.png',{
             frameSize: [78,78],frames: 1
         })
-        this.hitAni = loadAni("hit",'assets/bluesheet_hit.png',{
+        this.hitAni = loadAni("hit",'assets/hitpurple.png',{
           frameSize:[78,78], frames: 4
 
         })
-         this.shieldedAnim = loadAni("shield",'assets/bluesheet_shield.png',{
-             frameSize: [100,100], frames: 1
+         this.shieldedAnim = loadAni("shield",'assets/purpleshield.png',{
+          frames: 1
          })
         this.bulletAni = loadAni("bulletAni","assets/spr_bullet_strip.png",{
            frames: 3

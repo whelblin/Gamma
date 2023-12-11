@@ -62,7 +62,9 @@ function preload() {
     asteroidGroup = new colliding.Group();
     trackerGroup = new colliding.Group();
     bulletGroup = new colliding.Group()
-    Player.preload()
+    //Player.preload()
+    //Bullet.preload()
+    Animation.preload()
     bgimage1 = loadImage('assets/space.gif');
     bulletSound = loadSound('assets/shoot02wav-14562.mp3');
     asteroidHitSound = loadSound('assets/rock-destroy-6409.mp3');

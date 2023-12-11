@@ -29,3 +29,28 @@ function cullObjects(){
         allBullets.splice(index,1);
       });
 }
+class Animation{
+static preload(){
+        this.frameDelay = 1;
+        this.idleAni = loadAni("idle",'assets/bluesheet_hit.png',{
+            frameSize: [78,78],frames: 1
+        })
+        this.hitAni = loadAni("hit",'assets/bluesheet_hit.png',{
+          frameSize:[78,78], frames: 4
+
+        })
+        
+        this.shieldedAnim = loadAni('shield','assets/shield.png')
+        this.bulletAni = loadAni("bulletAni","assets/spr_bullet_strip.png",{
+           frames: 3
+        })
+        //this.expAni = loadImage("assets/Exp1.png")
+        //this.healthAni= loadImage("assets/health_potion.png")
+        //this.asteroidAni = loadImage("assets/asteroid.png")
+        //this.trackerAni = loadImage("assets/bugb.png")
+        //this.shooterAni = loadAni("assets/bird.png")
+
+
+    
+    }
+}

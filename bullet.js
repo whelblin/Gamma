@@ -2,7 +2,7 @@
 class Bullet{
     constructor(x,y, array){
         this.bullet = new bulletGroup.Sprite(x, y);
-        this.bullet.addAnimation('normal', 'assets/spr_bullet_strip.png');
+        this.bullet.changeAni('bulletAni');
         // this.bullet.addAnimation('normal', 'assets/spr_bullet_strip02.png');
 
         bulletSound.play();

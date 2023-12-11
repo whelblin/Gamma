@@ -7,7 +7,8 @@ class ExpOrb {
      */
     constructor(x,y, amount = 25){
         this.expOrb = new non_colliding.Sprite(x,y);
-        this.expOrb.addAnimation('assets/Exp1.png');
+        this.expOrb.image ="assets/Exp1.png"
+
         this.expOrb.collides(player.returnPlayerObject())
         this.expOrb.overlaps(itmBoxes)
         this.expOrb.overlaps(non_colliding)

@@ -5,9 +5,6 @@
 class Player{
     constructor(immuneState){
         this.player = new colliding.Sprite(width/2,height/2,80)
-        this.player.addAnis(this.idleAni);
-        this.player.addAnis(this.hitAni);
-        this.player.addAnis(this.shieldedAnim);
         this.player.changeAni('idle');
         this.immune = immuneState;
         this.hit = false;
@@ -37,20 +34,7 @@ class Player{
         //     frameSize: [100,100], frames: 1
         // })
 
-        this.spriteSheet = 'assets/purplesheetp.png';
-        this.frameDelay = 1;
-        this.idleAni = loadAni("idle",this.spriteSheet,{
-            frameSize: [117,100], frames: 1
-        })
-        this.hitAni = loadAni("hit",this.spriteSheet,{
-            frameSize: [117,100], frames: 1
-
-        })
-        this.shieldSprite = 'assets/purpleshield.png';
-        this.shieldedAnim = loadAni("shield",this.shieldSprite,{
-            frameSize: [120,133], frames: 1
-        })
-
+        
 
     }
     increaseFireRate(num){(this.fireRate - num > 0) ? this.fireRate -= num : this.fireRate = 1;}

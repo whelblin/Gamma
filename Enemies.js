@@ -5,7 +5,7 @@ class Tracker{
     constructor(){
 
         this.tracker = new trackerGroup.Sprite(width/2,height/2, 50);
-        this.tracker.addAnimation('small','assets/bugb.png');
+        this.tracker.img = "assets/bugb.png"
         this.tracker.Trackingspeed = 3;
        //this.tracker.attractTo(player,25);
         this.health = 20
@@ -53,7 +53,7 @@ class Shooter{
     constructor(){
 
         this.shooter = new trackerGroup.Sprite(width/2,height/2, 50);
-        this.shooter.addAnimation('small','assets/bird.png');
+        this.shooter.img = "assets/bird.png"
         this.shooter.Trackingspeed = .7;
         this.health = 10
         this.fireRate = 300;

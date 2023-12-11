@@ -46,7 +46,7 @@ static preload(){
            frames: 3
         })
         this.enemyBulletAni = loadAni("enemyBulletAni","assets/enemybullet.png",{
-           frames: 3
+           frames: 1
         })
         this.cannonAni = loadAni("cannonAni","assets/spr_bullet_strip02.png",{
           frames: 3

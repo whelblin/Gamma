@@ -514,7 +514,7 @@ class TutorialScreen extends Screen {
        textSize(80);
        textStyle(BOLD);
        textAlign(CENTER);
-       text("Tutorial",width/2, height/2-250);
+       text("Tutorial",width/2, 70);
        fill(215,175, 55, opacity);
        stroke(0);
        strokeWeight(5);
@@ -535,12 +535,12 @@ class TutorialScreen extends Screen {
        stroke(0);
        strokeWeight(5);
        rectMode(CORNER);
-       rect(width/16, height/4-50, 600, 400, 20);
+       rect(width/16, height/4-50, 600, 450, 20);
        fill(111,168,220);
        textSize(70);
        textStyle(BOLD);
        textAlign(CENTER);
-       text("Rules",width/16+300, height/2-150);
+       text("Rules",width/16+300, height/2-175);
        textSize(20);
        textStyle(NORMAL);
        textAlign(CENTER);
@@ -550,7 +550,7 @@ class TutorialScreen extends Screen {
        Enemies will drop green experience orbs. Pick them up to level up\n
        Enemies also have a chance to drop a health pack that heals you\n
        Leveling up allows you to choose a power up. However leveling up also increases the amount of enemies\n
-       `,width/16, height/2-125, 600);
+       `,width/16, height/2-150, 600);
        pop()
 
        push()
@@ -558,7 +558,7 @@ class TutorialScreen extends Screen {
        stroke(0);
        strokeWeight(5);
        rectMode(CORNER);
-       rect(width-width/16-600, height/4-50, 600, 400, 20);
+       rect(width-width/16-600, height/4-50, 600, 450, 20);
        fill(111,168,220);
        textSize(70);
        textStyle(BOLD);

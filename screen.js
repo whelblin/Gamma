@@ -535,12 +535,12 @@ class TutorialScreen extends Screen {
        stroke(0);
        strokeWeight(5);
        rectMode(CORNER);
-       rect(width/16, height/4-50, 600, 450, 20);
+       rect(width/16, height/4-50, 600, 425, 20);
        fill(111,168,220);
        textSize(70);
        textStyle(BOLD);
        textAlign(CENTER);
-       text("Rules",width/16+300, height/2-175);
+       text("Rules",width/16+300, height/2-170);
        textSize(20);
        textStyle(NORMAL);
        textAlign(CENTER);
@@ -558,12 +558,12 @@ class TutorialScreen extends Screen {
        stroke(0);
        strokeWeight(5);
        rectMode(CORNER);
-       rect(width-width/16-600, height/4-50, 600, 450, 20);
+       rect(width-width/16-600, height/4-50, 600, 425, 20);
        fill(111,168,220);
        textSize(70);
        textStyle(BOLD);
        textAlign(CENTER);
-       text("Controls",width - width/16-300, height/2-150);
+       text("Controls",width - width/16-300, height/2-170);
        textSize(20);
        textStyle(NORMAL);
        textAlign(CENTER);
@@ -572,7 +572,7 @@ class TutorialScreen extends Screen {
        Left click or space bar to shoot\n
        Enter to start the game\n
        Escape key to pause or unpause the game\n
-       `,width - width/16 - 600, height/2-125, 600);
+       `,width - width/16 - 600, height/2-150, 600);
        pop()
 
        push()
